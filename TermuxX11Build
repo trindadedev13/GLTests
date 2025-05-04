@@ -1,0 +1,41 @@
+#!/usr/bin/bash
+
+export TARGET=gltests
+export RUNNING_PATH="\"$(pwd)\""
+
+# compile
+if [ "$1" = "-c" ]; then
+  make clean
+fi
+make
+
+# copy executable to home
+cp $TARGET $HOME/$TARGET
+rm $TARGET
+
+# start termux-x11 in background and save its PID
+termux-x11 :0 &
+X11_PID=$!
+
+# define cleanup function to kill termux-x11
+cleanup() {
+  echo "Shutting down termux-x11..."
+  kill $X11_PID
+  exit
+}
+
+# trap Ctrl+C (SIGINT) and call cleanup
+trap cleanup SIGINT
+
+# wait for X11 to start
+sleep 3
+
+# set display
+export DISPLAY=:0
+
+# run program
+chmod +x $HOME/$TARGET
+$HOME/$TARGET
+
+# cleanup after program ends
+cleanup

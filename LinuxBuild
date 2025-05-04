@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+export TARGET=gltests
+export RUNNING_PATH="\"$(pwd)\""
+
+# compile
+if [ "1$" = "-c" ]; then
+  make clean
+fi
+make
