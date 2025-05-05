@@ -36,7 +36,7 @@ int main() {
     gltprintf("Error: %s", strerror(errno));
     return EXIT_FAILURE;
   }
-  cb->cube_color = COLOR_BLUE;
+  cb->cube_color = COLOR_RED;
 
   // GLM: Create projection matrix (P)
   float aspect = (float) GL_WINDOW_WIDTH / (float) GL_WINDOW_HEIGHT;
@@ -64,7 +64,11 @@ int main() {
     float time = glfwGetTime();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(
+        COLOR_WHITE.r,
+        COLOR_WHITE.g,
+        COLOR_WHITE.b,
+        COLOR_WHITE.a);
 
     // calculate MVP matrix
     mat4 mmvp;
@@ -73,28 +77,31 @@ int main() {
     glm_mat4_mul(mprojection, mtemp, mmvp);
 
     // draw cube
-    // cube model matrix
-    mat4 mcb_model;
-    glm_mat4_identity(mcb_model);
 
     // move cube to 0, 0, 0
     glm_translate(
-        mcb_model,
+        cb->cube_model_matrix,
         (vec3) { 0.0f, 0.0f, 0.0f });
 
     glm_rotate(
-        mcb_model,
+        cb->cube_model_matrix,
         glm_rad(time * 50.0f),
         (vec3) { 1.0f, 1.0f, 0.0f });
 
     glm_scale(
-        mcb_model,
+        cb->cube_model_matrix,
         (vec3) { .5f, .5f, .5f });
 
     // calculate MVP = mprojection * mview * cb_model
     mat4 mtemp2;
-    glm_mat4_mul(mview, mcb_model, mtemp2);
-    glm_mat4_mul(mprojection, mtemp2, mmvp);
+    glm_mat4_mul(
+      mview,
+      cb->cube_model_matrix,
+      mtemp2);
+    glm_mat4_mul(
+      mprojection,
+      mtemp2,
+      mmvp);
 
     cb->mvp_matrix = (GLfloat*) mmvp;
     cube_draw(cb);

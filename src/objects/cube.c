@@ -1,26 +1,27 @@
 #include <stdlib.h>
 #include <glad/gl.h>
+#include <cglm/cglm.h>
 #include "config.h"
 #include "graphics/shader.h"
 #include "objects/cube.h"
 
 static const GLfloat cube_vertices[] = {
-    // Frente
+    // Front
     -1, -1,  1,  1, -1,  1,  1,  1,  1,
     -1, -1,  1,  1,  1,  1, -1,  1,  1,
-    // Trás
+    // Back
     -1, -1, -1, -1,  1, -1,  1,  1, -1,
     -1, -1, -1,  1,  1, -1,  1, -1, -1,
-    // Esquerda
+    // Left
     -1, -1, -1, -1, -1,  1, -1,  1,  1,
     -1, -1, -1, -1,  1,  1, -1,  1, -1,
-    // Direita
+    // Right
      1, -1, -1,  1,  1, -1,  1,  1,  1,
      1, -1, -1,  1,  1,  1,  1, -1,  1,
-    // Topo
+    // Top
     -1,  1, -1, -1,  1,  1,  1,  1,  1,
     -1,  1, -1,  1,  1,  1,  1,  1, -1,
-    // Base
+    // Bottom
     -1, -1, -1,  1, -1, -1,  1, -1,  1,
     -1, -1, -1,  1, -1,  1, -1, -1,  1
 };
@@ -42,6 +43,7 @@ struct cube* cube_create() {
   cb->cube_vbo = 0;
   cb->cube_color = COLOR_WHITE;
   cb->cube_shader_program = cube_shader_program();
+  glm_mat4_identity(cb->cube_model_matrix);
 
   glGenVertexArrays(1, &cb->cube_vao);
   glGenBuffers(1, &cb->cube_vbo);
