@@ -1,0 +1,38 @@
+name: Build C Project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Install build tools and dependencies
+      run: |
+        echo "Updating package list and installing required dependencies..."
+        sudo apt-get update -y
+        sudo apt-get install -y build-essential gcc libglfw3-dev libgl1-mesa-dev
+
+    - name: Give execute permission to LinuxBuild
+      run: chmod +x LinuxBuild
+
+    - name: Compile the project
+      run: |
+        echo "Starting the build process..."
+        export TARGET=$(./LinuxBuild)
+        echo "Build finished. Target binary: $TARGET"
+
+    - name: Upload compiled binary as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: compiled-binary
+        path: ./$TARGET
