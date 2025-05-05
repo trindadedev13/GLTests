@@ -40,21 +40,21 @@ int main() {
 
   // GLM: Create projection matrix (P)
   float aspect = (float) GL_WINDOW_WIDTH / (float) GL_WINDOW_HEIGHT;
-  mat4 mprojection;
+  mat4 matrix_projection;
   glm_perspective(
-      glm_rad(45.0f),  // fovy vertical field of view
-      aspect,         // aspect vision aspect (width / height)
-      1.0f,           // nearz close cutting plane
-      10.0f,          // farz distant cut point
-      mprojection);   // dest 4x4 matrix where projection matrix will be stored
+      glm_rad(45.0f),      // fovy vertical field of view
+      aspect,              // aspect vision aspect (width / height)
+      1.0f,                // nearz close cutting plane
+      10.0f,               // farz distant cut point
+      matrix_projection);  // dest 4x4 matrix where projection matrix will be stored
 
   // GLM: Create view matrix (V) - Camera
-  mat4 mview;
+  mat4 matrix_view;
   glm_lookat(
       (vec3){ 0.0f, 0.0f, -3.0f },   // eye
       (vec3){ 0.0f, 0.0f,  0.0f  },  // center 
       (vec3){ 0.0f, 1.0f,  0.0f  },  // up vector
-      mview);                        // dest 4x4 matrix where will be stored view matrix
+      matrix_view);                  // dest 4x4 matrix where will be stored view matrix
 
   // Model matrix (M)
   mat4 mmodel;
@@ -71,10 +71,17 @@ int main() {
         COLOR_WHITE.a);
 
     // calculate MVP matrix
-    mat4 mmvp;
-    mat4 mtemp;
-    glm_mat4_mul(mview, mmodel, mtemp);
-    glm_mat4_mul(mprojection, mtemp, mmvp);
+    mat4 matrix_mvp;
+    mat4 matrix_temp;
+    glm_mat4_mul(
+        matrix_view,
+        mmodel,
+        matrix_temp);
+
+    glm_mat4_mul(
+        matrix_projection,
+        matrix_temp,
+        matrix_mvp);
 
     // draw cube
 
@@ -92,18 +99,18 @@ int main() {
         cb->cube_model_matrix,
         (vec3) { .5f, .5f, .5f });
 
-    // calculate MVP = mprojection * mview * cb_model
-    mat4 mtemp2;
+    // calculate MVP = matrix_projection * matrix_view * cb_model
+    mat4 matrix_temp2;
     glm_mat4_mul(
-      mview,
-      cb->cube_model_matrix,
-      mtemp2);
+        matrix_view,
+        cb->cube_model_matrix,
+        matrix_temp2);
     glm_mat4_mul(
-      mprojection,
-      mtemp2,
-      mmvp);
+        matrix_projection,
+        matrix_temp2,
+        matrix_mvp);
 
-    cb->mvp_matrix = (GLfloat*) mmvp;
+    cb->mvp_matrix = (GLfloat*) matrix_mvp;
     cube_draw(cb);
 
     glrenderer_swap_buffers(&renderer);
