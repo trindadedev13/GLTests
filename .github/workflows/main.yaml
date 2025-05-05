@@ -32,7 +32,7 @@ jobs:
         echo "Build finished. Target binary: $TARGET"
 
     - name: Upload compiled binary as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: compiled-binary
         path: ./$TARGET
