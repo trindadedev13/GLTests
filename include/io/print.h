@@ -3,6 +3,6 @@
 
 #include <stdarg.h>
 
-void gltprintf(const char* fmt, ...);
+void gltsprintf(const char* fmt, ...);
 
 #endif

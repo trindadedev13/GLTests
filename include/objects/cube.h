@@ -8,9 +8,9 @@ struct cube {
   GLuint cube_vao;  // vertex array object
   GLuint cube_vbo;  // vertex buffer object
   GLuint cube_shader_program;
-  GLfloat* mvp_matrix;
   mat4 cube_model_matrix;
   color cube_color;
+  mat4 matrix_mvp;
 };
 
 struct cube* cube_create();

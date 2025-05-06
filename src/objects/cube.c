@@ -3,6 +3,7 @@
 #include <cglm/cglm.h>
 #include "config.h"
 #include "graphics/shader.h"
+#include "io/print.h"
 #include "objects/cube.h"
 
 static const GLfloat cube_vertices[] = {
@@ -91,7 +92,7 @@ void cube_draw(struct cube* cb) {
         mvp_location,
         1,
         GL_FALSE,
-        (const GLfloat*) cb->mvp_matrix);
+        (const GLfloat*) cb->matrix_mvp);
   }
 
   // Draw

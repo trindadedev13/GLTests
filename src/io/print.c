@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include "io/print.h"
 
-void gltprintf(const char* fmt, ...) {
+void gltsprintf(const char* fmt, ...) {
   va_list args;
   va_start(args, fmt);
   vprintf(fmt, args);

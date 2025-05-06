@@ -9,15 +9,16 @@
 #include "io/print.h"
 #include "graphics/color.h"
 #include "objects/cube.h"
+#include "term/tcolor.h"
 
 int main() {
   if (!glfwInit()) return -1;
 
-  gltprintf("Running at path: %s all resources will be used from it.\n", GLT_RUNNING_PATH);
+  gltsprintf("Running at path: %s all resources will be used from it.\n", GLT_RUNNING_PATH);
 
   struct glrenderer renderer = {};
   if (glrenderer_init_window(&renderer) != EXIT_SUCCESS) {
-    gltprintf("Failed to init window\n");
+    gltsprintf("Failed to init window\n");
     return EXIT_FAILURE;
   }
   glrenderer_configure_window(&renderer);
@@ -33,12 +34,16 @@ int main() {
 
   struct cube* cb = cube_create();
   if (cb == NULL) {
-    gltprintf("Error: %s", strerror(errno));
+    gltsprintf(
+        "%sError: %s&s\n",
+        T_COLOR_RED,
+        strerror(errno),
+        T_COLOR_RESET);
     return EXIT_FAILURE;
   }
   cb->cube_color = COLOR_RED;
 
-  // GLM: Create projection matrix (P)
+  // setup project matrix
   float aspect = (float) GL_WINDOW_WIDTH / (float) GL_WINDOW_HEIGHT;
   mat4 matrix_projection;
   glm_perspective(
@@ -48,7 +53,7 @@ int main() {
       10.0f,               // farz distant cut point
       matrix_projection);  // dest 4x4 matrix where projection matrix will be stored
 
-  // GLM: Create view matrix (V) - Camera
+  // setup view matrix ( camera )
   mat4 matrix_view;
   glm_lookat(
       (vec3){ 0.0f, 0.0f, -3.0f },   // eye
@@ -57,8 +62,8 @@ int main() {
       matrix_view);                  // dest 4x4 matrix where will be stored view matrix
 
   // Model matrix (M)
-  mat4 mmodel;
-  glm_mat4_identity(mmodel);
+  mat4 matrix_model;
+  glm_mat4_identity(matrix_model);
 
   while (!glfwWindowShouldClose(renderer.window)) {
     float time = glfwGetTime();
@@ -75,7 +80,7 @@ int main() {
     mat4 matrix_temp;
     glm_mat4_mul(
         matrix_view,
-        mmodel,
+        matrix_model,
         matrix_temp);
 
     glm_mat4_mul(
@@ -110,7 +115,9 @@ int main() {
         matrix_temp2,
         matrix_mvp);
 
-    cb->mvp_matrix = (GLfloat*) matrix_mvp;
+    glm_mat4_copy(
+        cb->matrix_mvp,
+        matrix_mvp);
     cube_draw(cb);
 
     glrenderer_swap_buffers(&renderer);
