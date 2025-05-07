@@ -39,7 +39,7 @@ int main() {
     gltsprintf("%sError: %s&s\n", T_COLOR_RED, strerror(errno), T_COLOR_RESET);
     return EXIT_FAILURE;
   }
-  cb->cube_color = COLOR_RED;
+  cb->cube_color = COLOR_BLUE;
 
   // setup project matrix
   float aspect = (float)GL_WINDOW_WIDTH / (float)GL_WINDOW_HEIGHT;
@@ -76,6 +76,9 @@ int main() {
     glm_mat4_mul(matrix_projection, matrix_temp, matrix_mvp);
 
     // draw cube
+
+    // first reset cube model matrix
+    cube_reset_model_matrix(cb);
 
     // move cube to 0, 0, 0
     glm_translate(cb->cube_model_matrix, (vec3){0.0f, 0.0f, 0.0f});

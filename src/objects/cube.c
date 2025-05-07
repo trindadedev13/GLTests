@@ -80,3 +80,7 @@ void cube_draw(struct cube* cb) {
                6 * 2 * 3);  // 6 faces * 2 triangles * 3 vertices
   glBindVertexArray(0);
 }
+
+void cube_reset_model_matrix(struct cube* cb) {
+  glm_mat4_identity(cb->cube_model_matrix);
+}
