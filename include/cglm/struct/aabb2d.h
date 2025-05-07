@@ -8,12 +8,12 @@
 #ifndef cglms_aabb2ds_h
 #define cglms_aabb2ds_h
 
+#include "../aabb2d.h"
 #include "../common.h"
 #include "../types-struct.h"
-#include "../aabb2d.h"
+#include "mat4.h"
 #include "vec2.h"
 #include "vec4.h"
-#include "mat4.h"
 
 /* api definition */
 #define glms_aabb2d_(NAME) CGLM_STRUCTAPI(aabb2d, NAME)
@@ -26,8 +26,7 @@
  * @param[out] dest transformed bounding box
  */
 CGLM_INLINE
-void
-glms_aabb2d_(transform)(vec2s aabb[2], mat3s m, vec2s dest[2]) {
+void glms_aabb2d_(transform)(vec2s aabb[2], mat3s m, vec2s dest[2]) {
   vec2 rawAabb[2];
   vec2 rawDest[2];
 
@@ -47,8 +46,7 @@ glms_aabb2d_(transform)(vec2s aabb[2], mat3s m, vec2s dest[2]) {
  * @param[out] dest merged bounding box
  */
 CGLM_INLINE
-void
-glms_aabb2d_(merge)(vec2s aabb1[2], vec2s aabb2[2], vec2s dest[2]) {
+void glms_aabb2d_(merge)(vec2s aabb1[2], vec2s aabb2[2], vec2s dest[2]) {
   vec2 rawAabb1[2];
   vec2 rawAabb2[2];
   vec2 rawDest[2];
@@ -71,8 +69,7 @@ glms_aabb2d_(merge)(vec2s aabb1[2], vec2s aabb2[2], vec2s dest[2]) {
  * @param[out] dest    cropped bounding box
  */
 CGLM_INLINE
-void
-glms_aabb2d_(crop)(vec2s aabb[2], vec2s cropAabb[2], vec2s dest[2]) {
+void glms_aabb2d_(crop)(vec2s aabb[2], vec2s cropAabb[2], vec2s dest[2]) {
   vec2 rawAabb[2];
   vec2 rawCropAabb[2];
   vec2 rawDest[2];
@@ -96,11 +93,8 @@ glms_aabb2d_(crop)(vec2s aabb[2], vec2s cropAabb[2], vec2s dest[2]) {
  * @param[out] dest     cropped bounding box
  */
 CGLM_INLINE
-void
-glms_aabb2d_(crop_until)(vec2s aabb[2],
-                       vec2s cropAabb[2],
-                       vec2s clampAabb[2],
-                       vec2s dest[2]) {
+void glms_aabb2d_(crop_until)(vec2s aabb[2], vec2s cropAabb[2],
+                              vec2s clampAabb[2], vec2s dest[2]) {
   glms_aabb2d_(crop)(aabb, cropAabb, dest);
   glms_aabb2d_(merge)(clampAabb, dest, dest);
 }
@@ -111,8 +105,7 @@ glms_aabb2d_(crop_until)(vec2s aabb[2],
  * @param[in, out]  aabb bounding box
  */
 CGLM_INLINE
-void
-glms_aabb2d_(invalidate)(vec2s box[2]) {
+void glms_aabb2d_(invalidate)(vec2s box[2]) {
   box[0] = glms_vec2_(fill)(FLT_MAX);
   box[1] = glms_vec2_(fill)(-FLT_MAX);
 }
@@ -123,8 +116,7 @@ glms_aabb2d_(invalidate)(vec2s box[2]) {
  * @param[in]  aabb bounding box
  */
 CGLM_INLINE
-bool
-glms_aabb2d_(isvalid)(vec2s aabb[2]) {
+bool glms_aabb2d_(isvalid)(vec2s aabb[2]) {
   vec2 rawAabb[2];
   glms_vec2_(unpack)(rawAabb, aabb, 2);
   return glm_aabb2d_isvalid(rawAabb);
@@ -136,13 +128,11 @@ glms_aabb2d_(isvalid)(vec2s aabb[2]) {
  * @param[in]  aabb bounding box
  */
 CGLM_INLINE
-float
-glms_aabb2d_(diag)(vec2s aabb[2]) {
+float glms_aabb2d_(diag)(vec2s aabb[2]) {
   vec2 rawAabb[2];
   glms_vec2_(unpack)(rawAabb, aabb, 2);
   return glm_aabb2d_diag(rawAabb);
 }
-
 
 /*!
  * @brief size of aabb
@@ -151,10 +141,9 @@ glms_aabb2d_(diag)(vec2s aabb[2]) {
  * @param[out]  dest size
  */
 CGLM_INLINE
-vec2s
-glms_aabb2d_(sizev)(vec2s aabb[2]) {
+vec2s glms_aabb2d_(sizev)(vec2s aabb[2]) {
   vec2s size;
-  vec2  rawAabb[2];
+  vec2 rawAabb[2];
   glms_vec2_(unpack)(rawAabb, aabb, 2);
   glm_aabb2d_sizev(rawAabb, size.raw);
   return size;
@@ -166,8 +155,7 @@ glms_aabb2d_(sizev)(vec2s aabb[2]) {
  * @param[in]  aabb bounding box
  */
 CGLM_INLINE
-float
-glms_aabb2d_(radius)(vec2s aabb[2]) {
+float glms_aabb2d_(radius)(vec2s aabb[2]) {
   return glms_aabb2d_(size)(aabb) * 0.5f;
 }
 
@@ -178,8 +166,7 @@ glms_aabb2d_(radius)(vec2s aabb[2]) {
  * @returns center of bounding box
  */
 CGLM_INLINE
-vec2s
-glms_aabb2d_(center)(vec2s aabb[2]) {
+vec2s glms_aabb2d_(center)(vec2s aabb[2]) {
   return glms_vec2_(center)(aabb[0], aabb[1]);
 }
 
@@ -190,8 +177,7 @@ glms_aabb2d_(center)(vec2s aabb[2]) {
  * @param[in]   other  other bounding box
  */
 CGLM_INLINE
-bool
-glms_aabb2d_(aabb)(vec2s aabb[2], vec2s other[2]) {
+bool glms_aabb2d_(aabb)(vec2s aabb[2], vec2s other[2]) {
   vec2 rawAabb[2];
   vec2 rawOther[2];
 
@@ -210,8 +196,7 @@ glms_aabb2d_(aabb)(vec2s aabb[2], vec2s other[2]) {
  * @param[in]   s      solid sphere
  */
 CGLM_INLINE
-bool
-glms_aabb2d_(circle)(vec2s aabb[2], vec3s c) {
+bool glms_aabb2d_(circle)(vec2s aabb[2], vec3s c) {
   vec2 rawAabb[2];
 
   glms_vec2_(unpack)(rawAabb, aabb, 2);
@@ -225,8 +210,7 @@ glms_aabb2d_(circle)(vec2s aabb[2], vec3s c) {
  * @param[in]   point  point
  */
 CGLM_INLINE
-bool
-glms_aabb2d_(point)(vec2s aabb[2], vec2s point) {
+bool glms_aabb2d_(point)(vec2s aabb[2], vec2s point) {
   vec2 rawAabb[2];
 
   glms_vec2_(unpack)(rawAabb, aabb, 2);
@@ -240,8 +224,7 @@ glms_aabb2d_(point)(vec2s aabb[2], vec2s point) {
  * @param[in]   other  other bounding box
  */
 CGLM_INLINE
-bool
-glms_aabb2d_(contains)(vec2s aabb[2], vec2s other[2]) {
+bool glms_aabb2d_(contains)(vec2s aabb[2], vec2s other[2]) {
   vec2 rawAabb[2];
   vec2 rawOther[2];
 

@@ -9,9 +9,9 @@
 #define cglm_project_no_h
 
 #include "../common.h"
+#include "../mat4.h"
 #include "../vec3.h"
 #include "../vec4.h"
-#include "../mat4.h"
 
 /*!
  * @brief maps the specified viewport coordinates into specified space [1]
@@ -40,13 +40,12 @@
  * @param[out] dest     unprojected coordinates
  */
 CGLM_INLINE
-void
-glm_unprojecti_no(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
+void glm_unprojecti_no(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
   vec4 v;
 
   v[0] = 2.0f * (pos[0] - vp[0]) / vp[2] - 1.0f;
   v[1] = 2.0f * (pos[1] - vp[1]) / vp[3] - 1.0f;
-  v[2] = 2.0f *  pos[2]                  - 1.0f;
+  v[2] = 2.0f * pos[2] - 1.0f;
   v[3] = 1.0f;
 
   glm_mat4_mulv(invMat, v, v);
@@ -67,8 +66,7 @@ glm_unprojecti_no(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
  * @param[out] dest     projected coordinates
  */
 CGLM_INLINE
-void
-glm_project_no(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+void glm_project_no(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
   CGLM_ALIGN(16) vec4 pos4;
 
   glm_vec4(pos, 1.0f, pos4);
@@ -76,7 +74,7 @@ glm_project_no(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
   glm_mat4_mulv(m, pos4, pos4);
   glm_vec4_scale(pos4, 1.0f / pos4[3], pos4); /* pos = pos / pos.w */
   glm_vec4_scale(pos4, 0.5f, pos4);
-  glm_vec4_adds(pos4,  0.5f, pos4);
+  glm_vec4_adds(pos4, 0.5f, pos4);
 
   dest[0] = pos4[0] * vp[2] + vp[0];
   dest[1] = pos4[1] * vp[3] + vp[1];
@@ -96,8 +94,7 @@ glm_project_no(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
  * @returns projected z coordinate
  */
 CGLM_INLINE
-float
-glm_project_z_no(vec3 v, mat4 m) {
+float glm_project_z_no(vec3 v, mat4 m) {
   float z, w;
 
   z = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2];

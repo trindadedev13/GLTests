@@ -1,6 +1,7 @@
+#include "io/file.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "io/file.h"
 
 char* read_file(const char* path) {
   FILE* file = fopen(path, "rb");

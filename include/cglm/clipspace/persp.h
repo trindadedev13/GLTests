@@ -17,8 +17,8 @@
 #define cglm_persp_h
 
 #include "../common.h"
-#include "../plane.h"
 #include "../mat4.h"
+#include "../plane.h"
 
 /*!
  * @brief returns field of view angle along the Y-axis (in radians)
@@ -29,10 +29,7 @@
  * @param[in] proj perspective projection matrix
  */
 CGLM_INLINE
-float
-glm_persp_fovy(mat4 proj) {
-  return 2.0f * atanf(1.0f / proj[1][1]);
-}
+float glm_persp_fovy(mat4 proj) { return 2.0f * atanf(1.0f / proj[1][1]); }
 
 /*!
  * @brief returns aspect ratio of perspective projection
@@ -40,9 +37,6 @@ glm_persp_fovy(mat4 proj) {
  * @param[in] proj perspective projection matrix
  */
 CGLM_INLINE
-float
-glm_persp_aspect(mat4 proj) {
-  return proj[1][1] / proj[0][0];
-}
+float glm_persp_aspect(mat4 proj) { return proj[1][1] / proj[0][0]; }
 
 #endif /* cglm_persp_h */

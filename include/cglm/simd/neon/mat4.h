@@ -13,10 +13,9 @@
 #include "../intrin.h"
 
 CGLM_INLINE
-void
-glm_mat4_scale_neon(mat4 m, float s) {
+void glm_mat4_scale_neon(mat4 m, float s) {
   float32x4_t v0;
-  
+
   v0 = vdupq_n_f32(s);
 
   vst1q_f32(m[0], vmulq_f32(vld1q_f32(m[0]), v0));
@@ -26,10 +25,9 @@ glm_mat4_scale_neon(mat4 m, float s) {
 }
 
 CGLM_INLINE
-void
-glm_mat4_transp_neon(mat4 m, mat4 dest) {
+void glm_mat4_transp_neon(mat4 m, mat4 dest) {
   float32x4x4_t vmat;
-  
+
   vmat = vld4q_f32(m[0]);
 
   vst1q_f32(dest[0], vmat.val[0]);
@@ -39,13 +37,12 @@ glm_mat4_transp_neon(mat4 m, mat4 dest) {
 }
 
 CGLM_INLINE
-void
-glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
+void glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
 
-  l  = glmm_load(m1[0]);
+  l = glmm_load(m1[0]);
   r0 = glmm_load(m2[0]);
   r1 = glmm_load(m2[1]);
   r2 = glmm_load(m2[2]);
@@ -56,19 +53,19 @@ glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
   v2 = vmulq_f32(glmm_splat_x(r2), l);
   v3 = vmulq_f32(glmm_splat_x(r3), l);
 
-  l  = glmm_load(m1[1]);
+  l = glmm_load(m1[1]);
   v0 = glmm_fmadd(glmm_splat_y(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_y(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_y(r2), l, v2);
   v3 = glmm_fmadd(glmm_splat_y(r3), l, v3);
 
-  l  = glmm_load(m1[2]);
+  l = glmm_load(m1[2]);
   v0 = glmm_fmadd(glmm_splat_z(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_z(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_z(r2), l, v2);
   v3 = glmm_fmadd(glmm_splat_z(r3), l, v3);
 
-  l  = glmm_load(m1[3]);
+  l = glmm_load(m1[3]);
   v0 = glmm_fmadd(glmm_splat_w(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_w(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_w(r2), l, v2);
@@ -81,34 +78,32 @@ glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
 }
 
 CGLM_INLINE
-void
-glm_mat4_mulv_neon(mat4 m, vec4 v, vec4 dest) {
+void glm_mat4_mulv_neon(mat4 m, vec4 v, vec4 dest) {
   float32x4_t l0, l1, l2, l3;
   float32x2_t vlo, vhi;
-  
-  l0  = vld1q_f32(m[0]);
-  l1  = vld1q_f32(m[1]);
-  l2  = vld1q_f32(m[2]);
-  l3  = vld1q_f32(m[3]);
+
+  l0 = vld1q_f32(m[0]);
+  l1 = vld1q_f32(m[1]);
+  l2 = vld1q_f32(m[2]);
+  l3 = vld1q_f32(m[3]);
 
   vlo = vld1_f32(&v[0]);
   vhi = vld1_f32(&v[2]);
 
-  l0  = vmulq_lane_f32(l0, vlo, 0);
-  l0  = vmlaq_lane_f32(l0, l1, vlo, 1);
-  l0  = vmlaq_lane_f32(l0, l2, vhi, 0);
-  l0  = vmlaq_lane_f32(l0, l3, vhi, 1);
+  l0 = vmulq_lane_f32(l0, vlo, 0);
+  l0 = vmlaq_lane_f32(l0, l1, vlo, 1);
+  l0 = vmlaq_lane_f32(l0, l2, vhi, 0);
+  l0 = vmlaq_lane_f32(l0, l3, vhi, 1);
 
   vst1q_f32(dest, l0);
 }
 
 CGLM_INLINE
-float
-glm_mat4_det_neon(mat4 mat) {
-  float32x4_t   r0, r1, r2, r3, x0, x1, x2;
-  float32x2_t   ij, op, mn, kl, nn, mm, jj, ii, gh, ef, t12, t34;
+float glm_mat4_det_neon(mat4 mat) {
+  float32x4_t r0, r1, r2, r3, x0, x1, x2;
+  float32x2_t ij, op, mn, kl, nn, mm, jj, ii, gh, ef, t12, t34;
   float32x4x2_t a1;
-  float32x4_t   x3 = glmm_float32x4_SIGNMASK_PNPN;
+  float32x4_t x3 = glmm_float32x4_SIGNMASK_PNPN;
 
   /* 127 <- 0, [square] det(A) = det(At) */
   r0 = glmm_load(mat[0]);              /* d c b a */
@@ -126,7 +121,7 @@ glm_mat4_det_neon(mat4 mat) {
   nn = vdup_lane_f32(mn, 0);
   ii = vdup_lane_f32(ij, 1);
   jj = vdup_lane_f32(ij, 0);
-  
+
   /*
    t[1] = j * p - n * l;
    t[2] = j * o - n * k;
@@ -138,10 +133,10 @@ glm_mat4_det_neon(mat4 mat) {
 
   t12 = vget_low_f32(x0);
   t34 = vget_high_f32(x0);
-  
+
   /* 1 3 1 3 2 4 2 4 */
   a1 = vuzpq_f32(x0, x0);
-  
+
   /*
    t[0] = k * p - o * l;
    t[0] = k * p - o * l;
@@ -317,30 +312,27 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
 #endif
 
 CGLM_INLINE
-void
-glm_mat4_inv_neon(mat4 mat, mat4 dest) {
-  float32x4_t   r0, r1, r2, r3,
-                v0, v1, v2, v3, v4, v5,
-                t0, t1, t2;
+void glm_mat4_inv_neon(mat4 mat, mat4 dest) {
+  float32x4_t r0, r1, r2, r3, v0, v1, v2, v3, v4, v5, t0, t1, t2;
   float32x4x2_t a0, a1, a2, a3, a4;
-  float32x4_t   s1 = glmm_float32x4_SIGNMASK_PNPN, s2;
+  float32x4_t s1 = glmm_float32x4_SIGNMASK_PNPN, s2;
 
 #if !CGLM_ARM64
-  float32x2_t   l0, l1;
+  float32x2_t l0, l1;
 #endif
 
   s2 = vrev64q_f32(s1);
 
   /* 127 <- 0 */
-  r0 = glmm_load(mat[0]);                  /* d c b a */
-  r1 = glmm_load(mat[1]);                  /* h g f e */
-  r2 = glmm_load(mat[2]);                  /* l k j i */
-  r3 = glmm_load(mat[3]);                  /* p o n m */
+  r0 = glmm_load(mat[0]); /* d c b a */
+  r1 = glmm_load(mat[1]); /* h g f e */
+  r2 = glmm_load(mat[2]); /* l k j i */
+  r3 = glmm_load(mat[3]); /* p o n m */
 
-  a1 = vzipq_f32(r0, r2);                  /* l d k c, j b i a */
-  a2 = vzipq_f32(r1, r3);                  /* p h o g, n f m e */
-  a3 = vzipq_f32(a2.val[0], a1.val[0]);    /* j n b f, i m a e */
-  a4 = vzipq_f32(a2.val[1], a1.val[1]);    /* l p d h, k o c g */
+  a1 = vzipq_f32(r0, r2);               /* l d k c, j b i a */
+  a2 = vzipq_f32(r1, r3);               /* p h o g, n f m e */
+  a3 = vzipq_f32(a2.val[0], a1.val[0]); /* j n b f, i m a e */
+  a4 = vzipq_f32(a2.val[1], a1.val[1]); /* l p d h, k o c g */
 
   v0 = vextq_f32(a1.val[0], a1.val[1], 2); /* k c j b */
   v1 = vextq_f32(a2.val[0], a2.val[1], 2); /* o g n f */
@@ -380,11 +372,11 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   l0 = vget_low_f32(v0);
   l1 = vget_high_f32(v0);
 
-  l0 = vpadd_f32(l0, l0); /* [a+b, a+b] */ 
-  l1 = vpadd_f32(l1, l1); /* [c+d, c+d] */ 
-  l0 = vadd_f32(l0, l1);  /* [sum, sum] */ 
+  l0 = vpadd_f32(l0, l0); /* [a+b, a+b] */
+  l1 = vpadd_f32(l1, l1); /* [c+d, c+d] */
+  l0 = vadd_f32(l0, l1);  /* [sum, sum] */
 
-  v0 = vcombine_f32(l0, l0); 
+  v0 = vcombine_f32(l0, l0);
 #endif
 
   /* c5 * c12 + c6 * c11 */
@@ -394,26 +386,26 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   l0 = vget_low_f32(v1);
   l1 = vget_high_f32(v1);
 
-  l0 = vpadd_f32(l0, l0); /* [a+b, a+b] */ 
-  l1 = vpadd_f32(l1, l1); /* [c+d, c+d] */ 
+  l0 = vpadd_f32(l0, l0); /* [a+b, a+b] */
+  l1 = vpadd_f32(l1, l1); /* [c+d, c+d] */
 
   v1 = vcombine_f32(l0, l1);
 #endif
 
-  v0 = vsubq_f32(v0, v1);    /* det */
+  v0 = vsubq_f32(v0, v1); /* det */
 
   /* inv div */
   v1 = vdupq_n_f32(1.0f);
-  v0 = glmm_div(v1, v0);     /* inv div */
+  v0 = glmm_div(v1, v0); /* inv div */
 
   /* multiply t0,t1,t2 by idt to reduce 1mul below: 2eor+4mul vs 3mul+4eor */
   t0 = vmulq_f32(t0, v0);
   t1 = vmulq_f32(t1, v0);
   t2 = vmulq_f32(t2, v0);
 
-  a0 = vzipq_f32(t0, t0);    /* c4  c4  c3 c3, c2  c2  c1  c1  */
-  a1 = vzipq_f32(t1, t1);    /* c6  c6  c5 c5, c12 c12 c11 c11 */
-  a2 = vzipq_f32(t2, t2);    /* c10 c10 c9 c9, c8  c8  c7  c7  */
+  a0 = vzipq_f32(t0, t0); /* c4  c4  c3 c3, c2  c2  c1  c1  */
+  a1 = vzipq_f32(t1, t1); /* c6  c6  c5 c5, c12 c12 c11 c11 */
+  a2 = vzipq_f32(t2, t2); /* c10 c10 c9 c9, c8  c8  c7  c7  */
 
   /* result */
 

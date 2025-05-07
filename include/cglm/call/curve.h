@@ -14,8 +14,7 @@ extern "C" {
 #include "../cglm.h"
 
 CGLM_EXPORT
-float
-glmc_smc(float s, mat4 m, vec4 c);
+float glmc_smc(float s, mat4 m, vec4 c);
 
 #ifdef __cplusplus
 }

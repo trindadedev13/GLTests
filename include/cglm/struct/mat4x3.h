@@ -23,8 +23,8 @@
 #define cglms_mat4x3_h
 
 #include "../common.h"
-#include "../types-struct.h"
 #include "../mat4x3.h"
+#include "../types-struct.h"
 
 /* api definition */
 #define glms_mat4x3_(NAME) CGLM_STRUCTAPI(mat4x3, NAME)
@@ -40,8 +40,7 @@
  * @return[out] dest constructed mat4x3s from raw pointer
  */
 CGLM_INLINE
-mat4x3s
-glms_mat4x3_(zero)(void) {
+mat4x3s glms_mat4x3_(zero)(void) {
   mat4x3s dest;
   glm_mat4x3_zero(dest.raw);
   return dest;
@@ -54,8 +53,7 @@ glms_mat4x3_(zero)(void) {
  * @return[out] dest constructed mat4x3s from raw pointer
  */
 CGLM_INLINE
-mat4x3s
-glms_mat4x3_(make)(const float * __restrict src) {
+mat4x3s glms_mat4x3_(make)(const float* __restrict src) {
   mat4x3s dest;
   glm_mat4x3_make(src, dest.raw);
   return dest;
@@ -73,8 +71,7 @@ glms_mat4x3_(make)(const float * __restrict src) {
  * @return[out] dest constructed mat3s from raw pointers
  */
 CGLM_INLINE
-mat3s
-glms_mat4x3_(mul)(mat4x3s m1, mat3x4s m2) {
+mat3s glms_mat4x3_(mul)(mat4x3s m1, mat3x4s m2) {
   mat3s dest;
   glm_mat4x3_mul(m1.raw, m2.raw, dest.raw);
   return dest;
@@ -88,8 +85,7 @@ glms_mat4x3_(mul)(mat4x3s m1, mat3x4s m2) {
  * @return[out] dest constructed vec3s from raw pointers
  */
 CGLM_INLINE
-vec3s
-glms_mat4x3_(mulv)(mat4x3s m, vec4s v) {
+vec3s glms_mat4x3_(mulv)(mat4x3s m, vec4s v) {
   vec3s dest;
   glm_mat4x3_mulv(m.raw, v.raw, dest.raw);
   return dest;
@@ -102,8 +98,7 @@ glms_mat4x3_(mulv)(mat4x3s m, vec4s v) {
  * @return[out] dest constructed mat3x4s from raw pointers
  */
 CGLM_INLINE
-mat3x4s
-glms_mat4x3_(transpose)(mat4x3s m) {
+mat3x4s glms_mat4x3_(transpose)(mat4x3s m) {
   mat3x4s dest;
   glm_mat4x3_transpose(m.raw, dest.raw);
   return dest;
@@ -116,8 +111,7 @@ glms_mat4x3_(transpose)(mat4x3s m) {
  * @param[in]      s float (scalar)
  */
 CGLM_INLINE
-mat4x3s
-glms_mat4x3_(scale)(mat4x3s m, float s) {
+mat4x3s glms_mat4x3_(scale)(mat4x3s m, float s) {
   glm_mat4x3_scale(m.raw, s);
   return m;
 }

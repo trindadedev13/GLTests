@@ -14,79 +14,62 @@ extern "C" {
 #include "../cglm.h"
 
 /* DEPRECATED! use _copy, _ucopy versions */
-#define glmc_mat3_dup(mat, dest)  glmc_mat3_copy(mat, dest)
+#define glmc_mat3_dup(mat, dest) glmc_mat3_copy(mat, dest)
 
 CGLM_EXPORT
-void
-glmc_mat3_copy(mat3 mat, mat3 dest);
+void glmc_mat3_copy(mat3 mat, mat3 dest);
 
 CGLM_EXPORT
-void
-glmc_mat3_identity(mat3 mat);
+void glmc_mat3_identity(mat3 mat);
 
 CGLM_EXPORT
-void
-glmc_mat3_zero(mat3 mat);
+void glmc_mat3_zero(mat3 mat);
 
 CGLM_EXPORT
-void
-glmc_mat3_identity_array(mat3 * __restrict mat, size_t count);
+void glmc_mat3_identity_array(mat3* __restrict mat, size_t count);
 
 CGLM_EXPORT
-void
-glmc_mat3_mul(mat3 m1, mat3 m2, mat3 dest);
+void glmc_mat3_mul(mat3 m1, mat3 m2, mat3 dest);
 
 CGLM_EXPORT
-void
-glmc_mat3_transpose_to(mat3 m, mat3 dest);
+void glmc_mat3_transpose_to(mat3 m, mat3 dest);
 
 CGLM_EXPORT
-void
-glmc_mat3_transpose(mat3 m);
+void glmc_mat3_transpose(mat3 m);
 
 CGLM_EXPORT
-void
-glmc_mat3_mulv(mat3 m, vec3 v, vec3 dest);
+void glmc_mat3_mulv(mat3 m, vec3 v, vec3 dest);
 
 CGLM_EXPORT
-float
-glmc_mat3_trace(mat3 m);
+float glmc_mat3_trace(mat3 m);
 
 CGLM_EXPORT
-void
-glmc_mat3_quat(mat3 m, versor dest);
+void glmc_mat3_quat(mat3 m, versor dest);
 
 CGLM_EXPORT
-void
-glmc_mat3_scale(mat3 m, float s);
+void glmc_mat3_scale(mat3 m, float s);
 
 CGLM_EXPORT
-float
-glmc_mat3_det(mat3 mat);
+float glmc_mat3_det(mat3 mat);
 
 CGLM_EXPORT
-void
-glmc_mat3_inv(mat3 mat, mat3 dest);
+void glmc_mat3_inv(mat3 mat, mat3 dest);
 
 CGLM_EXPORT
-void
-glmc_mat3_swap_col(mat3 mat, int col1, int col2);
+void glmc_mat3_swap_col(mat3 mat, int col1, int col2);
 
 CGLM_EXPORT
-void
-glmc_mat3_swap_row(mat3 mat, int row1, int row2);
+void glmc_mat3_swap_row(mat3 mat, int row1, int row2);
 
 CGLM_EXPORT
-float
-glmc_mat3_rmc(vec3 r, mat3 m, vec3 c);
+float glmc_mat3_rmc(vec3 r, mat3 m, vec3 c);
 
 CGLM_EXPORT
-void
-glmc_mat3_make(const float * __restrict src, mat3 dest);
+void glmc_mat3_make(const float* __restrict src, mat3 dest);
 
 CGLM_EXPORT
-void
-glmc_mat3_textrans(float sx, float sy, float rot, float tx, float ty, mat3 dest);
+void glmc_mat3_textrans(float sx, float sy, float rot, float tx, float ty,
+                        mat3 dest);
 
 #ifdef __cplusplus
 }

@@ -9,8 +9,8 @@
 #define cglms_planes_h
 
 #include "../common.h"
-#include "../types-struct.h"
 #include "../plane.h"
+#include "../types-struct.h"
 #include "vec4.h"
 
 /*
@@ -31,8 +31,7 @@
  * @returns         normalized plane
  */
 CGLM_INLINE
-vec4s
-glms_plane_normalize(vec4s plane) {
+vec4s glms_plane_normalize(vec4s plane) {
   glm_plane_normalize(plane.raw);
   return plane;
 }

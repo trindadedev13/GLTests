@@ -1,7 +1,7 @@
 CC       = gcc
 SRC_DIR  = src
 OBJ_DIR  = obj
-CFLAGS   = -Wall -std=c11 -DRUNNING_PATH="\"$(RUNNING_PATH)\"" -I/usr/include -Iinclude/
+CFLAGS   = -Wall -std=c23 -DRUNNING_PATH="\"$(RUNNING_PATH)\"" -I/usr/include -Iinclude/
 LDFLAGS  = -lglfw -lGL -lm -ldl
 
 # 

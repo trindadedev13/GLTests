@@ -14,16 +14,13 @@ extern "C" {
 #include "../cglm.h"
 
 CGLM_EXPORT
-float
-glmc_perlin_vec4(vec4 point);
+float glmc_perlin_vec4(vec4 point);
 
 CGLM_EXPORT
-float
-glmc_perlin_vec3(vec3 point);
+float glmc_perlin_vec3(vec3 point);
 
 CGLM_EXPORT
-float
-glmc_perlin_vec2(vec2 point);
+float glmc_perlin_vec2(vec2 point);
 
 #ifdef __cplusplus
 }

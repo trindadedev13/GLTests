@@ -15,11 +15,11 @@
 #ifndef cglms_project_zo_h
 #define cglms_project_zo_h
 
-#include "../../common.h"
-#include "../../types-struct.h"
-#include "../../plane.h"
 #include "../../cam.h"
 #include "../../clipspace/project_zo.h"
+#include "../../common.h"
+#include "../../plane.h"
+#include "../../types-struct.h"
 
 /*!
  * @brief maps the specified viewport coordinates into specified space [1]
@@ -49,8 +49,7 @@
  * @returns unprojected coordinates
  */
 CGLM_INLINE
-vec3s
-glms_unprojecti_zo(vec3s pos, mat4s invMat, vec4s vp) {
+vec3s glms_unprojecti_zo(vec3s pos, mat4s invMat, vec4s vp) {
   vec3s dest;
   glm_unprojecti_zo(pos.raw, invMat.raw, vp.raw, dest.raw);
   return dest;
@@ -70,8 +69,7 @@ glms_unprojecti_zo(vec3s pos, mat4s invMat, vec4s vp) {
  * @returns projected coordinates
  */
 CGLM_INLINE
-vec3s
-glms_project_zo(vec3s pos, mat4s m, vec4s vp) {
+vec3s glms_project_zo(vec3s pos, mat4s m, vec4s vp) {
   vec3s dest;
   glm_project_zo(pos.raw, m.raw, vp.raw, dest.raw);
   return dest;
@@ -90,8 +88,7 @@ glms_project_zo(vec3s pos, mat4s m, vec4s vp) {
  * @returns projected z coordinate
  */
 CGLM_INLINE
-float
-glms_project_z_zo(vec3s v, mat4s m) {
+float glms_project_z_zo(vec3s v, mat4s m) {
   return glm_project_z_zo(v.raw, m.raw);
 }
 

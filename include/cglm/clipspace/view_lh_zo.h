@@ -30,8 +30,7 @@
  * @param[out] dest   result matrix
  */
 CGLM_INLINE
-void
-glm_lookat_lh_zo(vec3 eye, vec3 center, vec3 up, mat4 dest) {
+void glm_lookat_lh_zo(vec3 eye, vec3 center, vec3 up, mat4 dest) {
   glm_lookat_lh(eye, center, up, dest);
 }
 
@@ -50,8 +49,7 @@ glm_lookat_lh_zo(vec3 eye, vec3 center, vec3 up, mat4 dest) {
  * @param[out] dest   result matrix
  */
 CGLM_INLINE
-void
-glm_look_lh_zo(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
+void glm_look_lh_zo(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
   glm_look_lh(eye, dir, up, dest);
 }
 
@@ -66,8 +64,7 @@ glm_look_lh_zo(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
  * @param[out] dest   result matrix
  */
 CGLM_INLINE
-void
-glm_look_anyup_lh_zo(vec3 eye, vec3 dir, mat4 dest) {
+void glm_look_anyup_lh_zo(vec3 eye, vec3 dir, mat4 dest) {
   glm_look_anyup_lh(eye, dir, dest);
 }
 

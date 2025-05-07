@@ -44,53 +44,56 @@
    CGLM_INLINE void  glm_mat4_swap_row(mat4 mat, int row1, int row2);
    CGLM_INLINE float glm_mat4_rmc(vec4 r, mat4 m, vec4 c);
    CGLM_INLINE void  glm_mat4_make(float * restrict src, mat4 dest);
-   CGLM_INLINE void  glm_mat4_textrans(float sx, float sy, float rot, float tx, float ty, mat4 dest);
+   CGLM_INLINE void  glm_mat4_textrans(float sx, float sy, float rot, float tx,
+ float ty, mat4 dest);
  */
 
 #ifndef cglm_mat_h
 #define cglm_mat_h
 
 #include "common.h"
-#include "vec4.h"
 #include "vec3.h"
+#include "vec4.h"
 
 #ifdef CGLM_SSE_FP
-#  include "simd/sse2/mat4.h"
+#include "simd/sse2/mat4.h"
 #endif
 
 #ifdef CGLM_AVX_FP
-#  include "simd/avx/mat4.h"
+#include "simd/avx/mat4.h"
 #endif
 
 #ifdef CGLM_NEON_FP
-#  include "simd/neon/mat4.h"
+#include "simd/neon/mat4.h"
 #endif
 
 #ifdef CGLM_SIMD_WASM
-#  include "simd/wasm/mat4.h"
+#include "simd/wasm/mat4.h"
 #endif
 
 #ifndef NDEBUG
-# include <assert.h>
+#include <assert.h>
 #endif
 
-#define GLM_MAT4_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f, 0.0f},                    \
-                                 {0.0f, 1.0f, 0.0f, 0.0f},                    \
-                                 {0.0f, 0.0f, 1.0f, 0.0f},                    \
-                                 {0.0f, 0.0f, 0.0f, 1.0f}}
+#define GLM_MAT4_IDENTITY_INIT \
+  {{1.0f, 0.0f, 0.0f, 0.0f},   \
+   {0.0f, 1.0f, 0.0f, 0.0f},   \
+   {0.0f, 0.0f, 1.0f, 0.0f},   \
+   {0.0f, 0.0f, 0.0f, 1.0f}}
 
-#define GLM_MAT4_ZERO_INIT      {{0.0f, 0.0f, 0.0f, 0.0f},                    \
-                                 {0.0f, 0.0f, 0.0f, 0.0f},                    \
-                                 {0.0f, 0.0f, 0.0f, 0.0f},                    \
-                                 {0.0f, 0.0f, 0.0f, 0.0f}}
+#define GLM_MAT4_ZERO_INIT   \
+  {{0.0f, 0.0f, 0.0f, 0.0f}, \
+   {0.0f, 0.0f, 0.0f, 0.0f}, \
+   {0.0f, 0.0f, 0.0f, 0.0f}, \
+   {0.0f, 0.0f, 0.0f, 0.0f}}
 
 /* for C only */
 #define GLM_MAT4_IDENTITY ((mat4)GLM_MAT4_IDENTITY_INIT)
-#define GLM_MAT4_ZERO     ((mat4)GLM_MAT4_ZERO_INIT)
+#define GLM_MAT4_ZERO ((mat4)GLM_MAT4_ZERO_INIT)
 
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glm_mat4_udup(mat, dest) glm_mat4_ucopy(mat, dest)
-#define glm_mat4_dup(mat, dest)  glm_mat4_copy(mat, dest)
+#define glm_mat4_dup(mat, dest) glm_mat4_copy(mat, dest)
 
 /* DEPRECATED! default is precise now. */
 #define glm_mat4_inv_precise(mat, dest) glm_mat4_inv(mat, dest)
@@ -105,17 +108,24 @@
  * @param[out] dest destination
  */
 CGLM_INLINE
-void
-glm_mat4_ucopy(mat4 mat, mat4 dest) {
-  dest[0][0] = mat[0][0];  dest[1][0] = mat[1][0];
-  dest[0][1] = mat[0][1];  dest[1][1] = mat[1][1];
-  dest[0][2] = mat[0][2];  dest[1][2] = mat[1][2];
-  dest[0][3] = mat[0][3];  dest[1][3] = mat[1][3];
+void glm_mat4_ucopy(mat4 mat, mat4 dest) {
+  dest[0][0] = mat[0][0];
+  dest[1][0] = mat[1][0];
+  dest[0][1] = mat[0][1];
+  dest[1][1] = mat[1][1];
+  dest[0][2] = mat[0][2];
+  dest[1][2] = mat[1][2];
+  dest[0][3] = mat[0][3];
+  dest[1][3] = mat[1][3];
 
-  dest[2][0] = mat[2][0];  dest[3][0] = mat[3][0];
-  dest[2][1] = mat[2][1];  dest[3][1] = mat[3][1];
-  dest[2][2] = mat[2][2];  dest[3][2] = mat[3][2];
-  dest[2][3] = mat[2][3];  dest[3][3] = mat[3][3];
+  dest[2][0] = mat[2][0];
+  dest[3][0] = mat[3][0];
+  dest[2][1] = mat[2][1];
+  dest[3][1] = mat[3][1];
+  dest[2][2] = mat[2][2];
+  dest[3][2] = mat[3][2];
+  dest[2][3] = mat[2][3];
+  dest[3][3] = mat[3][3];
 }
 
 /*!
@@ -125,8 +135,7 @@ glm_mat4_ucopy(mat4 mat, mat4 dest) {
  * @param[out] dest destination
  */
 CGLM_INLINE
-void
-glm_mat4_copy(mat4 mat, mat4 dest) {
+void glm_mat4_copy(mat4 mat, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(dest[0], glmm_load(mat[0]));
   glmm_store(dest[1], glmm_load(mat[1]));
@@ -135,7 +144,7 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
 #elif defined(__AVX__)
   glmm_store256(dest[0], glmm_load256(mat[0]));
   glmm_store256(dest[2], glmm_load256(mat[2]));
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glmm_store(dest[0], glmm_load(mat[0]));
   glmm_store(dest[1], glmm_load(mat[1]));
   glmm_store(dest[2], glmm_load(mat[2]));
@@ -151,7 +160,7 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
 }
 
 /*!
- * @brief make given matrix identity. It is identical with below, 
+ * @brief make given matrix identity. It is identical with below,
  *        but it is more easy to do that with this func especially for members
  *        e.g. glm_mat4_identity(aStruct->aMatrix);
  *
@@ -165,8 +174,7 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
  * @param[in, out]  mat  destination
  */
 CGLM_INLINE
-void
-glm_mat4_identity(mat4 mat) {
+void glm_mat4_identity(mat4 mat) {
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   glm_mat4_copy(t, mat);
 }
@@ -180,8 +188,7 @@ glm_mat4_identity(mat4 mat) {
  * @param[in]       count count of matrices
  */
 CGLM_INLINE
-void
-glm_mat4_identity_array(mat4 * __restrict mat, size_t count) {
+void glm_mat4_identity_array(mat4* __restrict mat, size_t count) {
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   size_t i;
 
@@ -196,8 +203,7 @@ glm_mat4_identity_array(mat4 * __restrict mat, size_t count) {
  * @param[in, out]  mat  matrix
  */
 CGLM_INLINE
-void
-glm_mat4_zero(mat4 mat) {
+void glm_mat4_zero(mat4 mat) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_128 x0;
   x0 = wasm_f32x4_const_splat(0.f);
@@ -210,7 +216,7 @@ glm_mat4_zero(mat4 mat) {
   y0 = _mm256_setzero_ps();
   glmm_store256(mat[0], y0);
   glmm_store256(mat[2], y0);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glmm_128 x0;
   x0 = _mm_setzero_ps();
   glmm_store(mat[0], x0);
@@ -237,8 +243,7 @@ glm_mat4_zero(mat4 mat) {
  * @param[out] dest destination
  */
 CGLM_INLINE
-void
-glm_mat4_pick3(mat4 mat, mat3 dest) {
+void glm_mat4_pick3(mat4 mat, mat3 dest) {
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[0][1];
   dest[0][2] = mat[0][2];
@@ -261,8 +266,7 @@ glm_mat4_pick3(mat4 mat, mat3 dest) {
  * @param[out] dest destination
  */
 CGLM_INLINE
-void
-glm_mat4_pick3t(mat4 mat, mat3 dest) {
+void glm_mat4_pick3t(mat4 mat, mat3 dest) {
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[1][0];
   dest[0][2] = mat[2][0];
@@ -283,8 +287,7 @@ glm_mat4_pick3t(mat4 mat, mat3 dest) {
  * @param[out] dest destination
  */
 CGLM_INLINE
-void
-glm_mat4_ins3(mat3 mat, mat4 dest) {
+void glm_mat4_ins3(mat3 mat, mat4 dest) {
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[0][1];
   dest[0][2] = mat[0][2];
@@ -313,13 +316,12 @@ glm_mat4_ins3(mat3 mat, mat4 dest) {
  * @param[out] dest destination matrix
  */
 CGLM_INLINE
-void
-glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
+void glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_mul_wasm(m1, m2, dest);
 #elif defined(__AVX__)
   glm_mat4_mul_avx(m1, m2, dest);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mat4_mul_sse2(m1, m2, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_mul_neon(m1, m2, dest);
@@ -373,8 +375,7 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
  * @param[out] dest     result
  */
 CGLM_INLINE
-void
-glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
+void glm_mat4_mulN(mat4* __restrict matrices[], uint32_t len, mat4 dest) {
   uint32_t i;
 
 #ifndef NDEBUG
@@ -383,8 +384,7 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
 
   glm_mat4_mul(*matrices[0], *matrices[1], dest);
 
-  for (i = 2; i < len; i++)
-    glm_mat4_mul(dest, *matrices[i], dest);
+  for (i = 2; i < len; i++) glm_mat4_mul(dest, *matrices[i], dest);
 }
 
 /*!
@@ -395,11 +395,10 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
  * @param[out] dest vec4 (result, column vector)
  */
 CGLM_INLINE
-void
-glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
+void glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_mulv_wasm(m, v, dest);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mat4_mulv_sse2(m, v, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_mulv_neon(m, v, dest);
@@ -421,10 +420,7 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float
-glm_mat4_trace(mat4 m) {
-  return m[0][0] + m[1][1] + m[2][2] + m[3][3];
-}
+float glm_mat4_trace(mat4 m) { return m[0][0] + m[1][1] + m[2][2] + m[3][3]; }
 
 /*!
  * @brief trace of matrix (rotation part)
@@ -434,10 +430,7 @@ glm_mat4_trace(mat4 m) {
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float
-glm_mat4_trace3(mat4 m) {
-  return m[0][0] + m[1][1] + m[2][2];
-}
+float glm_mat4_trace3(mat4 m) { return m[0][0] + m[1][1] + m[2][2]; }
 
 /*!
  * @brief convert mat4's rotation part to quaternion
@@ -446,44 +439,43 @@ glm_mat4_trace3(mat4 m) {
  * @param[out] dest destination quaternion
  */
 CGLM_INLINE
-void
-glm_mat4_quat(mat4 m, versor dest) {
+void glm_mat4_quat(mat4 m, versor dest) {
   float trace, r, rinv;
 
   /* it seems using like m12 instead of m[1][2] causes extra instructions */
 
   trace = m[0][0] + m[1][1] + m[2][2];
   if (trace >= 0.0f) {
-    r       = sqrtf(1.0f + trace);
-    rinv    = 0.5f / r;
+    r = sqrtf(1.0f + trace);
+    rinv = 0.5f / r;
 
     dest[0] = rinv * (m[1][2] - m[2][1]);
     dest[1] = rinv * (m[2][0] - m[0][2]);
     dest[2] = rinv * (m[0][1] - m[1][0]);
-    dest[3] = r    * 0.5f;
+    dest[3] = r * 0.5f;
   } else if (m[0][0] >= m[1][1] && m[0][0] >= m[2][2]) {
-    r       = sqrtf(1.0f - m[1][1] - m[2][2] + m[0][0]);
-    rinv    = 0.5f / r;
+    r = sqrtf(1.0f - m[1][1] - m[2][2] + m[0][0]);
+    rinv = 0.5f / r;
 
-    dest[0] = r    * 0.5f;
+    dest[0] = r * 0.5f;
     dest[1] = rinv * (m[0][1] + m[1][0]);
     dest[2] = rinv * (m[0][2] + m[2][0]);
     dest[3] = rinv * (m[1][2] - m[2][1]);
   } else if (m[1][1] >= m[2][2]) {
-    r       = sqrtf(1.0f - m[0][0] - m[2][2] + m[1][1]);
-    rinv    = 0.5f / r;
+    r = sqrtf(1.0f - m[0][0] - m[2][2] + m[1][1]);
+    rinv = 0.5f / r;
 
     dest[0] = rinv * (m[0][1] + m[1][0]);
-    dest[1] = r    * 0.5f;
+    dest[1] = r * 0.5f;
     dest[2] = rinv * (m[1][2] + m[2][1]);
     dest[3] = rinv * (m[2][0] - m[0][2]);
   } else {
-    r       = sqrtf(1.0f - m[0][0] - m[1][1] + m[2][2]);
-    rinv    = 0.5f / r;
+    r = sqrtf(1.0f - m[0][0] - m[1][1] + m[2][2]);
+    rinv = 0.5f / r;
 
     dest[0] = rinv * (m[0][2] + m[2][0]);
     dest[1] = rinv * (m[1][2] + m[2][1]);
-    dest[2] = r    * 0.5f;
+    dest[2] = r * 0.5f;
     dest[3] = rinv * (m[0][1] - m[1][0]);
   }
 }
@@ -500,8 +492,7 @@ glm_mat4_quat(mat4 m, versor dest) {
  * @param[out] dest result vector (vec3)
  */
 CGLM_INLINE
-void
-glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) {
+void glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) {
   vec4 res;
   glm_vec4(v, last, res);
   glm_mat4_mulv(m, res, res);
@@ -517,25 +508,32 @@ glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) {
  * @param[out] dest result
  */
 CGLM_INLINE
-void
-glm_mat4_transpose_to(mat4 m, mat4 dest) {
+void glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_transp_wasm(m, dest);
 #elif defined(__AVX__)
   glm_mat4_transp_avx(m, dest);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mat4_transp_sse2(m, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_transp_neon(m, dest);
 #else
-  dest[0][0] = m[0][0]; dest[1][0] = m[0][1];
-  dest[0][1] = m[1][0]; dest[1][1] = m[1][1];
-  dest[0][2] = m[2][0]; dest[1][2] = m[2][1];
-  dest[0][3] = m[3][0]; dest[1][3] = m[3][1];
-  dest[2][0] = m[0][2]; dest[3][0] = m[0][3];
-  dest[2][1] = m[1][2]; dest[3][1] = m[1][3];
-  dest[2][2] = m[2][2]; dest[3][2] = m[2][3];
-  dest[2][3] = m[3][2]; dest[3][3] = m[3][3];
+  dest[0][0] = m[0][0];
+  dest[1][0] = m[0][1];
+  dest[0][1] = m[1][0];
+  dest[1][1] = m[1][1];
+  dest[0][2] = m[2][0];
+  dest[1][2] = m[2][1];
+  dest[0][3] = m[3][0];
+  dest[1][3] = m[3][1];
+  dest[2][0] = m[0][2];
+  dest[3][0] = m[0][3];
+  dest[2][1] = m[1][2];
+  dest[3][1] = m[1][3];
+  dest[2][2] = m[2][2];
+  dest[3][2] = m[2][3];
+  dest[2][3] = m[3][2];
+  dest[3][3] = m[3][3];
 #endif
 }
 
@@ -545,13 +543,12 @@ glm_mat4_transpose_to(mat4 m, mat4 dest) {
  * @param[in, out] m source and dest
  */
 CGLM_INLINE
-void
-glm_mat4_transpose(mat4 m) {
+void glm_mat4_transpose(mat4 m) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_transp_wasm(m, m);
 #elif defined(__AVX__)
   glm_mat4_transp_avx(m, m);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mat4_transp_sse2(m, m);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_transp_neon(m, m);
@@ -571,12 +568,23 @@ glm_mat4_transpose(mat4 m) {
  * @param[in]      s scalar
  */
 CGLM_INLINE
-void
-glm_mat4_scale_p(mat4 m, float s) {
-  m[0][0] *= s; m[0][1] *= s; m[0][2] *= s; m[0][3] *= s;
-  m[1][0] *= s; m[1][1] *= s; m[1][2] *= s; m[1][3] *= s;
-  m[2][0] *= s; m[2][1] *= s; m[2][2] *= s; m[2][3] *= s;
-  m[3][0] *= s; m[3][1] *= s; m[3][2] *= s; m[3][3] *= s;
+void glm_mat4_scale_p(mat4 m, float s) {
+  m[0][0] *= s;
+  m[0][1] *= s;
+  m[0][2] *= s;
+  m[0][3] *= s;
+  m[1][0] *= s;
+  m[1][1] *= s;
+  m[1][2] *= s;
+  m[1][3] *= s;
+  m[2][0] *= s;
+  m[2][1] *= s;
+  m[2][2] *= s;
+  m[2][3] *= s;
+  m[3][0] *= s;
+  m[3][1] *= s;
+  m[3][2] *= s;
+  m[3][3] *= s;
 }
 
 /*!
@@ -588,13 +596,12 @@ glm_mat4_scale_p(mat4 m, float s) {
  * @param[in]      s scalar
  */
 CGLM_INLINE
-void
-glm_mat4_scale(mat4 m, float s) {
+void glm_mat4_scale(mat4 m, float s) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_scale_wasm(m, s);
 #elif defined(__AVX__)
   glm_mat4_scale_avx(m, s);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mat4_scale_sse2(m, s);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_scale_neon(m, s);
@@ -611,11 +618,10 @@ glm_mat4_scale(mat4 m, float s) {
  * @return determinant
  */
 CGLM_INLINE
-float
-glm_mat4_det(mat4 mat) {
+float glm_mat4_det(mat4 mat) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   return glm_mat4_det_wasm(mat);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   return glm_mat4_det_sse2(mat);
 #elif defined(CGLM_NEON_FP)
   return glm_mat4_det_neon(mat);
@@ -634,10 +640,10 @@ glm_mat4_det(mat4 mat) {
   t[4] = i * o - m * k;
   t[5] = i * n - m * j;
 
-  return a * (f * t[0] - g * t[1] + h * t[2])
-       - b * (e * t[0] - g * t[3] + h * t[4])
-       + c * (e * t[1] - f * t[3] + h * t[5])
-       - d * (e * t[2] - f * t[4] + g * t[5]);
+  return a * (f * t[0] - g * t[1] + h * t[2]) -
+         b * (e * t[0] - g * t[3] + h * t[4]) +
+         c * (e * t[1] - f * t[3] + h * t[5]) -
+         d * (e * t[2] - f * t[4] + g * t[5]);
 #endif
 }
 
@@ -648,11 +654,10 @@ glm_mat4_det(mat4 mat) {
  * @param[out] dest inverse matrix
  */
 CGLM_INLINE
-void
-glm_mat4_inv(mat4 mat, mat4 dest) {
+void glm_mat4_inv(mat4 mat, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_inv_wasm(mat, dest);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mat4_inv_sse2(mat, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_inv_neon(mat, dest);
@@ -662,32 +667,34 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
         i = mat[2][0], j = mat[2][1], k = mat[2][2], l = mat[2][3],
         m = mat[3][0], n = mat[3][1], o = mat[3][2], p = mat[3][3],
 
-        c1  = k * p - l * o,  c2  = c * h - d * g,  c3  = i * p - l * m,
-        c4  = a * h - d * e,  c5  = j * p - l * n,  c6  = b * h - d * f, 
-        c7  = i * n - j * m,  c8  = a * f - b * e,  c9  = j * o - k * n,
-        c10 = b * g - c * f,  c11 = i * o - k * m,  c12 = a * g - c * e,
+        c1 = k * p - l * o, c2 = c * h - d * g, c3 = i * p - l * m,
+        c4 = a * h - d * e, c5 = j * p - l * n, c6 = b * h - d * f,
+        c7 = i * n - j * m, c8 = a * f - b * e, c9 = j * o - k * n,
+        c10 = b * g - c * f, c11 = i * o - k * m, c12 = a * g - c * e,
 
-        idt = 1.0f/(c8*c1+c4*c9+c10*c3+c2*c7-c12*c5-c6*c11), ndt = -idt;
+        idt = 1.0f /
+              (c8 * c1 + c4 * c9 + c10 * c3 + c2 * c7 - c12 * c5 - c6 * c11),
+        ndt = -idt;
 
-  dest[0][0] = (f * c1  - g * c5  + h * c9)  * idt;
-  dest[0][1] = (b * c1  - c * c5  + d * c9)  * ndt;
-  dest[0][2] = (n * c2  - o * c6  + p * c10) * idt;
-  dest[0][3] = (j * c2  - k * c6  + l * c10) * ndt;
+  dest[0][0] = (f * c1 - g * c5 + h * c9) * idt;
+  dest[0][1] = (b * c1 - c * c5 + d * c9) * ndt;
+  dest[0][2] = (n * c2 - o * c6 + p * c10) * idt;
+  dest[0][3] = (j * c2 - k * c6 + l * c10) * ndt;
 
-  dest[1][0] = (e * c1  - g * c3  + h * c11) * ndt;
-  dest[1][1] = (a * c1  - c * c3  + d * c11) * idt;
-  dest[1][2] = (m * c2  - o * c4  + p * c12) * ndt;
-  dest[1][3] = (i * c2  - k * c4  + l * c12) * idt;
+  dest[1][0] = (e * c1 - g * c3 + h * c11) * ndt;
+  dest[1][1] = (a * c1 - c * c3 + d * c11) * idt;
+  dest[1][2] = (m * c2 - o * c4 + p * c12) * ndt;
+  dest[1][3] = (i * c2 - k * c4 + l * c12) * idt;
 
-  dest[2][0] = (e * c5  - f * c3  + h * c7)  * idt;
-  dest[2][1] = (a * c5  - b * c3  + d * c7)  * ndt;
-  dest[2][2] = (m * c6  - n * c4  + p * c8)  * idt;
-  dest[2][3] = (i * c6  - j * c4  + l * c8)  * ndt;
+  dest[2][0] = (e * c5 - f * c3 + h * c7) * idt;
+  dest[2][1] = (a * c5 - b * c3 + d * c7) * ndt;
+  dest[2][2] = (m * c6 - n * c4 + p * c8) * idt;
+  dest[2][3] = (i * c6 - j * c4 + l * c8) * ndt;
 
-  dest[3][0] = (e * c9  - f * c11 + g * c7)  * ndt;
-  dest[3][1] = (a * c9  - b * c11 + c * c7)  * idt;
-  dest[3][2] = (m * c10 - n * c12 + o * c8)  * ndt;
-  dest[3][3] = (i * c10 - j * c12 + k * c8)  * idt;
+  dest[3][0] = (e * c9 - f * c11 + g * c7) * ndt;
+  dest[3][1] = (a * c9 - b * c11 + c * c7) * idt;
+  dest[3][2] = (m * c10 - n * c12 + o * c8) * ndt;
+  dest[3][3] = (i * c10 - j * c12 + k * c8) * idt;
 #endif
 }
 
@@ -704,11 +711,10 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
  * @param[out] dest inverse matrix
  */
 CGLM_INLINE
-void
-glm_mat4_inv_fast(mat4 mat, mat4 dest) {
+void glm_mat4_inv_fast(mat4 mat, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_inv_fast_wasm(mat, dest);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mat4_inv_fast_sse2(mat, dest);
 #else
   glm_mat4_inv(mat, dest);
@@ -723,8 +729,7 @@ glm_mat4_inv_fast(mat4 mat, mat4 dest) {
  * @param[in]     col2 col2
  */
 CGLM_INLINE
-void
-glm_mat4_swap_col(mat4 mat, int col1, int col2) {
+void glm_mat4_swap_col(mat4 mat, int col1, int col2) {
   CGLM_ALIGN(16) vec4 tmp;
   glm_vec4_copy(mat[col1], tmp);
   glm_vec4_copy(mat[col2], mat[col1]);
@@ -739,8 +744,7 @@ glm_mat4_swap_col(mat4 mat, int col1, int col2) {
  * @param[in]     row2 row2
  */
 CGLM_INLINE
-void
-glm_mat4_swap_row(mat4 mat, int row1, int row2) {
+void glm_mat4_swap_row(mat4 mat, int row1, int row2) {
   CGLM_ALIGN(16) vec4 tmp;
   tmp[0] = mat[0][row1];
   tmp[1] = mat[1][row1];
@@ -773,8 +777,7 @@ glm_mat4_swap_row(mat4 mat, int row1, int row2) {
  * @return scalar value e.g. B(s)
  */
 CGLM_INLINE
-float
-glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
+float glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
   vec4 tmp;
   glm_mat4_mulv(m, c, tmp);
   return glm_vec4_dot(r, tmp);
@@ -787,17 +790,24 @@ glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
  * @param[out] dest matrix
  */
 CGLM_INLINE
-void
-glm_mat4_make(const float * __restrict src, mat4 dest) {
-  dest[0][0] = src[0];   dest[1][0] = src[4];
-  dest[0][1] = src[1];   dest[1][1] = src[5];
-  dest[0][2] = src[2];   dest[1][2] = src[6];
-  dest[0][3] = src[3];   dest[1][3] = src[7];
+void glm_mat4_make(const float* __restrict src, mat4 dest) {
+  dest[0][0] = src[0];
+  dest[1][0] = src[4];
+  dest[0][1] = src[1];
+  dest[1][1] = src[5];
+  dest[0][2] = src[2];
+  dest[1][2] = src[6];
+  dest[0][3] = src[3];
+  dest[1][3] = src[7];
 
-  dest[2][0] = src[8];   dest[3][0] = src[12];
-  dest[2][1] = src[9];   dest[3][1] = src[13];
-  dest[2][2] = src[10];  dest[3][2] = src[14];
-  dest[2][3] = src[11];  dest[3][3] = src[15];
+  dest[2][0] = src[8];
+  dest[3][0] = src[12];
+  dest[2][1] = src[9];
+  dest[3][1] = src[13];
+  dest[2][2] = src[10];
+  dest[3][2] = src[14];
+  dest[2][3] = src[11];
+  dest[3][3] = src[15];
 }
 
 /*!
@@ -811,8 +821,8 @@ glm_mat4_make(const float * __restrict src, mat4 dest) {
  * @param[out] dest texture transform matrix
  */
 CGLM_INLINE
-void
-glm_mat4_textrans(float sx, float sy, float rot, float tx, float ty, mat4 dest) {
+void glm_mat4_textrans(float sx, float sy, float rot, float tx, float ty,
+                       mat4 dest) {
   float c, s;
 
   c = cosf(rot);
@@ -820,12 +830,12 @@ glm_mat4_textrans(float sx, float sy, float rot, float tx, float ty, mat4 dest) 
 
   glm_mat4_identity(dest);
 
-  dest[0][0] =  c * sx;
+  dest[0][0] = c * sx;
   dest[0][1] = -s * sy;
-  dest[1][0] =  s * sx;
-  dest[1][1] =  c * sy;
-  dest[3][0] =  tx;
-  dest[3][1] =  ty;
+  dest[1][0] = s * sx;
+  dest[1][1] = c * sy;
+  dest[3][0] = tx;
+  dest[3][1] = ty;
 }
 
 #endif /* cglm_mat_h */

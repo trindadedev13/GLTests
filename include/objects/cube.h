@@ -2,7 +2,12 @@
 #define CUBE_H
 
 #include <cglm/cglm.h>
+#include <glad/gl.h>
+
 #include "graphics/color.h"
+
+#define cube_reset_model_matrix(cube) \
+  glm_mat4_identity((cube).cube_model_matrix)
 
 struct cube {
   GLuint cube_vao;  // vertex array object

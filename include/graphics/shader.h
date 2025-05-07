@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <GL/gl.h>
+#include <glad/gl.h>
 
 GLuint compile_shader(GLenum type, const char* source);
 

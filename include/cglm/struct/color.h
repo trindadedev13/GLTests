@@ -8,9 +8,9 @@
 #ifndef cglms_colors_h
 #define cglms_colors_h
 
+#include "../color.h"
 #include "../common.h"
 #include "../types-struct.h"
-#include "../color.h"
 #include "vec3.h"
 
 /*!
@@ -19,9 +19,6 @@
  * @param[in]  rgb RGB color
  */
 CGLM_INLINE
-float
-glms_luminance(vec3s rgb) {
-  return glm_luminance(rgb.raw);
-}
+float glms_luminance(vec3s rgb) { return glm_luminance(rgb.raw); }
 
 #endif /* cglms_colors_h */

@@ -13,13 +13,12 @@
 #include "../intrin.h"
 
 CGLM_INLINE
-void
-glm_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
+void glm_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
 
-  l  = glmm_load(m1[0]);
+  l = glmm_load(m1[0]);
   r0 = glmm_load(m2[0]);
   r1 = glmm_load(m2[1]);
   r2 = glmm_load(m2[2]);
@@ -30,13 +29,13 @@ glm_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
   v2 = vmulq_f32(glmm_splat_x(r2), l);
   v3 = vmulq_f32(glmm_splat_x(r3), l);
 
-  l  = glmm_load(m1[1]);
+  l = glmm_load(m1[1]);
   v0 = glmm_fmadd(glmm_splat_y(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_y(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_y(r2), l, v2);
   v3 = glmm_fmadd(glmm_splat_y(r3), l, v3);
 
-  l  = glmm_load(m1[2]);
+  l = glmm_load(m1[2]);
   v0 = glmm_fmadd(glmm_splat_z(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_z(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_z(r2), l, v2);
@@ -51,13 +50,12 @@ glm_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
 }
 
 CGLM_INLINE
-void
-glm_mul_rot_neon(mat4 m1, mat4 m2, mat4 dest) {
+void glm_mul_rot_neon(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, v0, v1, v2;
 
-  l  = glmm_load(m1[0]);
+  l = glmm_load(m1[0]);
   r0 = glmm_load(m2[0]);
   r1 = glmm_load(m2[1]);
   r2 = glmm_load(m2[2]);
@@ -66,12 +64,12 @@ glm_mul_rot_neon(mat4 m1, mat4 m2, mat4 dest) {
   v1 = vmulq_f32(glmm_splat_x(r1), l);
   v2 = vmulq_f32(glmm_splat_x(r2), l);
 
-  l  = glmm_load(m1[1]);
+  l = glmm_load(m1[1]);
   v0 = glmm_fmadd(glmm_splat_y(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_y(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_y(r2), l, v2);
-  
-  l  = glmm_load(m1[2]);
+
+  l = glmm_load(m1[2]);
   v0 = glmm_fmadd(glmm_splat_z(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_z(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_z(r2), l, v2);
@@ -83,26 +81,25 @@ glm_mul_rot_neon(mat4 m1, mat4 m2, mat4 dest) {
 }
 
 CGLM_INLINE
-void
-glm_inv_tr_neon(mat4 mat) {
+void glm_inv_tr_neon(mat4 mat) {
   float32x4x4_t vmat;
-  glmm_128      r0, r1, r2, x0;
+  glmm_128 r0, r1, r2, x0;
 
   vmat = vld4q_f32(mat[0]);
-  r0   = vmat.val[0];
-  r1   = vmat.val[1];
-  r2   = vmat.val[2];
+  r0 = vmat.val[0];
+  r1 = vmat.val[1];
+  r2 = vmat.val[2];
 
-  x0 = glmm_fmadd(r0, glmm_splat_w(r0),
-                  glmm_fmadd(r1, glmm_splat_w(r1),
-                             vmulq_f32(r2, glmm_splat_w(r2))));
+  x0 = glmm_fmadd(
+      r0, glmm_splat_w(r0),
+      glmm_fmadd(r1, glmm_splat_w(r1), vmulq_f32(r2, glmm_splat_w(r2))));
   x0 = vnegq_f32(x0);
 
   glmm_store(mat[0], r0);
   glmm_store(mat[1], r1);
   glmm_store(mat[2], r2);
   glmm_store(mat[3], x0);
-  
+
   mat[0][3] = 0.0f;
   mat[1][3] = 0.0f;
   mat[2][3] = 0.0f;

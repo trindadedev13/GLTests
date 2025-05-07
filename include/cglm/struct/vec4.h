@@ -59,8 +59,8 @@
    CGLM_INLINE vec4s glms_vec4_mix(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_mixc(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_step(vec4s edge, vec4s x);
-   CGLM_INLINE vec4s glms_vec4_smoothstep_uni(float edge0, float edge1, vec4s x);
-   CGLM_INLINE vec4s glms_vec4_smoothstep(vec4s edge0, vec4s edge1, vec4s x);
+   CGLM_INLINE vec4s glms_vec4_smoothstep_uni(float edge0, float edge1, vec4s
+ x); CGLM_INLINE vec4s glms_vec4_smoothstep(vec4s edge0, vec4s edge1, vec4s x);
    CGLM_INLINE vec4s glms_vec4_smoothinterp(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_smoothinterpc(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_cubic(float s);
@@ -85,13 +85,13 @@
 /* DEPRECATED! */
 #define glms_vec4_step_uni(edge, x) glms_vec4_steps(edge, x)
 
-#define GLMS_VEC4_ONE_INIT   {GLM_VEC4_ONE_INIT}
+#define GLMS_VEC4_ONE_INIT {GLM_VEC4_ONE_INIT}
 #define GLMS_VEC4_BLACK_INIT {GLM_VEC4_BLACK_INIT}
-#define GLMS_VEC4_ZERO_INIT  {GLM_VEC4_ZERO_INIT}
+#define GLMS_VEC4_ZERO_INIT {GLM_VEC4_ZERO_INIT}
 
-#define GLMS_VEC4_ONE        ((vec4s)GLM_VEC4_ONE_INIT)
-#define GLMS_VEC4_BLACK      ((vec4s)GLM_VEC4_BLACK_INIT)
-#define GLMS_VEC4_ZERO       ((vec4s)GLM_VEC4_ZERO_INIT)
+#define GLMS_VEC4_ONE ((vec4s)GLM_VEC4_ONE_INIT)
+#define GLMS_VEC4_BLACK ((vec4s)GLM_VEC4_BLACK_INIT)
+#define GLMS_VEC4_ZERO ((vec4s)GLM_VEC4_ZERO_INIT)
 
 /*!
  * @brief init vec4 using vec3
@@ -101,8 +101,7 @@
  * @returns         destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4(vec3s v3, float last) {
+vec4s glms_vec4(vec3s v3, float last) {
   vec4s r;
   glm_vec4(v3.raw, last, r.raw);
   return r;
@@ -115,8 +114,7 @@ glms_vec4(vec3s v3, float last) {
  * @returns         vec3
  */
 CGLM_INLINE
-vec3s
-glms_vec4_(copy3)(vec4s v) {
+vec3s glms_vec4_(copy3)(vec4s v) {
   vec3s r;
   glm_vec4_copy3(v.raw, r.raw);
   return r;
@@ -129,8 +127,7 @@ glms_vec4_(copy3)(vec4s v) {
  * @returns         destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(copy)(vec4s v) {
+vec4s glms_vec4_(copy)(vec4s v) {
   vec4s r;
   glm_vec4_copy(v.raw, r.raw);
   return r;
@@ -145,8 +142,7 @@ glms_vec4_(copy)(vec4s v) {
  * @returns         destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(ucopy)(vec4s v) {
+vec4s glms_vec4_(ucopy)(vec4s v) {
   vec4s r;
   glm_vec4_ucopy(v.raw, r.raw);
   return r;
@@ -160,8 +156,7 @@ glms_vec4_(ucopy)(vec4s v) {
  * @param[in]  len number of elements
  */
 CGLM_INLINE
-void
-glms_vec4_(pack)(vec4s dst[], vec4 src[], size_t len) {
+void glms_vec4_(pack)(vec4s dst[], vec4 src[], size_t len) {
   size_t i;
 
   for (i = 0; i < len; i++) {
@@ -177,8 +172,7 @@ glms_vec4_(pack)(vec4s dst[], vec4 src[], size_t len) {
  * @param[in]  len number of elements
  */
 CGLM_INLINE
-void
-glms_vec4_(unpack)(vec4 dst[], vec4s src[], size_t len) {
+void glms_vec4_(unpack)(vec4 dst[], vec4s src[], size_t len) {
   size_t i;
 
   for (i = 0; i < len; i++) {
@@ -192,8 +186,7 @@ glms_vec4_(unpack)(vec4 dst[], vec4s src[], size_t len) {
  * @returns      zero vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(zero)(void) {
+vec4s glms_vec4_(zero)(void) {
   vec4s r;
   glm_vec4_zero(r.raw);
   return r;
@@ -205,8 +198,7 @@ glms_vec4_(zero)(void) {
  * @returns      one vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(one)(void) {
+vec4s glms_vec4_(one)(void) {
   vec4s r;
   glm_vec4_one(r.raw);
   return r;
@@ -221,10 +213,7 @@ glms_vec4_(one)(void) {
  * @return dot product
  */
 CGLM_INLINE
-float
-glms_vec4_(dot)(vec4s a, vec4s b) {
-  return glm_vec4_dot(a.raw, b.raw);
-}
+float glms_vec4_(dot)(vec4s a, vec4s b) { return glm_vec4_dot(a.raw, b.raw); }
 
 /*!
  * @brief norm * norm (magnitude) of vec
@@ -238,10 +227,7 @@ glms_vec4_(dot)(vec4s a, vec4s b) {
  * @return norm * norm
  */
 CGLM_INLINE
-float
-glms_vec4_(norm2)(vec4s v) {
-  return glm_vec4_norm2(v.raw);
-}
+float glms_vec4_(norm2)(vec4s v) { return glm_vec4_norm2(v.raw); }
 
 /*!
  * @brief norm (magnitude) of vec4
@@ -251,10 +237,7 @@ glms_vec4_(norm2)(vec4s v) {
  * @return norm
  */
 CGLM_INLINE
-float
-glms_vec4_(norm)(vec4s v) {
-  return glm_vec4_norm(v.raw);
-}
+float glms_vec4_(norm)(vec4s v) { return glm_vec4_norm(v.raw); }
 
 /*!
  * @brief L1 norm of vec4
@@ -271,16 +254,14 @@ glms_vec4_(norm)(vec4s v) {
  * @return L1 norm
  */
 CGLM_INLINE
-float
-glms_vec4_(norm_one)(vec4s v) {
-  return glm_vec4_norm_one(v.raw);
-}
+float glms_vec4_(norm_one)(vec4s v) { return glm_vec4_norm_one(v.raw); }
 
 /*!
  * @brief Infinity norm of vec4
  * Also known as Maximum norm.
  * Infinity Norm is the largest magnitude among each element of a vector.
- * It is calculated as the maximum of the absolute values of the vector components.
+ * It is calculated as the maximum of the absolute values of the vector
+ * components.
  *
  * This computes:
  * inf norm = max(|v[0]|, |v[1]|, |v[2]|, |v[3]|)
@@ -290,10 +271,7 @@ glms_vec4_(norm_one)(vec4s v) {
  * @return Infinity norm
  */
 CGLM_INLINE
-float
-glms_vec4_(norm_inf)(vec4s v) {
-  return glm_vec4_norm_inf(v.raw);
-}
+float glms_vec4_(norm_inf)(vec4s v) { return glm_vec4_norm_inf(v.raw); }
 
 /*!
  * @brief add b vector to a vector store result in dest
@@ -303,8 +281,7 @@ glms_vec4_(norm_inf)(vec4s v) {
  * @returns         destination vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(add)(vec4s a, vec4s b) {
+vec4s glms_vec4_(add)(vec4s a, vec4s b) {
   vec4s r;
   glm_vec4_add(a.raw, b.raw, r.raw);
   return r;
@@ -318,8 +295,7 @@ glms_vec4_(add)(vec4s a, vec4s b) {
  * @returns         destination vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(adds)(vec4s v, float s) {
+vec4s glms_vec4_(adds)(vec4s v, float s) {
   vec4s r;
   glm_vec4_adds(v.raw, s, r.raw);
   return r;
@@ -333,8 +309,7 @@ glms_vec4_(adds)(vec4s v, float s) {
  * @returns         destination vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(sub)(vec4s a, vec4s b) {
+vec4s glms_vec4_(sub)(vec4s a, vec4s b) {
   vec4s r;
   glm_vec4_sub(a.raw, b.raw, r.raw);
   return r;
@@ -348,8 +323,7 @@ glms_vec4_(sub)(vec4s a, vec4s b) {
  * @returns         destination vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(subs)(vec4s v, float s) {
+vec4s glms_vec4_(subs)(vec4s v, float s) {
   vec4s r;
   glm_vec4_subs(v.raw, s, r.raw);
   return r;
@@ -363,8 +337,7 @@ glms_vec4_(subs)(vec4s v, float s) {
  * @returns    dest = (a[0] * b[0], a[1] * b[1], a[2] * b[2], a[3] * b[3])
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(mul)(vec4s a, vec4s b) {
+vec4s glms_vec4_(mul)(vec4s a, vec4s b) {
   vec4s r;
   glm_vec4_mul(a.raw, b.raw, r.raw);
   return r;
@@ -378,8 +351,7 @@ glms_vec4_(mul)(vec4s a, vec4s b) {
  * @returns         destination vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(scale)(vec4s v, float s) {
+vec4s glms_vec4_(scale)(vec4s v, float s) {
   vec4s r;
   glm_vec4_scale(v.raw, s, r.raw);
   return r;
@@ -393,8 +365,7 @@ glms_vec4_(scale)(vec4s v, float s) {
  * @returns         destination vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(scale_as)(vec4s v, float s) {
+vec4s glms_vec4_(scale_as)(vec4s v, float s) {
   vec4s r;
   glm_vec4_scale_as(v.raw, s, r.raw);
   return r;
@@ -408,8 +379,7 @@ glms_vec4_(scale_as)(vec4s v, float s) {
  * @returns         result = (a[0]/b[0], a[1]/b[1], a[2]/b[2], a[3]/b[3])
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(div)(vec4s a, vec4s b) {
+vec4s glms_vec4_(div)(vec4s a, vec4s b) {
   vec4s r;
   glm_vec4_div(a.raw, b.raw, r.raw);
   return r;
@@ -423,8 +393,7 @@ glms_vec4_(div)(vec4s a, vec4s b) {
  * @returns         destination vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(divs)(vec4s v, float s) {
+vec4s glms_vec4_(divs)(vec4s v, float s) {
   vec4s r;
   glm_vec4_divs(v.raw, s, r.raw);
   return r;
@@ -440,8 +409,7 @@ glms_vec4_(divs)(vec4s v, float s) {
  * @returns         dest += (a + b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(addadd)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(addadd)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_addadd(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -456,8 +424,7 @@ glms_vec4_(addadd)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest += (a - b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(subadd)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(subadd)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_subadd(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -472,8 +439,7 @@ glms_vec4_(subadd)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest += (a * b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(muladd)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(muladd)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_muladd(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -488,8 +454,7 @@ glms_vec4_(muladd)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest += (a * b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(muladds)(vec4s a, float s, vec4s dest) {
+vec4s glms_vec4_(muladds)(vec4s a, float s, vec4s dest) {
   glm_vec4_muladds(a.raw, s, dest.raw);
   return dest;
 }
@@ -504,8 +469,7 @@ glms_vec4_(muladds)(vec4s a, float s, vec4s dest) {
  * @returns         dest += max(a, b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(maxadd)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(maxadd)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_maxadd(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -520,8 +484,7 @@ glms_vec4_(maxadd)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest += min(a, b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(minadd)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(minadd)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_minadd(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -536,8 +499,7 @@ glms_vec4_(minadd)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest -= (a + b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(subsub)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(subsub)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_subsub(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -552,8 +514,7 @@ glms_vec4_(subsub)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest -= (a + b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(addsub)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(addsub)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_addsub(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -568,8 +529,7 @@ glms_vec4_(addsub)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest -= (a * b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(mulsub)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(mulsub)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_mulsub(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -584,8 +544,7 @@ glms_vec4_(mulsub)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest -= (a * b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(mulsubs)(vec4s a, float s, vec4s dest) {
+vec4s glms_vec4_(mulsubs)(vec4s a, float s, vec4s dest) {
   glm_vec4_mulsubs(a.raw, s, dest.raw);
   return dest;
 }
@@ -600,8 +559,7 @@ glms_vec4_(mulsubs)(vec4s a, float s, vec4s dest) {
  * @returns         dest -= max(a, b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(maxsub)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(maxsub)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_maxsub(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -616,8 +574,7 @@ glms_vec4_(maxsub)(vec4s a, vec4s b, vec4s dest) {
  * @returns         dest -= min(a, b)
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(minsub)(vec4s a, vec4s b, vec4s dest) {
+vec4s glms_vec4_(minsub)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_minsub(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -629,8 +586,7 @@ glms_vec4_(minsub)(vec4s a, vec4s b, vec4s dest) {
  * @returns          result vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(negate)(vec4s v) {
+vec4s glms_vec4_(negate)(vec4s v) {
   glm_vec4_negate(v.raw);
   return v;
 }
@@ -642,8 +598,7 @@ glms_vec4_(negate)(vec4s v) {
  * @returns       normalized vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(normalize)(vec4s v) {
+vec4s glms_vec4_(normalize)(vec4s v) {
   glm_vec4_normalize(v.raw);
   return v;
 }
@@ -656,8 +611,7 @@ glms_vec4_(normalize)(vec4s v) {
  * @return returns distance
  */
 CGLM_INLINE
-float
-glms_vec4_(distance)(vec4s a, vec4s b) {
+float glms_vec4_(distance)(vec4s a, vec4s b) {
   return glm_vec4_distance(a.raw, b.raw);
 }
 
@@ -669,8 +623,7 @@ glms_vec4_(distance)(vec4s a, vec4s b) {
  * @return returns squared distance
  */
 CGLM_INLINE
-float
-glms_vec4_(distance2)(vec4s a, vec4s b) {
+float glms_vec4_(distance2)(vec4s a, vec4s b) {
   return glm_vec4_distance2(a.raw, b.raw);
 }
 
@@ -682,8 +635,7 @@ glms_vec4_(distance2)(vec4s a, vec4s b) {
  * @returns         destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(maxv)(vec4s a, vec4s b) {
+vec4s glms_vec4_(maxv)(vec4s a, vec4s b) {
   vec4s r;
   glm_vec4_maxv(a.raw, b.raw, r.raw);
   return r;
@@ -697,8 +649,7 @@ glms_vec4_(maxv)(vec4s a, vec4s b) {
  * @returns         destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(minv)(vec4s a, vec4s b) {
+vec4s glms_vec4_(minv)(vec4s a, vec4s b) {
   vec4s r;
   glm_vec4_minv(a.raw, b.raw, r.raw);
   return r;
@@ -713,8 +664,7 @@ glms_vec4_(minv)(vec4s a, vec4s b) {
  * @returns                 clamped vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(clamp)(vec4s v, float minVal, float maxVal) {
+vec4s glms_vec4_(clamp)(vec4s v, float minVal, float maxVal) {
   glm_vec4_clamp(v.raw, minVal, maxVal);
   return v;
 }
@@ -730,8 +680,7 @@ glms_vec4_(clamp)(vec4s v, float minVal, float maxVal) {
  * @returns           destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(lerp)(vec4s from, vec4s to, float t) {
+vec4s glms_vec4_(lerp)(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_lerp(from.raw, to.raw, t, r.raw);
   return r;
@@ -748,8 +697,7 @@ glms_vec4_(lerp)(vec4s from, vec4s to, float t) {
  * @returns           destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(lerpc)(vec4s from, vec4s to, float t) {
+vec4s glms_vec4_(lerpc)(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_lerpc(from.raw, to.raw, t, r.raw);
   return r;
@@ -766,8 +714,7 @@ glms_vec4_(lerpc)(vec4s from, vec4s to, float t) {
  * @returns           destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(mix)(vec4s from, vec4s to, float t) {
+vec4s glms_vec4_(mix)(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_mix(from.raw, to.raw, t, r.raw);
   return r;
@@ -784,8 +731,7 @@ glms_vec4_(mix)(vec4s from, vec4s to, float t) {
  * @returns           destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(mixc)(vec4s from, vec4s to, float t) {
+vec4s glms_vec4_(mixc)(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_mixc(from.raw, to.raw, t, r.raw);
   return r;
@@ -799,8 +745,7 @@ glms_vec4_(mixc)(vec4s from, vec4s to, float t) {
  * @returns             0.0 if x < edge, else 1.0
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(step)(vec4s edge, vec4s x) {
+vec4s glms_vec4_(step)(vec4s edge, vec4s x) {
   vec4s r;
   glm_vec4_step(edge.raw, x.raw, r.raw);
   return r;
@@ -815,8 +760,7 @@ glms_vec4_(step)(vec4s edge, vec4s x) {
  * @returns             destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(smoothstep_uni)(float edge0, float edge1, vec4s x) {
+vec4s glms_vec4_(smoothstep_uni)(float edge0, float edge1, vec4s x) {
   vec4s r;
   glm_vec4_smoothstep_uni(edge0, edge1, x.raw, r.raw);
   return r;
@@ -831,8 +775,7 @@ glms_vec4_(smoothstep_uni)(float edge0, float edge1, vec4s x) {
  * @returns             destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(smoothstep)(vec4s edge0, vec4s edge1, vec4s x) {
+vec4s glms_vec4_(smoothstep)(vec4s edge0, vec4s edge1, vec4s x) {
   vec4s r;
   glm_vec4_smoothstep(edge0.raw, edge1.raw, x.raw, r.raw);
   return r;
@@ -849,8 +792,7 @@ glms_vec4_(smoothstep)(vec4s edge0, vec4s edge1, vec4s x) {
  * @returns             destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(smoothinterp)(vec4s from, vec4s to, float t) {
+vec4s glms_vec4_(smoothinterp)(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_smoothinterp(from.raw, to.raw, t, r.raw);
   return r;
@@ -867,8 +809,7 @@ glms_vec4_(smoothinterp)(vec4s from, vec4s to, float t) {
  * @returns             destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(smoothinterpc)(vec4s from, vec4s to, float t) {
+vec4s glms_vec4_(smoothinterpc)(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_smoothinterpc(from.raw, to.raw, t, r.raw);
   return r;
@@ -881,8 +822,7 @@ glms_vec4_(smoothinterpc)(vec4s from, vec4s to, float t) {
  * @returns           destination
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(cubic)(float s) {
+vec4s glms_vec4_(cubic)(float s) {
   vec4s r;
   glm_vec4_cubic(s, r.raw);
   return r;
@@ -898,8 +838,7 @@ glms_vec4_(cubic)(float s) {
  * @returns swizzled vector
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(swizzle)(vec4s v, int mask) {
+vec4s glms_vec4_(swizzle)(vec4s v, int mask) {
   vec4s dest;
   glm_vec4_swizzle(v.raw, mask, dest.raw);
   return dest;
@@ -912,8 +851,7 @@ glms_vec4_(swizzle)(vec4s v, int mask) {
  * @returns constructed 4D vector from raw pointer
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(make)(const float * __restrict src) {
+vec4s glms_vec4_(make)(const float* __restrict src) {
   vec4s dest;
   glm_vec4_make(src, dest.raw);
   return dest;
@@ -927,19 +865,20 @@ glms_vec4_(make)(const float * __restrict src) {
  * @returns reflection result
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(reflect)(vec4s v, vec4s n) {
+vec4s glms_vec4_(reflect)(vec4s v, vec4s n) {
   vec4s dest;
   glm_vec4_reflect(v.raw, n.raw, dest.raw);
   return dest;
 }
 
 /*!
- * @brief computes refraction vector for an incident vector and a surface normal.
+ * @brief computes refraction vector for an incident vector and a surface
+ * normal.
  *
- * calculates the refraction vector based on Snell's law. If total internal reflection
- * occurs (angle too great given eta), dest is set to zero and returns false.
- * Otherwise, computes refraction vector, stores it in dest, and returns true.
+ * calculates the refraction vector based on Snell's law. If total internal
+ * reflection occurs (angle too great given eta), dest is set to zero and
+ * returns false. Otherwise, computes refraction vector, stores it in dest, and
+ * returns true.
  *
  * this implementation does not explicitly preserve the 'w' component of the
  * incident vector 'I' in the output 'dest', users requiring the preservation of
@@ -948,13 +887,14 @@ glms_vec4_(reflect)(vec4s v, vec4s n) {
  * @param[in]  v    normalized incident vector
  * @param[in]  n    normalized normal vector
  * @param[in]  eta  ratio of indices of refraction (incident/transmitted)
- * @param[out] dest refraction vector if refraction occurs; zero vector otherwise
+ * @param[out] dest refraction vector if refraction occurs; zero vector
+ * otherwise
  *
- * @returns true if refraction occurs; false if total internal reflection occurs.
+ * @returns true if refraction occurs; false if total internal reflection
+ * occurs.
  */
 CGLM_INLINE
-bool
-glms_vec4_(refract)(vec4s v, vec4s n, float eta, vec4s * __restrict dest) {
+bool glms_vec4_(refract)(vec4s v, vec4s n, float eta, vec4s* __restrict dest) {
   return glm_vec4_refract(v.raw, n.raw, eta, dest->raw);
 }
 

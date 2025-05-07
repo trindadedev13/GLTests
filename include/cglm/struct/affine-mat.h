@@ -15,12 +15,12 @@
 #ifndef cglms_affine_mat_h
 #define cglms_affine_mat_h
 
+#include "../affine-mat.h"
 #include "../common.h"
 #include "../types-struct.h"
-#include "../affine-mat.h"
+#include "mat4.h"
 #include "vec3.h"
 #include "vec4.h"
-#include "mat4.h"
 
 /*!
  * @brief this is similar to glms_mat4_mul but specialized to affine transform
@@ -39,8 +39,7 @@
  * @returns         destination matrix
  */
 CGLM_INLINE
-mat4s
-glms_mul(mat4s m1, mat4s m2){
+mat4s glms_mul(mat4s m1, mat4s m2) {
   mat4s r;
   glm_mul(m1.raw, m2.raw, r.raw);
   return r;
@@ -63,8 +62,7 @@ glms_mul(mat4s m1, mat4s m2){
  * @returns         destination matrix
  */
 CGLM_INLINE
-mat4s
-glms_mul_rot(mat4s m1, mat4s m2){
+mat4s glms_mul_rot(mat4s m1, mat4s m2) {
   mat4s r;
   glm_mul_rot(m1.raw, m2.raw, r.raw);
   return r;
@@ -82,8 +80,7 @@ glms_mul_rot(mat4s m1, mat4s m2){
  * @returns      destination matrix
  */
 CGLM_INLINE
-mat4s
-glms_inv_tr(mat4s m){
+mat4s glms_inv_tr(mat4s m) {
   glm_inv_tr(m.raw);
   return m;
 }

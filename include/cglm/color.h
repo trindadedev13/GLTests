@@ -17,8 +17,7 @@
  * @param[in]  rgb RGB color
  */
 CGLM_INLINE
-float
-glm_luminance(vec3 rgb) {
+float glm_luminance(vec3 rgb) {
   vec3 l = {0.212671f, 0.715160f, 0.072169f};
   return glm_dot(rgb, l);
 }

@@ -15,19 +15,19 @@
    CGLM_INLINE mat4s glms_rotate_y(mat4s m, float angle);
    CGLM_INLINE mat4s glms_rotate_z(mat4s m, float angle);
    CGLM_INLINE mat4s glms_rotate(mat4s m, float angle, vec3s axis);
-   CGLM_INLINE mat4s glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis);
-   CGLM_INLINE mat4s glms_spin(mat4s m, float angle, vec3s axis);
+   CGLM_INLINE mat4s glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s
+ axis); CGLM_INLINE mat4s glms_spin(mat4s m, float angle, vec3s axis);
  */
 
 #ifndef cglms_affines_pre_h
 #define cglms_affines_pre_h
 
+#include "../affine.h"
 #include "../common.h"
 #include "../types-struct.h"
-#include "../affine.h"
+#include "mat4.h"
 #include "vec3.h"
 #include "vec4.h"
-#include "mat4.h"
 
 /*!
  * @brief translate existing transform matrix by v vector
@@ -38,8 +38,7 @@
  * @returns             affine transform
  */
 CGLM_INLINE
-mat4s
-glms_translate(mat4s m, vec3s v) {
+mat4s glms_translate(mat4s m, vec3s v) {
   glm_translate(m.raw, v.raw);
   return m;
 }
@@ -52,8 +51,7 @@ glms_translate(mat4s m, vec3s v) {
  * @returns             affine transform
  */
 CGLM_INLINE
-mat4s
-glms_translate_x(mat4s m, float x) {
+mat4s glms_translate_x(mat4s m, float x) {
   glm_translate_x(m.raw, x);
   return m;
 }
@@ -66,8 +64,7 @@ glms_translate_x(mat4s m, float x) {
  * @returns             affine transform
  */
 CGLM_INLINE
-mat4s
-glms_translate_y(mat4s m, float y) {
+mat4s glms_translate_y(mat4s m, float y) {
   glm_translate_y(m.raw, y);
   return m;
 }
@@ -80,8 +77,7 @@ glms_translate_y(mat4s m, float y) {
  * @returns             affine transform
  */
 CGLM_INLINE
-mat4s
-glms_translate_z(mat4s m, float z) {
+mat4s glms_translate_z(mat4s m, float z) {
   glm_translate_z(m.raw, z);
   return m;
 }
@@ -95,8 +91,7 @@ glms_translate_z(mat4s m, float z) {
  * @returns             rotated matrix
  */
 CGLM_INLINE
-mat4s
-glms_rotate_x(mat4s m, float angle) {
+mat4s glms_rotate_x(mat4s m, float angle) {
   mat4s r;
   glm_rotate_x(m.raw, angle, r.raw);
   return r;
@@ -111,8 +106,7 @@ glms_rotate_x(mat4s m, float angle) {
  * @returns             rotated matrix
  */
 CGLM_INLINE
-mat4s
-glms_rotate_y(mat4s m, float angle) {
+mat4s glms_rotate_y(mat4s m, float angle) {
   mat4s r;
   glm_rotate_y(m.raw, angle, r.raw);
   return r;
@@ -127,8 +121,7 @@ glms_rotate_y(mat4s m, float angle) {
  * @returns             rotated matrix
  */
 CGLM_INLINE
-mat4s
-glms_rotate_z(mat4s m, float angle) {
+mat4s glms_rotate_z(mat4s m, float angle) {
   mat4s r;
   glm_rotate_z(m.raw, angle, r.raw);
   return r;
@@ -143,8 +136,7 @@ glms_rotate_z(mat4s m, float angle) {
  * @returns                affine transform
  */
 CGLM_INLINE
-mat4s
-glms_rotate(mat4s m, float angle, vec3s axis) {
+mat4s glms_rotate(mat4s m, float angle, vec3s axis) {
   glm_rotate(m.raw, angle, axis.raw);
   return m;
 }
@@ -160,14 +152,14 @@ glms_rotate(mat4s m, float angle, vec3s axis) {
  * @returns                 affine transform
  */
 CGLM_INLINE
-mat4s
-glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis) {
+mat4s glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis) {
   glm_rotate_at(m.raw, pivot.raw, angle, axis.raw);
   return m;
 }
 
 /*!
- * @brief rotate existing transform matrix around given axis by angle around self (doesn't affected by position)
+ * @brief rotate existing transform matrix around given axis by angle around
+ * self (doesn't affected by position)
  *
  * @param[in]       m       affine transform
  * @param[in]       angle   angle (radians)
@@ -175,8 +167,7 @@ glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis) {
  * @returns                affine transform
  */
 CGLM_INLINE
-mat4s
-glms_spin(mat4s m, float angle, vec3s axis) {
+mat4s glms_spin(mat4s m, float angle, vec3s axis) {
   glm_spin(m.raw, angle, axis.raw);
   return m;
 }

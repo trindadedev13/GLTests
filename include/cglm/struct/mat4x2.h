@@ -23,8 +23,8 @@
 #define cglms_mat4x2_h
 
 #include "../common.h"
-#include "../types-struct.h"
 #include "../mat4x2.h"
+#include "../types-struct.h"
 
 /* api definition */
 #define glms_mat4x2_(NAME) CGLM_STRUCTAPI(mat4x2, NAME)
@@ -34,15 +34,13 @@
 /* for C only */
 #define GLMS_MAT4X2_ZERO ((mat4x2s)GLMS_MAT4X2_ZERO_INIT)
 
-
 /*!
  * @brief Zero out the mat4x2s (dest).
  *
  * @return[out] dest constructed mat4x2s from raw pointer
  */
 CGLM_INLINE
-mat4x2s
-glms_mat4x2_(zero)(void) {
+mat4x2s glms_mat4x2_(zero)(void) {
   mat4x2s dest;
   glm_mat4x2_zero(dest.raw);
   return dest;
@@ -55,8 +53,7 @@ glms_mat4x2_(zero)(void) {
  * @return[out] dest constructed mat4x2s from raw pointer
  */
 CGLM_INLINE
-mat4x2s
-glms_mat4x2_(make)(const float * __restrict src) {
+mat4x2s glms_mat4x2_(make)(const float* __restrict src) {
   mat4x2s dest;
   glm_mat4x2_make(src, dest.raw);
   return dest;
@@ -74,8 +71,7 @@ glms_mat4x2_(make)(const float * __restrict src) {
  * @return[out] dest constructed mat2s from raw pointers
  */
 CGLM_INLINE
-mat2s
-glms_mat4x2_(mul)(mat4x2s m1, mat2x4s m2) {
+mat2s glms_mat4x2_(mul)(mat4x2s m1, mat2x4s m2) {
   mat2s dest;
   glm_mat4x2_mul(m1.raw, m2.raw, dest.raw);
   return dest;
@@ -89,8 +85,7 @@ glms_mat4x2_(mul)(mat4x2s m1, mat2x4s m2) {
  * @return[out] dest constructed vec2s from raw pointers
  */
 CGLM_INLINE
-vec2s
-glms_mat4x2_(mulv)(mat4x2s m, vec4s v) {
+vec2s glms_mat4x2_(mulv)(mat4x2s m, vec4s v) {
   vec2s dest;
   glm_mat4x2_mulv(m.raw, v.raw, dest.raw);
   return dest;
@@ -103,8 +98,7 @@ glms_mat4x2_(mulv)(mat4x2s m, vec4s v) {
  * @return[out] dest constructed mat2x4s from raw pointers
  */
 CGLM_INLINE
-mat2x4s
-glms_mat4x2_(transpose)(mat4x2s m) {
+mat2x4s glms_mat4x2_(transpose)(mat4x2s m) {
   mat2x4s dest;
   glm_mat4x2_transpose(m.raw, dest.raw);
   return dest;
@@ -117,8 +111,7 @@ glms_mat4x2_(transpose)(mat4x2s m) {
  * @param[in]      s float (scalar)
  */
 CGLM_INLINE
-mat4x2s
-glms_mat4x2_(scale)(mat4x2s m, float s) {
+mat4x2s glms_mat4x2_(scale)(mat4x2s m, float s) {
   glm_mat4x2_scale(m.raw, s);
   return m;
 }

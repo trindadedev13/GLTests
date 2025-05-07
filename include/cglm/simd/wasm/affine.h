@@ -13,12 +13,11 @@
 #include "../intrin.h"
 
 CGLM_INLINE
-void
-glm_mul_wasm(mat4 m1, mat4 m2, mat4 dest) {
+void glm_mul_wasm(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
 
-  l  = glmm_load(m1[0]);
+  l = glmm_load(m1[0]);
   r0 = glmm_load(m2[0]);
   r1 = glmm_load(m2[1]);
   r2 = glmm_load(m2[2]);
@@ -29,19 +28,19 @@ glm_mul_wasm(mat4 m1, mat4 m2, mat4 dest) {
   v2 = wasm_f32x4_mul(glmm_splat_x(r2), l);
   v3 = wasm_f32x4_mul(glmm_splat_x(r3), l);
 
-  l  = glmm_load(m1[1]);
+  l = glmm_load(m1[1]);
   v0 = glmm_fmadd(glmm_splat_y(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_y(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_y(r2), l, v2);
   v3 = glmm_fmadd(glmm_splat_y(r3), l, v3);
 
-  l  = glmm_load(m1[2]);
+  l = glmm_load(m1[2]);
   v0 = glmm_fmadd(glmm_splat_z(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_z(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_z(r2), l, v2);
   v3 = glmm_fmadd(glmm_splat_z(r3), l, v3);
 
-  l  = glmm_load(m1[3]);
+  l = glmm_load(m1[3]);
   v3 = glmm_fmadd(glmm_splat_w(r3), l, v3);
 
   glmm_store(dest[0], v0);
@@ -51,13 +50,12 @@ glm_mul_wasm(mat4 m1, mat4 m2, mat4 dest) {
 }
 
 CGLM_INLINE
-void
-glm_mul_rot_wasm(mat4 m1, mat4 m2, mat4 dest) {
+void glm_mul_rot_wasm(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, v0, v1, v2;
 
-  l  = glmm_load(m1[0]);
+  l = glmm_load(m1[0]);
   r0 = glmm_load(m2[0]);
   r1 = glmm_load(m2[1]);
   r2 = glmm_load(m2[2]);
@@ -66,12 +64,12 @@ glm_mul_rot_wasm(mat4 m1, mat4 m2, mat4 dest) {
   v1 = wasm_f32x4_mul(glmm_splat_x(r1), l);
   v2 = wasm_f32x4_mul(glmm_splat_x(r2), l);
 
-  l  = glmm_load(m1[1]);
+  l = glmm_load(m1[1]);
   v0 = glmm_fmadd(glmm_splat_y(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_y(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_y(r2), l, v2);
 
-  l  = glmm_load(m1[2]);
+  l = glmm_load(m1[2]);
   v0 = glmm_fmadd(glmm_splat_z(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_z(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_z(r2), l, v2);
@@ -83,8 +81,7 @@ glm_mul_rot_wasm(mat4 m1, mat4 m2, mat4 dest) {
 }
 
 CGLM_INLINE
-void
-glm_inv_tr_wasm(mat4 mat) {
+void glm_inv_tr_wasm(mat4 mat) {
   glmm_128 r0, r1, r2, r3, x0, x1, x2, x3, x4, x5;
 
   r0 = glmm_load(mat[0]);
@@ -111,8 +108,7 @@ glm_inv_tr_wasm(mat4 mat) {
   x3 = glmm_shuff1(r3, 1, 1, 1, 1);
   x4 = glmm_shuff1(r3, 2, 2, 2, 2);
 
-  x0 = glmm_fmadd(r0, x2,
-                  glmm_fmadd(r1, x3, wasm_f32x4_mul(r2, x4)));
+  x0 = glmm_fmadd(r0, x2, glmm_fmadd(r1, x3, wasm_f32x4_mul(r2, x4)));
   x0 = wasm_f32x4_neg(x0);
 
   x0 = wasm_f32x4_add(x0, x1);

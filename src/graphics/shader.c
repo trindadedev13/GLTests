@@ -1,9 +1,11 @@
+#include "graphics/shader.h"
+
+#include <glad/gl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <glad/gl.h>
+
 #include "io/file.h"
 #include "io/print.h"
-#include "graphics/shader.h"
 
 GLuint compile_shader(GLenum type, const char* source) {
   GLuint shader = glCreateShader(type);

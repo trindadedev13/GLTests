@@ -7,11 +7,8 @@
 
 #ifndef cglm_applesimd_h
 #define cglm_applesimd_h
-#if defined(__APPLE__)                                                        \
-    && defined(SIMD_COMPILER_HAS_REQUIRED_FEATURES)                           \
-    && defined(SIMD_BASE)                                                     \
-    && defined(SIMD_TYPES)                                                    \
-    && defined(SIMD_VECTOR_TYPES)
+#if defined(__APPLE__) && defined(SIMD_COMPILER_HAS_REQUIRED_FEATURES) && \
+    defined(SIMD_BASE) && defined(SIMD_TYPES) && defined(SIMD_VECTOR_TYPES)
 
 #include "common.h"
 #include "struct.h"
@@ -21,8 +18,7 @@
  * @return simd_float4x4
  */
 CGLM_INLINE
-simd_float4x4
-glm_mat4_applesimd(mat4 m) {
+simd_float4x4 glm_mat4_applesimd(mat4 m) {
   simd_float4x4 t;
 
   t.columns[0][0] = m[0][0];
@@ -49,12 +45,11 @@ glm_mat4_applesimd(mat4 m) {
 }
 
 /*!
-* @brief converts mat3 to Apple's simd type simd_float3x3
-* @return simd_float3x3
-*/
+ * @brief converts mat3 to Apple's simd type simd_float3x3
+ * @return simd_float3x3
+ */
 CGLM_INLINE
-simd_float3x3
-glm_mat3_applesimd(mat3 m) {
+simd_float3x3 glm_mat3_applesimd(mat3 m) {
   simd_float3x3 t;
 
   t.columns[0][0] = m[0][0];
@@ -73,22 +68,20 @@ glm_mat3_applesimd(mat3 m) {
 }
 
 /*!
-* @brief converts vec4 to Apple's simd type simd_float4
-* @return simd_float4
-*/
+ * @brief converts vec4 to Apple's simd type simd_float4
+ * @return simd_float4
+ */
 CGLM_INLINE
-simd_float4
-glm_vec4_applesimd(vec4 v) {
+simd_float4 glm_vec4_applesimd(vec4 v) {
   return (simd_float4){v[0], v[1], v[2], v[3]};
 }
 
 /*!
-* @brief converts vec3 to Apple's simd type simd_float3
-* @return simd_float3
-*/
+ * @brief converts vec3 to Apple's simd type simd_float3
+ * @return simd_float3
+ */
 CGLM_INLINE
-simd_float3
-glm_vec3_applesimd(vec3 v) {
+simd_float3 glm_vec3_applesimd(vec3 v) {
   return (simd_float3){v[0], v[1], v[2]};
 }
 
@@ -103,32 +96,40 @@ glm_vec3_applesimd(vec3 v) {
  * @return corresponding Apple simd type
  */
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
-#  define applesimd(x) _Generic((x),                    \
-                         mat4:  glm_mat4_applesimd,     \
-                         mat3:  glm_mat3_applesimd,     \
-                         vec4:  glm_vec4_applesimd,     \
-                         vec3:  glm_vec3_applesimd      \
-                       )((x))
+#define applesimd(x)            \
+  _Generic((x),                 \
+      mat4: glm_mat4_applesimd, \
+      mat3: glm_mat3_applesimd, \
+      vec4: glm_vec4_applesimd, \
+      vec3: glm_vec3_applesimd)((x))
 #endif
 
 #ifdef cglm_types_struct_h
-CGLM_INLINE simd_float4x4 glms_mat4_(applesimd)(mat4s m) { return glm_mat4_applesimd(m.raw); }
-CGLM_INLINE simd_float3x3 glms_mat3_(applesimd)(mat3s m) { return glm_mat3_applesimd(m.raw); }
-CGLM_INLINE simd_float4   glms_vec4_(applesimd)(vec4s v) { return glm_vec4_applesimd(v.raw); }
-CGLM_INLINE simd_float3   glms_vec3_(applesimd)(vec3s v) { return glm_vec3_applesimd(v.raw); }
+CGLM_INLINE simd_float4x4 glms_mat4_(applesimd)(mat4s m) {
+  return glm_mat4_applesimd(m.raw);
+}
+CGLM_INLINE simd_float3x3 glms_mat3_(applesimd)(mat3s m) {
+  return glm_mat3_applesimd(m.raw);
+}
+CGLM_INLINE simd_float4 glms_vec4_(applesimd)(vec4s v) {
+  return glm_vec4_applesimd(v.raw);
+}
+CGLM_INLINE simd_float3 glms_vec3_(applesimd)(vec3s v) {
+  return glm_vec3_applesimd(v.raw);
+}
 
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
-#  undef applesimd
-#  define applesimd(x) _Generic((x),                       \
-                         mat4:  glm_mat4_applesimd,        \
-                         mat3:  glm_mat3_applesimd,        \
-                         vec4:  glm_vec4_applesimd,        \
-                         vec3:  glm_vec3_applesimd,        \
-                         mat4s: glms_mat4_(applesimd),     \
-                         mat3s: glms_mat3_(applesimd),     \
-                         vec4s: glms_vec4_(applesimd),     \
-                         vec3s: glms_vec3_(applesimd)      \
-                       )((x))
+#undef applesimd
+#define applesimd(x)                \
+  _Generic((x),                     \
+      mat4: glm_mat4_applesimd,     \
+      mat3: glm_mat3_applesimd,     \
+      vec4: glm_vec4_applesimd,     \
+      vec3: glm_vec3_applesimd,     \
+      mat4s: glms_mat4_(applesimd), \
+      mat3s: glms_mat3_(applesimd), \
+      vec4s: glms_vec4_(applesimd), \
+      vec3s: glms_vec3_(applesimd))((x))
 #endif
 #endif
 

@@ -9,10 +9,10 @@
 #define cglms_curves_h
 
 #include "../common.h"
-#include "../types-struct.h"
 #include "../curve.h"
-#include "vec4.h"
+#include "../types-struct.h"
 #include "mat4.h"
+#include "vec4.h"
 
 /*!
  * @brief helper function to calculate S*M*C multiplication for curves
@@ -32,9 +32,6 @@
  * @return B(s)
  */
 CGLM_INLINE
-float
-glms_smc(float s, mat4s m, vec4s c) {
-  return glm_smc(s, m.raw, c.raw);
-}
+float glms_smc(float s, mat4s m, vec4s c) { return glm_smc(s, m.raw, c.raw); }
 
 #endif /* cglms_curves_h */

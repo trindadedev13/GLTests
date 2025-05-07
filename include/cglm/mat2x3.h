@@ -37,8 +37,7 @@
  * @param[out] dest destination (result, mat2x3)
  */
 CGLM_INLINE
-void
-glm_mat2x3_copy(mat2x3 src, mat2x3 dest) {
+void glm_mat2x3_copy(mat2x3 src, mat2x3 dest) {
   glm_vec3_copy(src[0], dest[0]);
   glm_vec3_copy(src[1], dest[1]);
 }
@@ -49,8 +48,7 @@ glm_mat2x3_copy(mat2x3 src, mat2x3 dest) {
  * @param[in, out] mat2x3 (src, dest)
  */
 CGLM_INLINE
-void
-glm_mat2x3_zero(mat2x3 m) {
+void glm_mat2x3_zero(mat2x3 m) {
   CGLM_ALIGN_MAT mat2x3 t = GLM_MAT2X3_ZERO_INIT;
   glm_mat2x3_copy(t, m);
 }
@@ -62,8 +60,7 @@ glm_mat2x3_zero(mat2x3 m) {
  * @param[out] dest destination (result, mat2x3)
  */
 CGLM_INLINE
-void
-glm_mat2x3_make(const float * __restrict src, mat2x3 dest) {
+void glm_mat2x3_make(const float* __restrict src, mat2x3 dest) {
   dest[0][0] = src[0];
   dest[0][1] = src[1];
   dest[0][2] = src[2];
@@ -85,13 +82,11 @@ glm_mat2x3_make(const float * __restrict src, mat2x3 dest) {
  * @param[out] dest destination (result, mat3)
  */
 CGLM_INLINE
-void
-glm_mat2x3_mul(mat2x3 m1, mat3x2 m2, mat3 dest) {
-  float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], 
-        a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2],
+void glm_mat2x3_mul(mat2x3 m1, mat3x2 m2, mat3 dest) {
+  float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a10 = m1[1][0],
+        a11 = m1[1][1], a12 = m1[1][2],
 
-        b00 = m2[0][0], b01 = m2[0][1],
-        b10 = m2[1][0], b11 = m2[1][1],
+        b00 = m2[0][0], b01 = m2[0][1], b10 = m2[1][0], b11 = m2[1][1],
         b20 = m2[2][0], b21 = m2[2][1];
 
   dest[0][0] = a00 * b00 + a10 * b01;
@@ -115,8 +110,7 @@ glm_mat2x3_mul(mat2x3 m1, mat3x2 m2, mat3 dest) {
  * @param[out] dest destination (result, column vector)
  */
 CGLM_INLINE
-void
-glm_mat2x3_mulv(mat2x3 m, vec2 v, vec3 dest) {
+void glm_mat2x3_mulv(mat2x3 m, vec2 v, vec3 dest) {
   float v0 = v[0], v1 = v[1];
 
   dest[0] = m[0][0] * v0 + m[1][0] * v1;
@@ -131,11 +125,13 @@ glm_mat2x3_mulv(mat2x3 m, vec2 v, vec3 dest) {
  * @param[out] dest destination (result, mat3x2)
  */
 CGLM_INLINE
-void
-glm_mat2x3_transpose(mat2x3 src, mat3x2 dest) {
-  dest[0][0] = src[0][0];  dest[0][1] = src[1][0];
-  dest[1][0] = src[0][1];  dest[1][1] = src[1][1];
-  dest[2][0] = src[0][2];  dest[2][1] = src[1][2];
+void glm_mat2x3_transpose(mat2x3 src, mat3x2 dest) {
+  dest[0][0] = src[0][0];
+  dest[0][1] = src[1][0];
+  dest[1][0] = src[0][1];
+  dest[1][1] = src[1][1];
+  dest[2][0] = src[0][2];
+  dest[2][1] = src[1][2];
 }
 
 /*!
@@ -145,10 +141,13 @@ glm_mat2x3_transpose(mat2x3 src, mat3x2 dest) {
  * @param[in]      float (scalar)
  */
 CGLM_INLINE
-void
-glm_mat2x3_scale(mat2x3 m, float s) {
-  m[0][0] *= s;  m[0][1] *= s;  m[0][2] *= s;
-  m[1][0] *= s;  m[1][1] *= s;  m[1][2] *= s;
+void glm_mat2x3_scale(mat2x3 m, float s) {
+  m[0][0] *= s;
+  m[0][1] *= s;
+  m[0][2] *= s;
+  m[1][0] *= s;
+  m[1][1] *= s;
+  m[1][2] *= s;
 }
 
 #endif

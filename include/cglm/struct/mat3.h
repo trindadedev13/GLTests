@@ -15,13 +15,11 @@
  Functions:
    CGLM_INLINE mat3s  glms_mat3_copy(mat3s mat);
    CGLM_INLINE mat3s  glms_mat3_identity(void);
-   CGLM_INLINE void   glms_mat3_identity_array(mat3s * __restrict mat, size_t count);
-   CGLM_INLINE mat3s  glms_mat3_zero(void);
-   CGLM_INLINE mat3s  glms_mat3_mul(mat3s m1, mat3s m2);
-   CGLM_INLINE ma3s   glms_mat3_transpose(mat3s m);
-   CGLM_INLINE vec3s  glms_mat3_mulv(mat3s m, vec3s v);
-   CGLM_INLINE float  glms_mat3_trace(mat3s m);
-   CGLM_INLINE versor glms_mat3_quat(mat3s m);
+   CGLM_INLINE void   glms_mat3_identity_array(mat3s * __restrict mat, size_t
+ count); CGLM_INLINE mat3s  glms_mat3_zero(void); CGLM_INLINE mat3s
+ glms_mat3_mul(mat3s m1, mat3s m2); CGLM_INLINE ma3s   glms_mat3_transpose(mat3s
+ m); CGLM_INLINE vec3s  glms_mat3_mulv(mat3s m, vec3s v); CGLM_INLINE float
+ glms_mat3_trace(mat3s m); CGLM_INLINE versor glms_mat3_quat(mat3s m);
    CGLM_INLINE mat3s  glms_mat3_scale(mat3s m, float s);
    CGLM_INLINE float  glms_mat3_det(mat3s mat);
    CGLM_INLINE mat3s  glms_mat3_inv(mat3s mat);
@@ -29,26 +27,27 @@
    CGLM_INLINE mat3s  glms_mat3_swap_row(mat3s mat, int row1, int row2);
    CGLM_INLINE float  glms_mat3_rmc(vec3s r, mat3s m, vec3s c);
    CGLM_INLINE mat3s  glms_mat3_make(const float * __restrict src);
-   CGLM_INLINE mat3s  glms_mat3_textrans(float sx, float sy, float rot, float tx, float ty);
+   CGLM_INLINE mat3s  glms_mat3_textrans(float sx, float sy, float rot, float
+ tx, float ty);
  */
 
 #ifndef cglms_mat3s_h
 #define cglms_mat3s_h
 
 #include "../common.h"
-#include "../types-struct.h"
 #include "../mat3.h"
+#include "../types-struct.h"
 #include "vec3.h"
 
 /* api definition */
 #define glms_mat3_(NAME) CGLM_STRUCTAPI(mat3, NAME)
 
-#define GLMS_MAT3_IDENTITY_INIT  {GLM_MAT3_IDENTITY_INIT}
-#define GLMS_MAT3_ZERO_INIT      {GLM_MAT3_ZERO_INIT}
+#define GLMS_MAT3_IDENTITY_INIT {GLM_MAT3_IDENTITY_INIT}
+#define GLMS_MAT3_ZERO_INIT {GLM_MAT3_ZERO_INIT}
 
 /* for C only */
 #define GLMS_MAT3_IDENTITY ((mat3s)GLMS_MAT3_IDENTITY_INIT)
-#define GLMS_MAT3_ZERO     ((mat3s)GLMS_MAT3_ZERO_INIT)
+#define GLMS_MAT3_ZERO ((mat3s)GLMS_MAT3_ZERO_INIT)
 
 /*!
  * @brief copy all members of [mat] to [dest]
@@ -57,8 +56,7 @@
  * @returns         destination
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(copy)(mat3s mat) {
+mat3s glms_mat3_(copy)(mat3s mat) {
   mat3s r;
   glm_mat3_copy(mat.raw, r.raw);
   return r;
@@ -79,8 +77,7 @@ glms_mat3_(copy)(mat3s mat) {
  * @returns  destination
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(identity)(void) {
+mat3s glms_mat3_(identity)(void) {
   mat3s r;
   glm_mat3_identity(r.raw);
   return r;
@@ -95,8 +92,7 @@ glms_mat3_(identity)(void) {
  * @param[in]       count count of matrices
  */
 CGLM_INLINE
-void
-glms_mat3_(identity_array)(mat3s * __restrict mat, size_t count) {
+void glms_mat3_(identity_array)(mat3s* __restrict mat, size_t count) {
   CGLM_ALIGN_MAT mat3s t = GLMS_MAT3_IDENTITY_INIT;
   size_t i;
 
@@ -111,8 +107,7 @@ glms_mat3_(identity_array)(mat3s * __restrict mat, size_t count) {
  * @returns  matrix
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(zero)(void) {
+mat3s glms_mat3_(zero)(void) {
   mat3s r;
   glm_mat3_zero(r.raw);
   return r;
@@ -133,8 +128,7 @@ glms_mat3_(zero)(void) {
  * @returns destination matrix
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(mul)(mat3s m1, mat3s m2) {
+mat3s glms_mat3_(mul)(mat3s m1, mat3s m2) {
   mat3s r;
   glm_mat3_mul(m1.raw, m2.raw, r.raw);
   return r;
@@ -146,8 +140,7 @@ glms_mat3_(mul)(mat3s m1, mat3s m2) {
  * @param[in, out] m source and dest
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(transpose)(mat3s m) {
+mat3s glms_mat3_(transpose)(mat3s m) {
   glm_mat3_transpose(m.raw);
   return m;
 }
@@ -160,8 +153,7 @@ glms_mat3_(transpose)(mat3s m) {
  * @returns         vec3 (result, column vector)
  */
 CGLM_INLINE
-vec3s
-glms_mat3_(mulv)(mat3s m, vec3s v) {
+vec3s glms_mat3_(mulv)(mat3s m, vec3s v) {
   vec3s r;
   glm_mat3_mulv(m.raw, v.raw, r.raw);
   return r;
@@ -175,10 +167,7 @@ glms_mat3_(mulv)(mat3s m, vec3s v) {
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float
-glms_mat3_(trace)(mat3s m) {
-  return glm_mat3_trace(m.raw);
-}
+float glms_mat3_(trace)(mat3s m) { return glm_mat3_trace(m.raw); }
 
 /*!
  * @brief convert mat3 to quaternion
@@ -187,8 +176,7 @@ glms_mat3_(trace)(mat3s m) {
  * @returns         destination quaternion
  */
 CGLM_INLINE
-versors
-glms_mat3_(quat)(mat3s m) {
+versors glms_mat3_(quat)(mat3s m) {
   versors r;
   glm_mat3_quat(m.raw, r.raw);
   return r;
@@ -204,8 +192,7 @@ glms_mat3_(quat)(mat3s m) {
  * @returns          scaled matrix
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(scale)(mat3s m, float s) {
+mat3s glms_mat3_(scale)(mat3s m, float s) {
   glm_mat3_scale(m.raw, s);
   return m;
 }
@@ -218,10 +205,7 @@ glms_mat3_(scale)(mat3s m, float s) {
  * @return determinant
  */
 CGLM_INLINE
-float
-glms_mat3_(det)(mat3s mat) {
-  return glm_mat3_det(mat.raw);
-}
+float glms_mat3_(det)(mat3s mat) { return glm_mat3_det(mat.raw); }
 
 /*!
  * @brief inverse mat3 and store in dest
@@ -230,8 +214,7 @@ glms_mat3_(det)(mat3s mat) {
  * @returns         inverse matrix
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(inv)(mat3s mat) {
+mat3s glms_mat3_(inv)(mat3s mat) {
   mat3s r;
   glm_mat3_inv(mat.raw, r.raw);
   return r;
@@ -246,8 +229,7 @@ glms_mat3_(inv)(mat3s mat) {
  * @returns            matrix
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(swap_col)(mat3s mat, int col1, int col2) {
+mat3s glms_mat3_(swap_col)(mat3s mat, int col1, int col2) {
   glm_mat3_swap_col(mat.raw, col1, col2);
   return mat;
 }
@@ -261,8 +243,7 @@ glms_mat3_(swap_col)(mat3s mat, int col1, int col2) {
  * @returns            matrix
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(swap_row)(mat3s mat, int row1, int row2) {
+mat3s glms_mat3_(swap_row)(mat3s mat, int row1, int row2) {
   glm_mat3_swap_row(mat.raw, row1, row2);
   return mat;
 }
@@ -282,8 +263,7 @@ glms_mat3_(swap_row)(mat3s mat, int row1, int row2) {
  * @return scalar value e.g. Matrix1x1
  */
 CGLM_INLINE
-float
-glms_mat3_(rmc)(vec3s r, mat3s m, vec3s c) {
+float glms_mat3_(rmc)(vec3s r, mat3s m, vec3s c) {
   return glm_mat3_rmc(r.raw, m.raw, c.raw);
 }
 
@@ -294,8 +274,7 @@ glms_mat3_(rmc)(vec3s r, mat3s m, vec3s c) {
  * @return constructed matrix from raw pointer
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(make)(const float * __restrict src) {
+mat3s glms_mat3_(make)(const float* __restrict src) {
   mat3s r;
   glm_mat3_make(src, r.raw);
   return r;
@@ -312,8 +291,7 @@ glms_mat3_(make)(const float * __restrict src) {
  * @return texture transform matrix
  */
 CGLM_INLINE
-mat3s
-glms_mat3_(textrans)(float sx, float sy, float rot, float tx, float ty) {
+mat3s glms_mat3_(textrans)(float sx, float sy, float rot, float tx, float ty) {
   mat3s r;
   glm_mat3_textrans(sx, sy, rot, tx, ty, r.raw);
   return r;

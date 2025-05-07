@@ -16,23 +16,23 @@
 #define cglm_affine_mat_h
 
 #include "common.h"
-#include "mat4.h"
 #include "mat3.h"
+#include "mat4.h"
 
 #ifdef CGLM_SSE_FP
-#  include "simd/sse2/affine.h"
+#include "simd/sse2/affine.h"
 #endif
 
 #ifdef CGLM_AVX_FP
-#  include "simd/avx/affine.h"
+#include "simd/avx/affine.h"
 #endif
 
 #ifdef CGLM_NEON_FP
-#  include "simd/neon/affine.h"
+#include "simd/neon/affine.h"
 #endif
 
 #ifdef CGLM_SIMD_WASM
-#  include "simd/wasm/affine.h"
+#include "simd/wasm/affine.h"
 #endif
 
 /*!
@@ -52,13 +52,12 @@
  * @param[out]  dest  result matrix
  */
 CGLM_INLINE
-void
-glm_mul(mat4 m1, mat4 m2, mat4 dest) {
+void glm_mul(mat4 m1, mat4 m2, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mul_wasm(m1, m2, dest);
 #elif defined(__AVX__)
   glm_mul_avx(m1, m2, dest);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mul_sse2(m1, m2, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mul_neon(m1, m2, dest);
@@ -68,10 +67,10 @@ glm_mul(mat4 m1, mat4 m2, mat4 dest) {
         a20 = m1[2][0], a21 = m1[2][1], a22 = m1[2][2], a23 = m1[2][3],
         a30 = m1[3][0], a31 = m1[3][1], a32 = m1[3][2], a33 = m1[3][3],
 
-        b00 = m2[0][0], b01 = m2[0][1], b02 = m2[0][2],
-        b10 = m2[1][0], b11 = m2[1][1], b12 = m2[1][2],
-        b20 = m2[2][0], b21 = m2[2][1], b22 = m2[2][2],
-        b30 = m2[3][0], b31 = m2[3][1], b32 = m2[3][2], b33 = m2[3][3];
+        b00 = m2[0][0], b01 = m2[0][1], b02 = m2[0][2], b10 = m2[1][0],
+        b11 = m2[1][1], b12 = m2[1][2], b20 = m2[2][0], b21 = m2[2][1],
+        b22 = m2[2][2], b30 = m2[3][0], b31 = m2[3][1], b32 = m2[3][2],
+        b33 = m2[3][3];
 
   dest[0][0] = a00 * b00 + a10 * b01 + a20 * b02;
   dest[0][1] = a01 * b00 + a11 * b01 + a21 * b02;
@@ -112,11 +111,10 @@ glm_mul(mat4 m1, mat4 m2, mat4 dest) {
  * @param[out]  dest  result matrix
  */
 CGLM_INLINE
-void
-glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
+void glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mul_rot_wasm(m1, m2, dest);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_mul_rot_sse2(m1, m2, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mul_rot_neon(m1, m2, dest);
@@ -126,9 +124,9 @@ glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
         a20 = m1[2][0], a21 = m1[2][1], a22 = m1[2][2], a23 = m1[2][3],
         a30 = m1[3][0], a31 = m1[3][1], a32 = m1[3][2], a33 = m1[3][3],
 
-        b00 = m2[0][0], b01 = m2[0][1], b02 = m2[0][2],
-        b10 = m2[1][0], b11 = m2[1][1], b12 = m2[1][2],
-        b20 = m2[2][0], b21 = m2[2][1], b22 = m2[2][2];
+        b00 = m2[0][0], b01 = m2[0][1], b02 = m2[0][2], b10 = m2[1][0],
+        b11 = m2[1][1], b12 = m2[1][2], b20 = m2[2][0], b21 = m2[2][1],
+        b22 = m2[2][2];
 
   dest[0][0] = a00 * b00 + a10 * b01 + a20 * b02;
   dest[0][1] = a01 * b00 + a11 * b01 + a21 * b02;
@@ -163,17 +161,16 @@ glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
  * @param[in,out]  mat  matrix
  */
 CGLM_INLINE
-void
-glm_inv_tr(mat4 mat) {
+void glm_inv_tr(mat4 mat) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_inv_tr_wasm(mat);
-#elif defined( __SSE__ ) || defined( __SSE2__ )
+#elif defined(__SSE__) || defined(__SSE2__)
   glm_inv_tr_sse2(mat);
 #elif defined(CGLM_NEON_FP)
   glm_inv_tr_neon(mat);
 #else
   CGLM_ALIGN_MAT mat3 r;
-  CGLM_ALIGN(8)  vec3 t;
+  CGLM_ALIGN(8) vec3 t;
 
   /* rotate */
   glm_mat4_pick3t(mat, r);

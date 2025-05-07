@@ -14,8 +14,7 @@ extern "C" {
 #include "../cglm.h"
 
 CGLM_EXPORT
-void
-glmc_plane_normalize(vec4 plane);
+void glmc_plane_normalize(vec4 plane);
 
 #ifdef __cplusplus
 }

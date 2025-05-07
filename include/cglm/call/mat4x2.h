@@ -14,32 +14,25 @@ extern "C" {
 #include "../cglm.h"
 
 CGLM_EXPORT
-void
-glmc_mat4x2_copy(mat4x2 src, mat4x2 dest);
+void glmc_mat4x2_copy(mat4x2 src, mat4x2 dest);
 
 CGLM_EXPORT
-void
-glmc_mat4x2_zero(mat4x2 m);
+void glmc_mat4x2_zero(mat4x2 m);
 
 CGLM_EXPORT
-void
-glmc_mat4x2_make(const float * __restrict src, mat4x2 dest);
+void glmc_mat4x2_make(const float* __restrict src, mat4x2 dest);
 
 CGLM_EXPORT
-void
-glmc_mat4x2_mul(mat4x2 m1, mat2x4 m2, mat2 dest);
+void glmc_mat4x2_mul(mat4x2 m1, mat2x4 m2, mat2 dest);
 
 CGLM_EXPORT
-void
-glmc_mat4x2_mulv(mat4x2 m, vec4 v, vec2 dest);
+void glmc_mat4x2_mulv(mat4x2 m, vec4 v, vec2 dest);
 
 CGLM_EXPORT
-void
-glmc_mat4x2_transpose(mat4x2 src, mat2x4 dest);
+void glmc_mat4x2_transpose(mat4x2 src, mat2x4 dest);
 
 CGLM_EXPORT
-void
-glmc_mat4x2_scale(mat4x2 m, float s);
+void glmc_mat4x2_scale(mat4x2 m, float s);
 
 #ifdef __cplusplus
 }

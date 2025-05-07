@@ -20,12 +20,12 @@
 #ifndef cglms_ortho_lh_no_h
 #define cglms_ortho_lh_no_h
 
-#include "../../common.h"
-#include "../../types-struct.h"
-#include "../../plane.h"
 #include "../../cam.h"
-#include "../vec3.h"
 #include "../../clipspace/ortho_lh_no.h"
+#include "../../common.h"
+#include "../../plane.h"
+#include "../../types-struct.h"
+#include "../vec3.h"
 
 /*!
  * @brief set up orthographic projection matrix
@@ -41,10 +41,8 @@
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s
-glms_ortho_lh_no(float left,   float right,
-                 float bottom, float top,
-                 float nearZ,  float farZ) {
+mat4s glms_ortho_lh_no(float left, float right, float bottom, float top,
+                       float nearZ, float farZ) {
   mat4s dest;
   glm_ortho_lh_no(left, right, bottom, top, nearZ, farZ, dest.raw);
   return dest;
@@ -61,10 +59,9 @@ glms_ortho_lh_no(float left,   float right,
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s
-glms_ortho_aabb_lh_no(vec3s box[2]) {
+mat4s glms_ortho_aabb_lh_no(vec3s box[2]) {
   mat4s dest;
-  vec3  rawBox[2];
+  vec3 rawBox[2];
 
   glms_vec3_(unpack)(rawBox, box, 2);
   glm_ortho_aabb_lh_no(rawBox, dest.raw);
@@ -84,10 +81,9 @@ glms_ortho_aabb_lh_no(vec3s box[2]) {
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s
-glms_ortho_aabb_p_lh_no(vec3s box[2], float padding) {
+mat4s glms_ortho_aabb_p_lh_no(vec3s box[2], float padding) {
   mat4s dest;
-  vec3  rawBox[2];
+  vec3 rawBox[2];
 
   glms_vec3_(unpack)(rawBox, box, 2);
   glm_ortho_aabb_p_lh_no(rawBox, padding, dest.raw);
@@ -107,10 +103,9 @@ glms_ortho_aabb_p_lh_no(vec3s box[2], float padding) {
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s
-glms_ortho_aabb_pz_lh_no(vec3s box[2], float padding) {
+mat4s glms_ortho_aabb_pz_lh_no(vec3s box[2], float padding) {
   mat4s dest;
-  vec3  rawBox[2];
+  vec3 rawBox[2];
 
   glms_vec3_(unpack)(rawBox, box, 2);
   glm_ortho_aabb_pz_lh_no(rawBox, padding, dest.raw);
@@ -127,8 +122,7 @@ glms_ortho_aabb_pz_lh_no(vec3s box[2], float padding) {
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s
-glms_ortho_default_lh_no(float aspect) {
+mat4s glms_ortho_default_lh_no(float aspect) {
   mat4s dest;
   glm_ortho_default_lh_no(aspect, dest.raw);
   return dest;
@@ -144,8 +138,7 @@ glms_ortho_default_lh_no(float aspect) {
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s
-glms_ortho_default_s_lh_no(float aspect, float size) {
+mat4s glms_ortho_default_s_lh_no(float aspect, float size) {
   mat4s dest;
   glm_ortho_default_s_lh_no(aspect, size, dest.raw);
   return dest;

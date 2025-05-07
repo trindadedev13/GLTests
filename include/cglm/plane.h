@@ -29,15 +29,14 @@
  * @param[in, out] plane plane to normalize
  */
 CGLM_INLINE
-void
-glm_plane_normalize(vec4 plane) {
+void glm_plane_normalize(vec4 plane) {
   float norm;
-  
+
   if (CGLM_UNLIKELY((norm = glm_vec3_norm(plane)) < FLT_EPSILON)) {
     glm_vec4_zero(plane);
     return;
   }
-  
+
   glm_vec4_scale(plane, 1.0f / norm, plane);
 }
 
