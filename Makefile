@@ -1,19 +1,18 @@
 CC            = gcc
-SRC_DIR       = src
+SRC_DIRS      = src extern/src
 OBJ_DIR       = obj
 VAR_FLAGS     = -DRUNNING_PATH="\"$(RUNNING_PATH)\"" -D$(PLATFORM)
-INCLUDE_FLAGS = -I/usr/include -Iinclude/ -Iextern/
+INCLUDE_FLAGS = -I/usr/include -Iinclude/ -Iextern/include/
 CFLAGS        = -Wall -std=c11 $(VAR_FLAGS) $(INCLUDE_FLAGS)
 LDFLAGS       = -lglfw -lGL -lm -ldl
 
-SRCS := $(shell find $(SRC_DIR) -name '*.c')
-OBJS := $(patsubst %.c, %.o, $(subst $(SRC_DIR)/,$(OBJ_DIR)/,$(SRCS)))
+SRCS := $(foreach dir,$(SRC_DIRS),$(shell find $(dir) -name '*.c'))
+OBJS := $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
-# main rule
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
