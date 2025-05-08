@@ -42,8 +42,8 @@
  versors glms_quat_for(vec3s dir, vec3s fwd, vec3s up) CGLM_INLINE versors
  glms_quat_forp(vec3s from, vec3s to, vec3s fwd, vec3s up) CGLM_INLINE vec3s
  glms_quat_rotatev(versors q, vec3s v) CGLM_INLINE mat4s glms_quat_rotate(mat4s
- m, versors q) CGLM_INLINE mat4s   glms_quat_rotate_at(mat4s m, versors q, vec3s
- pivot) CGLM_INLINE mat4s   glms_quat_rotate_atm(versors q, vec3s pivot)
+ m, versors q) CGLM_INLINE mat4s   glms_quat_rotate_at(mat4s m, versors q,
+ vec3s pivot) CGLM_INLINE mat4s   glms_quat_rotate_atm(versors q, vec3s pivot)
    CGLM_INLINE versors glms_quat_make(float * restrict src)
  */
 
@@ -167,7 +167,9 @@ versors glms_quat_(from_vecs)(vec3s a, vec3s b) {
  * @param[in]  q  quaternion
  */
 CGLM_INLINE
-float glms_quat_(norm)(versors q) { return glm_quat_norm(q.raw); }
+float glms_quat_(norm)(versors q) {
+  return glm_quat_norm(q.raw);
+}
 
 /*!
  * @brief normalize quaternion
@@ -266,7 +268,9 @@ vec3s glms_quat_(imagn)(versors q) {
  * @param[in]   q    quaternion
  */
 CGLM_INLINE
-float glms_quat_(imaglen)(versors q) { return glm_quat_imaglen(q.raw); }
+float glms_quat_(imaglen)(versors q) {
+  return glm_quat_imaglen(q.raw);
+}
 
 /*!
  * @brief returns angle of quaternion
@@ -274,7 +278,9 @@ float glms_quat_(imaglen)(versors q) { return glm_quat_imaglen(q.raw); }
  * @param[in]   q    quaternion
  */
 CGLM_INLINE
-float glms_quat_(angle)(versors q) { return glm_quat_angle(q.raw); }
+float glms_quat_(angle)(versors q) {
+  return glm_quat_angle(q.raw);
+}
 
 /*!
  * @brief axis of quaternion
@@ -465,7 +471,8 @@ mat4s glms_quat_(look)(vec3s eye, versors ori) {
  */
 CGLM_INLINE
 versors
-glms_quat_(for)(vec3s dir, vec3s up) {
+glms_quat_(for)(vec3s dir, vec3s up)
+{
   versors dest;
   glm_quat_for(dir.raw, up.raw, dest.raw);
   return dest;

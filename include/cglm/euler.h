@@ -192,7 +192,9 @@ void glm_euler_xyz(vec3 angles, mat4 dest) {
  * @param[out] dest   rotation matrix
  */
 CGLM_INLINE
-void glm_euler(vec3 angles, mat4 dest) { glm_euler_xyz(angles, dest); }
+void glm_euler(vec3 angles, mat4 dest) {
+  glm_euler_xyz(angles, dest);
+}
 
 /*!
  * @brief build rotation matrix from euler angles

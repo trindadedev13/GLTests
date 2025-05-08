@@ -208,7 +208,9 @@ void glm_frustum_box(vec4 corners[8], mat4 m, vec3 box[2]) {
  * @param[out] planeCorners  plane corners [LB, LT, RT, RB]
  */
 CGLM_INLINE
-void glm_frustum_corners_at(vec4 corners[8], float splitDist, float farDist,
+void glm_frustum_corners_at(vec4 corners[8],
+                            float splitDist,
+                            float farDist,
                             vec4 planeCorners[4]) {
   vec4 corner;
   float dist, sc;

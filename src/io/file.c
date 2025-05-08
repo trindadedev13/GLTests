@@ -5,7 +5,8 @@
 
 char* read_file(const char* path) {
   FILE* file = fopen(path, "rb");
-  if (!file) return NULL;
+  if (!file)
+    return NULL;
   fseek(file, 0, SEEK_END);
   size_t size = ftell(file);
   rewind(file);

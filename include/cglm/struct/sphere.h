@@ -28,7 +28,9 @@
  * @return returns radii
  */
 CGLM_INLINE
-float glms_sphere_radii(vec4s s) { return glm_sphere_radii(s.raw); }
+float glms_sphere_radii(vec4s s) {
+  return glm_sphere_radii(s.raw);
+}
 
 /*!
  * @brief apply transform to sphere, it is just wrapper for glm_mat4_mulv3

@@ -20,7 +20,8 @@
  * This function does not encourage you to use SMC,
  * instead it is a helper if you use SMC.
  *
- * if you want to specify S as vector then use more generic glm_mat4_rmc() func.
+ * if you want to specify S as vector then use more generic glm_mat4_rmc()
+ * func.
  *
  * Example usage:
  *  B(s) = glm_smc(s, GLM_BEZIER_MAT, (vec4){p0, c0, c1, p1})
@@ -32,6 +33,8 @@
  * @return B(s)
  */
 CGLM_INLINE
-float glms_smc(float s, mat4s m, vec4s c) { return glm_smc(s, m.raw, c.raw); }
+float glms_smc(float s, mat4s m, vec4s c) {
+  return glm_smc(s, m.raw, c.raw);
+}
 
 #endif /* cglms_curves_h */

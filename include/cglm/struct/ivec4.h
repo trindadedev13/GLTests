@@ -410,7 +410,8 @@ ivec4s glms_ivec4_(addsubs)(ivec4s a, int s, ivec4s dest) {
 }
 
 /*!
- * @brief multiply vector [a] and vector [b] and subtract the result from [dest]
+ * @brief multiply vector [a] and vector [b] and subtract the result from
+ * [dest]
  *
  * applies -= operator so dest must be initialized
  *

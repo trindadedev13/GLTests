@@ -104,7 +104,9 @@ void glm_vec2_copy(vec2 a, vec2 dest) {
  * @param[in, out]  v vector
  */
 CGLM_INLINE
-void glm_vec2_zero(vec2 v) { v[0] = v[1] = 0.0f; }
+void glm_vec2_zero(vec2 v) {
+  v[0] = v[1] = 0.0f;
+}
 
 /*!
  * @brief make vector one
@@ -112,7 +114,9 @@ void glm_vec2_zero(vec2 v) { v[0] = v[1] = 0.0f; }
  * @param[in, out]  v vector
  */
 CGLM_INLINE
-void glm_vec2_one(vec2 v) { v[0] = v[1] = 1.0f; }
+void glm_vec2_one(vec2 v) {
+  v[0] = v[1] = 1.0f;
+}
 
 /*!
  * @brief vec2 dot product
@@ -123,7 +127,9 @@ void glm_vec2_one(vec2 v) { v[0] = v[1] = 1.0f; }
  * @return dot product
  */
 CGLM_INLINE
-float glm_vec2_dot(vec2 a, vec2 b) { return a[0] * b[0] + a[1] * b[1]; }
+float glm_vec2_dot(vec2 a, vec2 b) {
+  return a[0] * b[0] + a[1] * b[1];
+}
 
 /*!
  * @brief vec2 cross product
@@ -145,15 +151,17 @@ float glm_vec2_cross(vec2 a, vec2 b) {
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf function twice but with this func we can avoid func call, maybe this is
- * not good name for this func
+ * sqrtf function twice but with this func we can avoid func call, maybe this
+ * is not good name for this func
  *
  * @param[in] v vector
  *
  * @return norm * norm
  */
 CGLM_INLINE
-float glm_vec2_norm2(vec2 v) { return glm_vec2_dot(v, v); }
+float glm_vec2_norm2(vec2 v) {
+  return glm_vec2_dot(v, v);
+}
 
 /*!
  * @brief norm (magnitude) of vec2
@@ -163,7 +171,9 @@ float glm_vec2_norm2(vec2 v) { return glm_vec2_dot(v, v); }
  * @return norm
  */
 CGLM_INLINE
-float glm_vec2_norm(vec2 vec) { return sqrtf(glm_vec2_norm2(vec)); }
+float glm_vec2_norm(vec2 vec) {
+  return sqrtf(glm_vec2_norm2(vec));
+}
 
 /*!
  * @brief add a vector to b vector store result in dest
@@ -487,7 +497,9 @@ void glm_vec2_negate_to(vec2 v, vec2 dest) {
  * @param[in, out]  v  vector
  */
 CGLM_INLINE
-void glm_vec2_negate(vec2 v) { glm_vec2_negate_to(v, v); }
+void glm_vec2_negate(vec2 v) {
+  glm_vec2_negate_to(v, v);
+}
 
 /*!
  * @brief normalize vector and store result in same vec

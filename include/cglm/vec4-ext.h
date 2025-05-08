@@ -105,7 +105,9 @@ bool glm_vec4_eq_eps(vec4 v, float val) {
  * @param v   vector
  */
 CGLM_INLINE
-bool glm_vec4_eq_all(vec4 v) { return glm_vec4_eq_eps(v, v[0]); }
+bool glm_vec4_eq_all(vec4 v) {
+  return glm_vec4_eq_eps(v, v[0]);
+}
 
 /*!
  * @brief check if vector is equal to another (without epsilon)
@@ -142,7 +144,8 @@ float glm_vec4_max(vec4 v) {
   float max;
 
   max = glm_vec3_max(v);
-  if (v[3] > max) max = v[3];
+  if (v[3] > max)
+    max = v[3];
 
   return max;
 }
@@ -157,7 +160,8 @@ float glm_vec4_min(vec4 v) {
   float min;
 
   min = glm_vec3_min(v);
-  if (v[3] < min) min = v[3];
+  if (v[3] < min)
+    min = v[3];
 
   return min;
 }

@@ -25,7 +25,9 @@
  * @returns           perlin noise value
  */
 CGLM_INLINE
-float glms_perlin_vec4(vec4s point) { return glm_perlin_vec4(point.raw); }
+float glms_perlin_vec4(vec4s point) {
+  return glm_perlin_vec4(point.raw);
+}
 
 /*!
  * @brief Classic perlin noise
@@ -34,7 +36,9 @@ float glms_perlin_vec4(vec4s point) { return glm_perlin_vec4(point.raw); }
  * @returns           perlin noise value
  */
 CGLM_INLINE
-float glms_perlin_vec3(vec3s point) { return glm_perlin_vec3(point.raw); }
+float glms_perlin_vec3(vec3s point) {
+  return glm_perlin_vec3(point.raw);
+}
 
 /*!
  * @brief Classic perlin noise
@@ -43,6 +47,8 @@ float glms_perlin_vec3(vec3s point) { return glm_perlin_vec3(point.raw); }
  * @returns           perlin noise value
  */
 CGLM_INLINE
-float glms_perlin_vec2(vec2s point) { return glm_perlin_vec2(point.raw); }
+float glms_perlin_vec2(vec2s point) {
+  return glm_perlin_vec2(point.raw);
+}
 
 #endif /* cglms_noises_h */

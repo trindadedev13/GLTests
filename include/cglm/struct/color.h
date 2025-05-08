@@ -19,6 +19,8 @@
  * @param[in]  rgb RGB color
  */
 CGLM_INLINE
-float glms_luminance(vec3s rgb) { return glm_luminance(rgb.raw); }
+float glms_luminance(vec3s rgb) {
+  return glm_luminance(rgb.raw);
+}
 
 #endif /* cglms_colors_h */

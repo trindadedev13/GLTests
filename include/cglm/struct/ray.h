@@ -27,8 +27,12 @@
  * @return whether there is intersection
  */
 CGLM_INLINE
-bool glms_ray_(triangle)(vec3s origin, vec3s direction, vec3s v0, vec3s v1,
-                         vec3s v2, float *d) {
+bool glms_ray_(triangle)(vec3s origin,
+                         vec3s direction,
+                         vec3s v0,
+                         vec3s v1,
+                         vec3s v2,
+                         float* d) {
   return glm_ray_triangle(origin.raw, direction.raw, v0.raw, v1.raw, v2.raw, d);
 }
 
@@ -54,8 +58,11 @@ bool glms_ray_(triangle)(vec3s origin, vec3s direction, vec3s v0, vec3s v1,
  * @returns whether there is intersection
  */
 CGLM_INLINE
-bool glms_ray_(sphere)(vec3s origin, vec3s dir, vec4s s, float *__restrict t1,
-                       float *__restrict t2) {
+bool glms_ray_(sphere)(vec3s origin,
+                       vec3s dir,
+                       vec4s s,
+                       float* __restrict t1,
+                       float* __restrict t2) {
   return glm_ray_sphere(origin.raw, dir.raw, s.raw, t1, t2);
 }
 

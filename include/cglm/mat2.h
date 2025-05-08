@@ -77,7 +77,9 @@ void glm_mat2_make(const float* __restrict src, mat2 dest) {
  * @param[out] dest destination (result, mat2)
  */
 CGLM_INLINE
-void glm_mat2_copy(mat2 mat, mat2 dest) { glm_vec4_ucopy(mat[0], dest[0]); }
+void glm_mat2_copy(mat2 mat, mat2 dest) {
+  glm_vec4_ucopy(mat[0], dest[0]);
+}
 
 /*!
  * @brief Copy a mat2 identity to mat2 (m), or makes mat2 (m) an identity.
@@ -300,7 +302,9 @@ void glm_mat2_swap_row(mat2 mat, int row1, int row2) {
  * @return[out] mat2 determinant (float)
  */
 CGLM_INLINE
-float glm_mat2_det(mat2 m) { return m[0][0] * m[1][1] - m[1][0] * m[0][1]; }
+float glm_mat2_det(mat2 m) {
+  return m[0][0] * m[1][1] - m[1][0] * m[0][1];
+}
 
 /*!
  * @brief Returns trace of matrix. Which is:
@@ -313,7 +317,9 @@ float glm_mat2_det(mat2 m) { return m[0][0] * m[1][1] - m[1][0] * m[0][1]; }
  * @return[out] mat2 trace (float)
  */
 CGLM_INLINE
-float glm_mat2_trace(mat2 m) { return m[0][0] + m[1][1]; }
+float glm_mat2_trace(mat2 m) {
+  return m[0][0] + m[1][1];
+}
 
 /*!
  * @brief Helper for  R (row vector) * M (matrix) * C (column vector)

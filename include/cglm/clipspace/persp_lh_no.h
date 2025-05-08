@@ -64,8 +64,13 @@
  * @param[out] dest    result matrix
  */
 CGLM_INLINE
-void glm_frustum_lh_no(float left, float right, float bottom, float top,
-                       float nearZ, float farZ, mat4 dest) {
+void glm_frustum_lh_no(float left,
+                       float right,
+                       float bottom,
+                       float top,
+                       float nearZ,
+                       float farZ,
+                       mat4 dest) {
   float rl, tb, fn, nv;
 
   glm_mat4_zero(dest);
@@ -96,7 +101,10 @@ void glm_frustum_lh_no(float left, float right, float bottom, float top,
  * @param[out] dest    result matrix
  */
 CGLM_INLINE
-void glm_perspective_lh_no(float fovy, float aspect, float nearZ, float farZ,
+void glm_perspective_lh_no(float fovy,
+                           float aspect,
+                           float nearZ,
+                           float farZ,
                            mat4 dest) {
   float f, fn;
 
@@ -136,7 +144,8 @@ void glm_perspective_default_lh_no(float aspect, mat4 dest) {
  */
 CGLM_INLINE
 void glm_perspective_resize_lh_no(float aspect, mat4 proj) {
-  if (proj[0][0] == 0.0f) return;
+  if (proj[0][0] == 0.0f)
+    return;
 
   proj[0][0] = proj[1][1] / aspect;
 }
@@ -180,9 +189,12 @@ void glm_persp_move_far_lh_no(mat4 proj, float deltaFar) {
  * @param[out] right   right
  */
 CGLM_INLINE
-void glm_persp_decomp_lh_no(mat4 proj, float* __restrict nearZ,
-                            float* __restrict farZ, float* __restrict top,
-                            float* __restrict bottom, float* __restrict left,
+void glm_persp_decomp_lh_no(mat4 proj,
+                            float* __restrict nearZ,
+                            float* __restrict farZ,
+                            float* __restrict top,
+                            float* __restrict bottom,
+                            float* __restrict left,
                             float* __restrict right) {
   float m00, m11, m20, m21, m22, m32, n, f;
   float n_m11, n_m00;
@@ -234,7 +246,8 @@ void glm_persp_decompv_lh_no(mat4 proj, float dest[6]) {
  * @param[out] right right
  */
 CGLM_INLINE
-void glm_persp_decomp_x_lh_no(mat4 proj, float* __restrict left,
+void glm_persp_decomp_x_lh_no(mat4 proj,
+                              float* __restrict left,
                               float* __restrict right) {
   float nearZ, m20, m00, m22;
 
@@ -258,7 +271,8 @@ void glm_persp_decomp_x_lh_no(mat4 proj, float* __restrict left,
  * @param[out] bottom bottom
  */
 CGLM_INLINE
-void glm_persp_decomp_y_lh_no(mat4 proj, float* __restrict top,
+void glm_persp_decomp_y_lh_no(mat4 proj,
+                              float* __restrict top,
                               float* __restrict bottom) {
   float nearZ, m21, m11, m22;
 
@@ -282,7 +296,8 @@ void glm_persp_decomp_y_lh_no(mat4 proj, float* __restrict top,
  * @param[out] farZ    far
  */
 CGLM_INLINE
-void glm_persp_decomp_z_lh_no(mat4 proj, float* __restrict nearZ,
+void glm_persp_decomp_z_lh_no(mat4 proj,
+                              float* __restrict nearZ,
                               float* __restrict farZ) {
   float m32, m22;
 
@@ -353,7 +368,9 @@ void glm_persp_sizes_lh_no(mat4 proj, float fovy, vec4 dest) {
  * @param[in] proj perspective projection matrix
  */
 CGLM_INLINE
-float glm_persp_fovy_lh_no(mat4 proj) { return glm_persp_fovy(proj); }
+float glm_persp_fovy_lh_no(mat4 proj) {
+  return glm_persp_fovy(proj);
+}
 
 /*!
  * @brief returns aspect ratio of perspective projection
@@ -362,6 +379,8 @@ float glm_persp_fovy_lh_no(mat4 proj) { return glm_persp_fovy(proj); }
  * @param[in] proj perspective projection matrix
  */
 CGLM_INLINE
-float glm_persp_aspect_lh_no(mat4 proj) { return glm_persp_aspect(proj); }
+float glm_persp_aspect_lh_no(mat4 proj) {
+  return glm_persp_aspect(proj);
+}
 
 #endif /*cglm_cam_lh_no_h*/

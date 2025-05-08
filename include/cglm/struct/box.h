@@ -93,7 +93,9 @@ void glms_aabb_(crop)(vec3s box[2], vec3s cropBox[2], vec3s dest[2]) {
  * @param[out] dest     cropped bounding box
  */
 CGLM_INLINE
-void glms_aabb_(crop_until)(vec3s box[2], vec3s cropBox[2], vec3s clampBox[2],
+void glms_aabb_(crop_until)(vec3s box[2],
+                            vec3s cropBox[2],
+                            vec3s clampBox[2],
                             vec3s dest[2]) {
   glms_aabb_(crop)(box, cropBox, dest);
   glms_aabb_(merge)(clampBox, dest, dest);
@@ -162,7 +164,9 @@ float glms_aabb_(size)(vec3s box[2]) {
  * @param[in]  box bounding box
  */
 CGLM_INLINE
-float glms_aabb_(radius)(vec3s box[2]) { return glms_aabb_(size)(box) * 0.5f; }
+float glms_aabb_(radius)(vec3s box[2]) {
+  return glms_aabb_(size)(box) * 0.5f;
+}
 
 /*!
  * @brief computes center point of AABB

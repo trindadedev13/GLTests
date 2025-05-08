@@ -45,8 +45,13 @@
  * @param[out] dest    result matrix
  */
 CGLM_INLINE
-void glm_ortho_rh_zo(float left, float right, float bottom, float top,
-                     float nearZ, float farZ, mat4 dest) {
+void glm_ortho_rh_zo(float left,
+                     float right,
+                     float bottom,
+                     float top,
+                     float nearZ,
+                     float farZ,
+                     mat4 dest) {
   float rl, tb, fn;
 
   glm_mat4_zero(dest);

@@ -2,6 +2,7 @@
 
 export TARGET=gltests
 export RUNNING_PATH="\"$(pwd)\""
+export PLATFORM=GLTS_PLATFORM_TERMUX_X11
 
 # compile
 if [ "$1" = "-c" ]; then

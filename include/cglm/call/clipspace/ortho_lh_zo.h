@@ -14,8 +14,13 @@ extern "C" {
 #include "../../cglm.h"
 
 CGLM_EXPORT
-void glmc_ortho_lh_zo(float left, float right, float bottom, float top,
-                      float nearZ, float farZ, mat4 dest);
+void glmc_ortho_lh_zo(float left,
+                      float right,
+                      float bottom,
+                      float top,
+                      float nearZ,
+                      float farZ,
+                      mat4 dest);
 
 CGLM_EXPORT
 void glmc_ortho_aabb_lh_zo(vec3 box[2], mat4 dest);

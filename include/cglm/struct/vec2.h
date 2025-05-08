@@ -56,7 +56,8 @@
    CGLM_INLINE vec2s glms_vec2_step(vec2s edge, vec2s x)
    CGLM_INLINE vec2s glms_vec2_make(float * restrict src)
    CGLM_INLINE vec2s glms_vec2_reflect(vec2s v, vec2s n)
-   CGLM_INLINE bool  glms_vec2_refract(vec2s v, vec2s n, float eta, vec2s *dest)
+   CGLM_INLINE bool  glms_vec2_refract(vec2s v, vec2s n, float eta, vec2s
+ *dest)
  */
 
 #ifndef cglms_vec2s_h
@@ -152,7 +153,9 @@ vec2s glms_vec2_(one)(void) {
  * @return dot product
  */
 CGLM_INLINE
-float glms_vec2_(dot)(vec2s a, vec2s b) { return glm_vec2_dot(a.raw, b.raw); }
+float glms_vec2_(dot)(vec2s a, vec2s b) {
+  return glm_vec2_dot(a.raw, b.raw);
+}
 
 /*!
  * @brief vec2 cross product
@@ -173,15 +176,17 @@ float glms_vec2_(cross)(vec2s a, vec2s b) {
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf function twice but with this func we can avoid func call, maybe this is
- * not good name for this func
+ * sqrtf function twice but with this func we can avoid func call, maybe this
+ * is not good name for this func
  *
  * @param[in] v vector
  *
  * @return norm * norm
  */
 CGLM_INLINE
-float glms_vec2_(norm2)(vec2s v) { return glm_vec2_norm2(v.raw); }
+float glms_vec2_(norm2)(vec2s v) {
+  return glm_vec2_norm2(v.raw);
+}
 
 /*!
  * @brief norm (magnitude) of vec2
@@ -191,7 +196,9 @@ float glms_vec2_(norm2)(vec2s v) { return glm_vec2_norm2(v.raw); }
  * @return norm
  */
 CGLM_INLINE
-float glms_vec2_(norm)(vec2s v) { return glm_vec2_norm(v.raw); }
+float glms_vec2_(norm)(vec2s v) {
+  return glm_vec2_norm(v.raw);
+}
 
 /*!
  * @brief add a vector to b vector store result in dest

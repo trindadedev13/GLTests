@@ -55,8 +55,12 @@
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s glms_frustum_rh_zo(float left, float right, float bottom, float top,
-                         float nearZ, float farZ) {
+mat4s glms_frustum_rh_zo(float left,
+                         float right,
+                         float bottom,
+                         float top,
+                         float nearZ,
+                         float farZ) {
   mat4s dest;
   glm_frustum_rh_zo(left, right, bottom, top, nearZ, farZ, dest.raw);
   return dest;
@@ -74,7 +78,9 @@ mat4s glms_frustum_rh_zo(float left, float right, float bottom, float top,
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s glms_perspective_rh_zo(float fovy, float aspect, float nearZ,
+mat4s glms_perspective_rh_zo(float fovy,
+                             float aspect,
+                             float nearZ,
                              float farZ) {
   mat4s dest;
   glm_perspective_rh_zo(fovy, aspect, nearZ, farZ, dest.raw);
@@ -153,9 +159,12 @@ mat4s glms_perspective_resize_rh_zo(mat4s proj, float aspect) {
  * @param[out] right   right
  */
 CGLM_INLINE
-void glms_persp_decomp_rh_zo(mat4s proj, float* __restrict nearZ,
-                             float* __restrict farZ, float* __restrict top,
-                             float* __restrict bottom, float* __restrict left,
+void glms_persp_decomp_rh_zo(mat4s proj,
+                             float* __restrict nearZ,
+                             float* __restrict farZ,
+                             float* __restrict top,
+                             float* __restrict bottom,
+                             float* __restrict left,
                              float* __restrict right) {
   glm_persp_decomp_rh_zo(proj.raw, nearZ, farZ, top, bottom, left, right);
 }
@@ -185,7 +194,8 @@ void glms_persp_decompv_rh_zo(mat4s proj, float dest[6]) {
  * @param[out] right right
  */
 CGLM_INLINE
-void glms_persp_decomp_x_rh_zo(mat4s proj, float* __restrict left,
+void glms_persp_decomp_x_rh_zo(mat4s proj,
+                               float* __restrict left,
                                float* __restrict right) {
   glm_persp_decomp_x_rh_zo(proj.raw, left, right);
 }
@@ -201,7 +211,8 @@ void glms_persp_decomp_x_rh_zo(mat4s proj, float* __restrict left,
  * @param[out] bottom bottom
  */
 CGLM_INLINE
-void glms_persp_decomp_y_rh_zo(mat4s proj, float* __restrict top,
+void glms_persp_decomp_y_rh_zo(mat4s proj,
+                               float* __restrict top,
                                float* __restrict bottom) {
   glm_persp_decomp_y_rh_zo(proj.raw, top, bottom);
 }
@@ -217,7 +228,8 @@ void glms_persp_decomp_y_rh_zo(mat4s proj, float* __restrict top,
  * @param[out] farZ    far
  */
 CGLM_INLINE
-void glms_persp_decomp_z_rh_zo(mat4s proj, float* __restrict nearZ,
+void glms_persp_decomp_z_rh_zo(mat4s proj,
+                               float* __restrict nearZ,
                                float* __restrict farZ) {
   glm_persp_decomp_z_rh_zo(proj.raw, nearZ, farZ);
 }

@@ -11,35 +11,50 @@
 #include "common.h"
 
 CGLM_INLINE
-float glm_ease_linear(float t) { return t; }
+float glm_ease_linear(float t) {
+  return t;
+}
 
 CGLM_INLINE
-float glm_ease_sine_in(float t) { return sinf((t - 1.0f) * GLM_PI_2f) + 1.0f; }
+float glm_ease_sine_in(float t) {
+  return sinf((t - 1.0f) * GLM_PI_2f) + 1.0f;
+}
 
 CGLM_INLINE
-float glm_ease_sine_out(float t) { return sinf(t * GLM_PI_2f); }
+float glm_ease_sine_out(float t) {
+  return sinf(t * GLM_PI_2f);
+}
 
 CGLM_INLINE
-float glm_ease_sine_inout(float t) { return 0.5f * (1.0f - cosf(t * GLM_PIf)); }
+float glm_ease_sine_inout(float t) {
+  return 0.5f * (1.0f - cosf(t * GLM_PIf));
+}
 
 CGLM_INLINE
-float glm_ease_quad_in(float t) { return t * t; }
+float glm_ease_quad_in(float t) {
+  return t * t;
+}
 
 CGLM_INLINE
-float glm_ease_quad_out(float t) { return -(t * (t - 2.0f)); }
+float glm_ease_quad_out(float t) {
+  return -(t * (t - 2.0f));
+}
 
 CGLM_INLINE
 float glm_ease_quad_inout(float t) {
   float tt;
 
   tt = t * t;
-  if (t < 0.5f) return 2.0f * tt;
+  if (t < 0.5f)
+    return 2.0f * tt;
 
   return (-2.0f * tt) + (4.0f * t) - 1.0f;
 }
 
 CGLM_INLINE
-float glm_ease_cubic_in(float t) { return t * t * t; }
+float glm_ease_cubic_in(float t) {
+  return t * t * t;
+}
 
 CGLM_INLINE
 float glm_ease_cubic_out(float t) {
@@ -52,7 +67,8 @@ CGLM_INLINE
 float glm_ease_cubic_inout(float t) {
   float f;
 
-  if (t < 0.5f) return 4.0f * t * t * t;
+  if (t < 0.5f)
+    return 4.0f * t * t * t;
 
   f = 2.0f * t - 2.0f;
 
@@ -124,36 +140,45 @@ float glm_ease_quint_inout(float t) {
 
 CGLM_INLINE
 float glm_ease_exp_in(float t) {
-  if (t == 0.0f) return t;
+  if (t == 0.0f)
+    return t;
 
   return powf(2.0f, 10.0f * (t - 1.0f));
 }
 
 CGLM_INLINE
 float glm_ease_exp_out(float t) {
-  if (t == 1.0f) return t;
+  if (t == 1.0f)
+    return t;
 
   return 1.0f - powf(2.0f, -10.0f * t);
 }
 
 CGLM_INLINE
 float glm_ease_exp_inout(float t) {
-  if (t == 0.0f || t == 1.0f) return t;
+  if (t == 0.0f || t == 1.0f)
+    return t;
 
-  if (t < 0.5f) return 0.5f * powf(2.0f, (20.0f * t) - 10.0f);
+  if (t < 0.5f)
+    return 0.5f * powf(2.0f, (20.0f * t) - 10.0f);
 
   return -0.5f * powf(2.0f, (-20.0f * t) + 10.0f) + 1.0f;
 }
 
 CGLM_INLINE
-float glm_ease_circ_in(float t) { return 1.0f - sqrtf(1.0f - (t * t)); }
+float glm_ease_circ_in(float t) {
+  return 1.0f - sqrtf(1.0f - (t * t));
+}
 
 CGLM_INLINE
-float glm_ease_circ_out(float t) { return sqrtf((2.0f - t) * t); }
+float glm_ease_circ_out(float t) {
+  return sqrtf((2.0f - t) * t);
+}
 
 CGLM_INLINE
 float glm_ease_circ_inout(float t) {
-  if (t < 0.5f) return 0.5f * (1.0f - sqrtf(1.0f - 4.0f * (t * t)));
+  if (t < 0.5f)
+    return 0.5f * (1.0f - sqrtf(1.0f - 4.0f * (t * t)));
 
   return 0.5f * (sqrtf(-((2.0f * t) - 3.0f) * ((2.0f * t) - 1.0f)) + 1.0f);
 }
@@ -231,7 +256,8 @@ float glm_ease_bounce_out(float t) {
 
   tt = t * t;
 
-  if (t < (4.0f / 11.0f)) return (121.0f * tt) / 16.0f;
+  if (t < (4.0f / 11.0f))
+    return (121.0f * tt) / 16.0f;
 
   if (t < 8.0f / 11.0f)
     return ((363.0f / 40.0f) * tt) - ((99.0f / 10.0f) * t) + (17.0f / 5.0f);
@@ -250,7 +276,8 @@ float glm_ease_bounce_in(float t) {
 
 CGLM_INLINE
 float glm_ease_bounce_inout(float t) {
-  if (t < 0.5f) return 0.5f * (1.0f - glm_ease_bounce_out(t * 2.0f));
+  if (t < 0.5f)
+    return 0.5f * (1.0f - glm_ease_bounce_out(t * 2.0f));
 
   return 0.5f * glm_ease_bounce_out(t * 2.0f - 1.0f) + 0.5f;
 }

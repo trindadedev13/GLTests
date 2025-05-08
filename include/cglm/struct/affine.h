@@ -22,8 +22,8 @@
    CGLM_INLINE mat4s glms_rotate_make(float angle, vec3s axis);
    CGLM_INLINE mat4s glms_rotate(mat4s m, float angle, vec3s axis);
    CGLM_INLINE mat4s glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s
- axis); CGLM_INLINE mat4s glms_rotate_atm(vec3s pivot, float angle, vec3s axis);
-   CGLM_INLINE mat4s glms_spin(mat4s m, float angle, vec3s axis);
+ axis); CGLM_INLINE mat4s glms_rotate_atm(vec3s pivot, float angle, vec3s
+ axis); CGLM_INLINE mat4s glms_spin(mat4s m, float angle, vec3s axis);
    CGLM_INLINE vec3s glms_decompose_scalev(mat4s m);
    CGLM_INLINE bool  glms_uniscaled(mat4s m);
    CGLM_INLINE void  glms_decompose_rs(mat4s m, mat4s * r, vec3s * s);
@@ -154,7 +154,9 @@ vec3s glms_decompose_scalev(mat4s m) {
  * @return boolean
  */
 CGLM_INLINE
-bool glms_uniscaled(mat4s m) { return glm_uniscaled(m.raw); }
+bool glms_uniscaled(mat4s m) {
+  return glm_uniscaled(m.raw);
+}
 
 /*!
  * @brief decompose rotation matrix (mat4) and scale vector [Sx, Sy, Sz]
@@ -179,7 +181,9 @@ void glms_decompose_rs(mat4s m, mat4s* __restrict r, vec3s* __restrict s) {
  * @param[out] s scaling vector [X, Y, Z]
  */
 CGLM_INLINE
-void glms_decompose(mat4s m, vec4s* __restrict t, mat4s* __restrict r,
+void glms_decompose(mat4s m,
+                    vec4s* __restrict t,
+                    mat4s* __restrict r,
                     vec3s* __restrict s) {
   glm_decompose(m.raw, t->raw, r->raw, s->raw);
 }

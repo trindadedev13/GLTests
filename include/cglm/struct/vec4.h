@@ -67,7 +67,8 @@
    CGLM_INLINE vec4s glms_vec4_swizzle(vec4s v, int mask);
    CGLM_INLINE vec4s glms_vec4_make(float * restrict src);
    CGLM_INLINE vec4s glms_vec4_reflect(vec4s v, vec4s n);
-   CGLM_INLINE bool  glms_vec4_refract(vec4s v, vec4s n, float eta, vec4s *dest)
+   CGLM_INLINE bool  glms_vec4_refract(vec4s v, vec4s n, float eta, vec4s
+ *dest)
 
  Deprecated:
    glms_vec4_step_uni  -->  use glms_vec4_steps
@@ -213,21 +214,25 @@ vec4s glms_vec4_(one)(void) {
  * @return dot product
  */
 CGLM_INLINE
-float glms_vec4_(dot)(vec4s a, vec4s b) { return glm_vec4_dot(a.raw, b.raw); }
+float glms_vec4_(dot)(vec4s a, vec4s b) {
+  return glm_vec4_dot(a.raw, b.raw);
+}
 
 /*!
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf function twice but with this func we can avoid func call, maybe this is
- * not good name for this func
+ * sqrtf function twice but with this func we can avoid func call, maybe this
+ * is not good name for this func
  *
  * @param[in] v vec4
  *
  * @return norm * norm
  */
 CGLM_INLINE
-float glms_vec4_(norm2)(vec4s v) { return glm_vec4_norm2(v.raw); }
+float glms_vec4_(norm2)(vec4s v) {
+  return glm_vec4_norm2(v.raw);
+}
 
 /*!
  * @brief norm (magnitude) of vec4
@@ -237,7 +242,9 @@ float glms_vec4_(norm2)(vec4s v) { return glm_vec4_norm2(v.raw); }
  * @return norm
  */
 CGLM_INLINE
-float glms_vec4_(norm)(vec4s v) { return glm_vec4_norm(v.raw); }
+float glms_vec4_(norm)(vec4s v) {
+  return glm_vec4_norm(v.raw);
+}
 
 /*!
  * @brief L1 norm of vec4
@@ -254,7 +261,9 @@ float glms_vec4_(norm)(vec4s v) { return glm_vec4_norm(v.raw); }
  * @return L1 norm
  */
 CGLM_INLINE
-float glms_vec4_(norm_one)(vec4s v) { return glm_vec4_norm_one(v.raw); }
+float glms_vec4_(norm_one)(vec4s v) {
+  return glm_vec4_norm_one(v.raw);
+}
 
 /*!
  * @brief Infinity norm of vec4
@@ -271,7 +280,9 @@ float glms_vec4_(norm_one)(vec4s v) { return glm_vec4_norm_one(v.raw); }
  * @return Infinity norm
  */
 CGLM_INLINE
-float glms_vec4_(norm_inf)(vec4s v) { return glm_vec4_norm_inf(v.raw); }
+float glms_vec4_(norm_inf)(vec4s v) {
+  return glm_vec4_norm_inf(v.raw);
+}
 
 /*!
  * @brief add b vector to a vector store result in dest
@@ -881,8 +892,9 @@ vec4s glms_vec4_(reflect)(vec4s v, vec4s n) {
  * returns true.
  *
  * this implementation does not explicitly preserve the 'w' component of the
- * incident vector 'I' in the output 'dest', users requiring the preservation of
- * the 'w' component should manually adjust 'dest' after calling this function.
+ * incident vector 'I' in the output 'dest', users requiring the preservation
+ * of the 'w' component should manually adjust 'dest' after calling this
+ * function.
  *
  * @param[in]  v    normalized incident vector
  * @param[in]  n    normalized normal vector

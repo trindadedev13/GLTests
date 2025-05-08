@@ -58,7 +58,9 @@ float32x4_t glmm_float32x4_init(float x, float y, float z, float w) {
 #define glmm_float32x4_SIGNMASK_NPNP glmm_float32x4_init(-0.f, 0.f, -0.f, 0.f)
 #define glmm_float32x4_SIGNMASK_NPPN glmm_float32x4_init(-0.f, 0.f, 0.f, -0.f)
 
-static inline float32x4_t glmm_abs(float32x4_t v) { return vabsq_f32(v); }
+static inline float32x4_t glmm_abs(float32x4_t v) {
+  return vabsq_f32(v);
+}
 static inline float32x4_t glmm_min(float32x4_t a, float32x4_t b) {
   return vminq_f32(a, b);
 }
@@ -122,9 +124,13 @@ static inline float32x4_t glmm_vdot(float32x4_t a, float32x4_t b) {
   return glmm_vhadd(vmulq_f32(a, b));
 }
 
-static inline float glmm_norm(float32x4_t a) { return sqrtf(glmm_dot(a, a)); }
+static inline float glmm_norm(float32x4_t a) {
+  return sqrtf(glmm_dot(a, a));
+}
 
-static inline float glmm_norm2(float32x4_t a) { return glmm_dot(a, a); }
+static inline float glmm_norm2(float32x4_t a) {
+  return glmm_dot(a, a);
+}
 
 static inline float glmm_norm_one(float32x4_t a) {
   return glmm_hadd(glmm_abs(a));
@@ -149,7 +155,8 @@ static inline float32x4_t glmm_div(float32x4_t a, float32x4_t b) {
 #endif
 }
 
-static inline float32x4_t glmm_fmadd(float32x4_t a, float32x4_t b,
+static inline float32x4_t glmm_fmadd(float32x4_t a,
+                                     float32x4_t b,
                                      float32x4_t c) {
 #if CGLM_ARM64
   return vfmaq_f32(c, a, b); /* why vfmaq_f32 is slower than vmlaq_f32 ??? */
@@ -158,7 +165,8 @@ static inline float32x4_t glmm_fmadd(float32x4_t a, float32x4_t b,
 #endif
 }
 
-static inline float32x4_t glmm_fnmadd(float32x4_t a, float32x4_t b,
+static inline float32x4_t glmm_fnmadd(float32x4_t a,
+                                      float32x4_t b,
                                       float32x4_t c) {
 #if CGLM_ARM64
   return vfmsq_f32(c, a, b);
@@ -167,12 +175,14 @@ static inline float32x4_t glmm_fnmadd(float32x4_t a, float32x4_t b,
 #endif
 }
 
-static inline float32x4_t glmm_fmsub(float32x4_t a, float32x4_t b,
+static inline float32x4_t glmm_fmsub(float32x4_t a,
+                                     float32x4_t b,
                                      float32x4_t c) {
   return glmm_fmadd(a, b, vnegq_f32(c));
 }
 
-static inline float32x4_t glmm_fnmsub(float32x4_t a, float32x4_t b,
+static inline float32x4_t glmm_fnmsub(float32x4_t a,
+                                      float32x4_t b,
                                       float32x4_t c) {
   return vsubq_f32(vdupq_n_f32(0.0f), glmm_fmadd(a, b, c));
 }

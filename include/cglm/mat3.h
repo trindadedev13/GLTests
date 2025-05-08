@@ -241,7 +241,9 @@ void glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float glm_mat3_trace(mat3 m) { return m[0][0] + m[1][1] + m[2][2]; }
+float glm_mat3_trace(mat3 m) {
+  return m[0][0] + m[1][1] + m[2][2];
+}
 
 /*!
  * @brief convert mat3 to quaternion
@@ -445,7 +447,11 @@ void glm_mat3_make(const float* __restrict src, mat3 dest) {
  * @param[out] dest texture transform matrix
  */
 CGLM_INLINE
-void glm_mat3_textrans(float sx, float sy, float rot, float tx, float ty,
+void glm_mat3_textrans(float sx,
+                       float sy,
+                       float rot,
+                       float tx,
+                       float ty,
                        mat3 dest) {
   float c, s;
 

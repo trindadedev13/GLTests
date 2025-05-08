@@ -77,7 +77,8 @@
    CGLM_INLINE vec3s glms_vec3_make(float * restrict src);
    CGLM_INLINE vec3s glms_vec3_faceforward(vec3s n, vec3s v, vec3s nref);
    CGLM_INLINE vec3s glms_vec3_reflect(vec3s v, vec3s n);
-   CGLM_INLINE bool  glms_vec3_refract(vec3s v, vec3s n, float eta, vec3s *dest)
+   CGLM_INLINE bool  glms_vec3_refract(vec3s v, vec3s n, float eta, vec3s
+ *dest)
 
  Convenient:
    CGLM_INLINE vec3s glms_cross(vec3s a, vec3s b);
@@ -188,21 +189,25 @@ vec3s glms_vec3_(one)(void) {
  * @return dot product
  */
 CGLM_INLINE
-float glms_vec3_(dot)(vec3s a, vec3s b) { return glm_vec3_dot(a.raw, b.raw); }
+float glms_vec3_(dot)(vec3s a, vec3s b) {
+  return glm_vec3_dot(a.raw, b.raw);
+}
 
 /*!
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf function twice but with this func we can avoid func call, maybe this is
- * not good name for this func
+ * sqrtf function twice but with this func we can avoid func call, maybe this
+ * is not good name for this func
  *
  * @param[in] v vector
  *
  * @return norm * norm
  */
 CGLM_INLINE
-float glms_vec3_(norm2)(vec3s v) { return glm_vec3_norm2(v.raw); }
+float glms_vec3_(norm2)(vec3s v) {
+  return glm_vec3_norm2(v.raw);
+}
 
 /*!
  * @brief norm (magnitude) of vec3
@@ -212,7 +217,9 @@ float glms_vec3_(norm2)(vec3s v) { return glm_vec3_norm2(v.raw); }
  * @return norm
  */
 CGLM_INLINE
-float glms_vec3_(norm)(vec3s v) { return glm_vec3_norm(v.raw); }
+float glms_vec3_(norm)(vec3s v) {
+  return glm_vec3_norm(v.raw);
+}
 
 /*!
  * @brief L1 norm of vec3
@@ -229,7 +236,9 @@ float glms_vec3_(norm)(vec3s v) { return glm_vec3_norm(v.raw); }
  * @return L1 norm
  */
 CGLM_INLINE
-float glms_vec3_(norm_one)(vec3s v) { return glm_vec3_norm_one(v.raw); }
+float glms_vec3_(norm_one)(vec3s v) {
+  return glm_vec3_norm_one(v.raw);
+}
 
 /*!
  * @brief Infinity norm of vec3
@@ -246,7 +255,9 @@ float glms_vec3_(norm_one)(vec3s v) { return glm_vec3_norm_one(v.raw); }
  * @return Infinity norm
  */
 CGLM_INLINE
-float glms_vec3_(norm_inf)(vec3s v) { return glm_vec3_norm_inf(v.raw); }
+float glms_vec3_(norm_inf)(vec3s v) {
+  return glm_vec3_norm_inf(v.raw);
+}
 
 /*!
  * @brief add a vector to b vector store result in dest
@@ -958,7 +969,9 @@ vec3s glms_cross(vec3s a, vec3s b) {
  * @return      dot product
  */
 CGLM_INLINE
-float glms_dot(vec3s a, vec3s b) { return glm_dot(a.raw, b.raw); }
+float glms_dot(vec3s a, vec3s b) {
+  return glm_dot(a.raw, b.raw);
+}
 
 /*!
  * @brief normalize vec3 and store result in same vec

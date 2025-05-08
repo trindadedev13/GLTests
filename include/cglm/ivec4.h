@@ -94,7 +94,9 @@ void glm_ivec4_copy(ivec4 a, ivec4 dest) {
  * @param[out] v vector
  */
 CGLM_INLINE
-void glm_ivec4_zero(ivec4 v) { v[0] = v[1] = v[2] = v[3] = 0; }
+void glm_ivec4_zero(ivec4 v) {
+  v[0] = v[1] = v[2] = v[3] = 0;
+}
 
 /*!
  * @brief set all members of [v] to one
@@ -102,7 +104,9 @@ void glm_ivec4_zero(ivec4 v) { v[0] = v[1] = v[2] = v[3] = 0; }
  * @param[out] v vector
  */
 CGLM_INLINE
-void glm_ivec4_one(ivec4 v) { v[0] = v[1] = v[2] = v[3] = 1; }
+void glm_ivec4_one(ivec4 v) {
+  v[0] = v[1] = v[2] = v[3] = 1;
+}
 
 /*!
  * @brief add vector [a] to vector [b] and store result in [dest]

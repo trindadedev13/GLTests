@@ -8,55 +8,49 @@
 #include "io/print.h"
 
 static const GLfloat cube_vertices[] = {
-    -1, -1, -1, // 0
-     1, -1, -1, // 1
-     1,  1, -1, // 2
-    -1,  1, -1, // 3
-    -1, -1,  1, // 4
-     1, -1,  1, // 5
-     1,  1,  1, // 6
-    -1,  1,  1  // 7
+    -1, -1, -1,  // 0
+    1,  -1, -1,  // 1
+    1,  1,  -1,  // 2
+    -1, 1,  -1,  // 3
+    -1, -1, 1,   // 4
+    1,  -1, 1,   // 5
+    1,  1,  1,   // 6
+    -1, 1,  1    // 7
 };
 
 static const GLuint cube_indices[] = {
     // front
-    4, 5, 6,
-    6, 7, 8,
+    4, 5, 6, 6, 7, 8,
 
     // back
-    0, 1, 2,
-    2, 3, 0,
+    0, 1, 2, 2, 3, 0,
 
     // left
-    0, 4, 7,
-    7, 3, 0,
+    0, 4, 7, 7, 3, 0,
 
     // right
-    1, 5, 6,
-    6, 2, 1,
+    1, 5, 6, 6, 2, 1,
 
     // top
-    3, 7, 6,
-    6, 2, 3,
+    3, 7, 6, 6, 2, 3,
 
     // bottom
-    0, 4, 5,
-    5, 1, 0
-};
+    0, 4, 5, 5, 1, 0};
 
 GLuint cube_shader_program() {
   char scfp[512];
   char scvp[512];
 
-  snprintf(scfp, sizeof(scfp), "%s/shaders/cube/cube.vert", GLT_RUNNING_PATH);
-  snprintf(scvp, sizeof(scvp), "%s/shaders/cube/cube.frag", GLT_RUNNING_PATH);
+  snprintf(scfp, sizeof(scfp), "%s/shaders/cube/cube.vert", GLTS_RUNNING_PATH);
+  snprintf(scvp, sizeof(scvp), "%s/shaders/cube/cube.frag", GLTS_RUNNING_PATH);
 
   return load_shader_program(scfp, scvp);
 }
 
 struct cube* cube_create() {
   struct cube* cb = malloc(sizeof(struct cube));
-  if (!cb) return NULL;
+  if (!cb)
+    return NULL;
   cb->cube_vao = 0;
   cb->cube_vbo = 0;
   cb->cube_ebo = 0;
@@ -112,9 +106,8 @@ void cube_draw(struct cube* cb) {
   }
 
   // Draw
-  glDrawElements(GL_TRIANGLES,
-               sizeof(cube_indices) / sizeof(GLuint),
-               GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_TRIANGLES, sizeof(cube_indices) / sizeof(GLuint),
+                 GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
 }
 

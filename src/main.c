@@ -1,7 +1,7 @@
-#include <glad/gl.h>
-#include <GLFW/glfw3.h>
 #include <cglm/cglm.h>
 #include <errno.h>
+#include <glad/gl.h>
+#include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,10 +16,16 @@
 #include "term/tcolor.h"
 
 int main() {
-  if (!glfwInit()) return -1;
+  if (!glfwInit())
+    return -1;
 
-  gltsprintf("Running at path: %s all resources will be used from it.\n",
-             GLT_RUNNING_PATH);
+  gltsprintf("%sRunning Info:\n%s", T_COLOR_YELLOW, T_COLOR_RESET);
+  gltsprintf("%s", T_COLOR_BLUE);
+  gltsprintf("%s-- Platform: %s\n", T_COLOR_BLUE, GLTS_DEVICE_NAME);
+
+  gltsprintf("%s-- Environment Path: %s all resources will be used from it.\n",
+             T_COLOR_BLUE, GLTS_RUNNING_PATH);
+  gltsprintf("%s", T_COLOR_RESET);
 
   struct glrenderer renderer = {};
   if (glrenderer_init_window(&renderer) != EXIT_SUCCESS) {
@@ -63,9 +69,18 @@ int main() {
   glm_mat4_identity(matrix_model);
 
   srand(time(NULL));
+  float last_time = glfwGetTime();
+  float time = .5f;
 
   while (!glfwWindowShouldClose(renderer.window)) {
-    float time = glfwGetTime();
+    float current_time = glfwGetTime();
+    float delta_time = current_time - last_time;
+    last_time = current_time;
+    time += delta_time;
+
+    float factor = (sinf(time) + .5f) / 1.0f;
+    color clc = {1.0f * (.5f - factor), 0.0f, 1.0f * factor, 1.0f};
+    cb->cube_color = clc;
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(COLOR_WHITE.r, COLOR_WHITE.g, COLOR_WHITE.b, COLOR_WHITE.a);
@@ -90,10 +105,10 @@ int main() {
     // move cube to 0, 0, 0
     glm_translate(cb->cube_model_matrix, (vec3){0.0f, 0.0f, 0.0f});
 
-    glm_rotate(cb->cube_model_matrix, glm_rad(time * 50.0f),
+    glm_rotate(cb->cube_model_matrix, glm_rad(time * 80.0f),
                (vec3){1.0f, 1.0f, 0.0f});
 
-    glm_scale(cb->cube_model_matrix, (vec3){.5f, .5f, .5f});
+    glm_scale(cb->cube_model_matrix, (vec3){.2f, .2f, .2f});
 
     // calculate MVP = matrix_projection * matrix_view * cb_model
     mat4 matrix_temp2;

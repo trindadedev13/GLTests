@@ -41,8 +41,12 @@
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s glms_ortho_lh_no(float left, float right, float bottom, float top,
-                       float nearZ, float farZ) {
+mat4s glms_ortho_lh_no(float left,
+                       float right,
+                       float bottom,
+                       float top,
+                       float nearZ,
+                       float farZ) {
   mat4s dest;
   glm_ortho_lh_no(left, right, bottom, top, nearZ, farZ, dest.raw);
   return dest;

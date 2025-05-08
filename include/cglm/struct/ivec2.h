@@ -149,7 +149,9 @@ ivec2s glms_ivec2_(one)(void) {
  * @return dot product
  */
 CGLM_INLINE
-int glms_ivec2_(dot)(ivec2s a, ivec2s b) { return glm_ivec2_dot(a.raw, b.raw); }
+int glms_ivec2_(dot)(ivec2s a, ivec2s b) {
+  return glm_ivec2_dot(a.raw, b.raw);
+}
 
 /*!
  * @brief ivec2 cross product
@@ -485,7 +487,8 @@ ivec2s glms_ivec2_(addsubs)(ivec2s a, int s, ivec2s dest) {
 }
 
 /*!
- * @brief multiply vector [a] and vector [b] and subtract the result from [dest]
+ * @brief multiply vector [a] and vector [b] and subtract the result from
+ * [dest]
  *
  * applies -= operator so dest must be initialized
  *
@@ -593,7 +596,9 @@ ivec2s glms_ivec2_(fill)(int val) {
  * @param[in] val value
  */
 CGLM_INLINE
-bool glms_ivec2_(eq)(ivec2s v, int val) { return glm_ivec2_eq(v.raw, val); }
+bool glms_ivec2_(eq)(ivec2s v, int val) {
+  return glm_ivec2_eq(v.raw, val);
+}
 
 /*!
  * @brief check if vector is equal to another

@@ -146,7 +146,8 @@ void glm_pickmatrix(vec2 center, vec2 size, vec4 vp, mat4 dest) {
   mat4 res;
   vec3 v;
 
-  if (size[0] <= 0.0f || size[1] <= 0.0f) return;
+  if (size[0] <= 0.0f || size[1] <= 0.0f)
+    return;
 
   /* Translate and scale the picked region to the entire window */
   v[0] = (vp[2] - 2.0f * (center[0] - vp[0])) / size[0];

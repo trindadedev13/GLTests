@@ -92,7 +92,9 @@ void glm_scale_make(mat4 m, vec3 v) {
  * @param[in]       v  scale vector [x, y, z]
  */
 CGLM_INLINE
-void glm_scale(mat4 m, vec3 v) { glm_scale_to(m, v, m); }
+void glm_scale(mat4 m, vec3 v) {
+  glm_scale_to(m, v, m);
+}
 
 /*!
  * @brief applies uniform scale to existing transform matrix v = [s, s, s]
@@ -226,7 +228,7 @@ void glm_decompose(mat4 m, vec4 t, mat4 r, vec3 s) {
   glm_decompose_rs(m, r, s);
 }
 
-//#include "affine-post.h"
+// #include "affine-post.h"
 #include "affine-pre.h"
 
 #endif /* cglm_affine_h */

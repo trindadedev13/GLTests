@@ -149,21 +149,25 @@ ivec3s glms_ivec3_(one)(void) {
  * @return dot product
  */
 CGLM_INLINE
-int glms_ivec3_(dot)(ivec3s a, ivec3s b) { return glm_ivec3_dot(a.raw, b.raw); }
+int glms_ivec3_(dot)(ivec3s a, ivec3s b) {
+  return glm_ivec3_dot(a.raw, b.raw);
+}
 
 /*!
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf function twice but with this func we can avoid func call, maybe this is
- * not good name for this func
+ * sqrtf function twice but with this func we can avoid func call, maybe this
+ * is not good name for this func
  *
  * @param[in] v vector
  *
  * @return norm * norm
  */
 CGLM_INLINE
-int glms_ivec3_(norm2)(ivec3s v) { return glm_ivec3_norm2(v.raw); }
+int glms_ivec3_(norm2)(ivec3s v) {
+  return glm_ivec3_norm2(v.raw);
+}
 
 /*!
  * @brief euclidean norm (magnitude), also called L2 norm
@@ -174,7 +178,9 @@ int glms_ivec3_(norm2)(ivec3s v) { return glm_ivec3_norm2(v.raw); }
  * @return norm
  */
 CGLM_INLINE
-int glms_ivec3_(norm)(ivec3s v) { return glm_ivec3_norm(v.raw); }
+int glms_ivec3_(norm)(ivec3s v) {
+  return glm_ivec3_norm(v.raw);
+}
 
 /*!
  * @brief add vector [a] to vector [b] and store result in [dest]
@@ -497,7 +503,8 @@ ivec3s glms_ivec3_(addsubs)(ivec3s a, int s, ivec3s dest) {
 }
 
 /*!
- * @brief multiply vector [a] and vector [b] and subtract the result from [dest]
+ * @brief multiply vector [a] and vector [b] and subtract the result from
+ * [dest]
  *
  * applies -= operator so dest must be initialized
  *
@@ -605,7 +612,9 @@ ivec3s glms_ivec3_(fill)(int val) {
  * @param[in] val value
  */
 CGLM_INLINE
-bool glms_ivec3_(eq)(ivec3s v, int val) { return glm_ivec3_eq(v.raw, val); }
+bool glms_ivec3_(eq)(ivec3s v, int val) {
+  return glm_ivec3_eq(v.raw, val);
+}
 
 /*!
  * @brief check if vector is equal to another

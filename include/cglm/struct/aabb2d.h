@@ -93,8 +93,10 @@ void glms_aabb2d_(crop)(vec2s aabb[2], vec2s cropAabb[2], vec2s dest[2]) {
  * @param[out] dest     cropped bounding box
  */
 CGLM_INLINE
-void glms_aabb2d_(crop_until)(vec2s aabb[2], vec2s cropAabb[2],
-                              vec2s clampAabb[2], vec2s dest[2]) {
+void glms_aabb2d_(crop_until)(vec2s aabb[2],
+                              vec2s cropAabb[2],
+                              vec2s clampAabb[2],
+                              vec2s dest[2]) {
   glms_aabb2d_(crop)(aabb, cropAabb, dest);
   glms_aabb2d_(merge)(clampAabb, dest, dest);
 }

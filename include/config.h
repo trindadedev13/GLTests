@@ -1,9 +1,20 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define GL_WINDOW_NAME "gltest"
+#define GL_WINDOW_NAME "gltests"
+
+#define GLTS_RUNNING_PATH RUNNING_PATH
+
+#if defined(GLTS_PLATFORM_TERMUX_X11)
+#define GL_WINDOW_WIDTH 600
+#define GL_WINDOW_HEIGHT 1000
+#define GLTS_DEVICE_NAME "termux_x11"
+#elif defined(GLTS_PLATFORM_LINUX)
 #define GL_WINDOW_WIDTH 600
 #define GL_WINDOW_HEIGHT 600
-#define GLT_RUNNING_PATH RUNNING_PATH
+#define GLTS_DEVICE_NAME "linux"
+#else
+#error "No valid device macro defined"
+#endif
 
 #endif

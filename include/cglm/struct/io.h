@@ -76,7 +76,8 @@ void glms_versor_print(versors vec, FILE* __restrict ostream) {
 }
 
 CGLM_INLINE
-void glms_aabb_print(vec3s bbox[2], const char* __restrict tag,
+void glms_aabb_print(vec3s bbox[2],
+                     const char* __restrict tag,
                      FILE* __restrict ostream) {
   vec3 rawBbox[2];
 

@@ -79,8 +79,8 @@
  float t, vec3 dest); CGLM_INLINE void  glm_vec3_smoothinterpc(vec3 from, vec3
  to, float t, vec3 dest); CGLM_INLINE void  glm_vec3_swizzle(vec3 v, int mask,
  vec3 dest); CGLM_INLINE void  glm_vec3_make(float * restrict src, vec3 dest);
-   CGLM_INLINE void  glm_vec3_faceforward(vec3 n, vec3 v, vec3 nref, vec3 dest);
-   CGLM_INLINE void  glm_vec3_reflect(vec3 v, vec3 n, vec3 dest);
+   CGLM_INLINE void  glm_vec3_faceforward(vec3 n, vec3 v, vec3 nref, vec3
+ dest); CGLM_INLINE void  glm_vec3_reflect(vec3 v, vec3 n, vec3 dest);
    CGLM_INLINE void  glm_vec3_refract(vec3 v, vec3 n, float eta, vec3 dest);
 
  Convenient:
@@ -164,7 +164,9 @@ void glm_vec3_copy(vec3 a, vec3 dest) {
  * @param[in, out]  v vector
  */
 CGLM_INLINE
-void glm_vec3_zero(vec3 v) { v[0] = v[1] = v[2] = 0.0f; }
+void glm_vec3_zero(vec3 v) {
+  v[0] = v[1] = v[2] = 0.0f;
+}
 
 /*!
  * @brief make vector one
@@ -172,7 +174,9 @@ void glm_vec3_zero(vec3 v) { v[0] = v[1] = v[2] = 0.0f; }
  * @param[in, out]  v vector
  */
 CGLM_INLINE
-void glm_vec3_one(vec3 v) { v[0] = v[1] = v[2] = 1.0f; }
+void glm_vec3_one(vec3 v) {
+  v[0] = v[1] = v[2] = 1.0f;
+}
 
 /*!
  * @brief vec3 dot product
@@ -191,15 +195,17 @@ float glm_vec3_dot(vec3 a, vec3 b) {
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf function twice but with this func we can avoid func call, maybe this is
- * not good name for this func
+ * sqrtf function twice but with this func we can avoid func call, maybe this
+ * is not good name for this func
  *
  * @param[in] v vector
  *
  * @return norm * norm
  */
 CGLM_INLINE
-float glm_vec3_norm2(vec3 v) { return glm_vec3_dot(v, v); }
+float glm_vec3_norm2(vec3 v) {
+  return glm_vec3_dot(v, v);
+}
 
 /*!
  * @brief euclidean norm (magnitude), also called L2 norm
@@ -210,7 +216,9 @@ float glm_vec3_norm2(vec3 v) { return glm_vec3_dot(v, v); }
  * @return norm
  */
 CGLM_INLINE
-float glm_vec3_norm(vec3 v) { return sqrtf(glm_vec3_norm2(v)); }
+float glm_vec3_norm(vec3 v) {
+  return sqrtf(glm_vec3_norm2(v));
+}
 
 /*!
  * @brief L1 norm of vec3
@@ -597,7 +605,9 @@ void glm_vec3_negate_to(vec3 v, vec3 dest) {
  * @param[in, out]  v  vector
  */
 CGLM_INLINE
-void glm_vec3_negate(vec3 v) { glm_vec3_negate_to(v, v); }
+void glm_vec3_negate(vec3 v) {
+  glm_vec3_negate_to(v, v);
+}
 
 /*!
  * @brief normalize vec3 and store result in same vec
@@ -1058,7 +1068,9 @@ void glm_vec3_swizzle(vec3 v, int mask, vec3 dest) {
  * @param[out] d destination
  */
 CGLM_INLINE
-void glm_cross(vec3 a, vec3 b, vec3 d) { glm_vec3_cross(a, b, d); }
+void glm_cross(vec3 a, vec3 b, vec3 d) {
+  glm_vec3_cross(a, b, d);
+}
 
 /*!
  * @brief vec3 dot product
@@ -1071,7 +1083,9 @@ void glm_cross(vec3 a, vec3 b, vec3 d) { glm_vec3_cross(a, b, d); }
  * @return dot product
  */
 CGLM_INLINE
-float glm_dot(vec3 a, vec3 b) { return glm_vec3_dot(a, b); }
+float glm_dot(vec3 a, vec3 b) {
+  return glm_vec3_dot(a, b);
+}
 
 /*!
  * @brief normalize vec3 and store result in same vec
@@ -1081,7 +1095,9 @@ float glm_dot(vec3 a, vec3 b) { return glm_vec3_dot(a, b); }
  * @param[in, out] v vector
  */
 CGLM_INLINE
-void glm_normalize(vec3 v) { glm_vec3_normalize(v); }
+void glm_normalize(vec3 v) {
+  glm_vec3_normalize(v);
+}
 
 /*!
  * @brief normalize vec3 to dest
@@ -1092,7 +1108,9 @@ void glm_normalize(vec3 v) { glm_vec3_normalize(v); }
  * @param[out] dest destination
  */
 CGLM_INLINE
-void glm_normalize_to(vec3 v, vec3 dest) { glm_vec3_normalize_to(v, dest); }
+void glm_normalize_to(vec3 v, vec3 dest) {
+  glm_vec3_normalize_to(v, dest);
+}
 
 /*!
  * @brief Create three dimensional vector from pointer

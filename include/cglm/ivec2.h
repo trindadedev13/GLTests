@@ -97,7 +97,9 @@ void glm_ivec2_copy(ivec2 a, ivec2 dest) {
  * @param[out] v vector
  */
 CGLM_INLINE
-void glm_ivec2_zero(ivec2 v) { v[0] = v[1] = 0; }
+void glm_ivec2_zero(ivec2 v) {
+  v[0] = v[1] = 0;
+}
 
 /*!
  * @brief set all members of [v] to one
@@ -105,7 +107,9 @@ void glm_ivec2_zero(ivec2 v) { v[0] = v[1] = 0; }
  * @param[out] v vector
  */
 CGLM_INLINE
-void glm_ivec2_one(ivec2 v) { v[0] = v[1] = 1; }
+void glm_ivec2_one(ivec2 v) {
+  v[0] = v[1] = 1;
+}
 
 /*!
  * @brief ivec2 dot product
@@ -116,7 +120,9 @@ void glm_ivec2_one(ivec2 v) { v[0] = v[1] = 1; }
  * @return dot product
  */
 CGLM_INLINE
-int glm_ivec2_dot(ivec2 a, ivec2 b) { return a[0] * b[0] + a[1] * b[1]; }
+int glm_ivec2_dot(ivec2 a, ivec2 b) {
+  return a[0] * b[0] + a[1] * b[1];
+}
 
 /*!
  * @brief ivec2 cross product
@@ -129,7 +135,9 @@ int glm_ivec2_dot(ivec2 a, ivec2 b) { return a[0] * b[0] + a[1] * b[1]; }
  * @return Z component of cross product
  */
 CGLM_INLINE
-int glm_ivec2_cross(ivec2 a, ivec2 b) { return a[0] * b[1] - a[1] * b[0]; }
+int glm_ivec2_cross(ivec2 a, ivec2 b) {
+  return a[0] * b[1] - a[1] * b[0];
+}
 
 /*!
  * @brief add vector [a] to vector [b] and store result in [dest]
@@ -523,7 +531,9 @@ float glm_ivec2_distance(ivec2 a, ivec2 b) {
  * @param[in]  val value
  */
 CGLM_INLINE
-void glm_ivec2_fill(ivec2 v, int val) { v[0] = v[1] = val; }
+void glm_ivec2_fill(ivec2 v, int val) {
+  v[0] = v[1] = val;
+}
 
 /*!
  * @brief check if vector is equal to value
@@ -532,7 +542,9 @@ void glm_ivec2_fill(ivec2 v, int val) { v[0] = v[1] = val; }
  * @param[in] val value
  */
 CGLM_INLINE
-bool glm_ivec2_eq(ivec2 v, int val) { return v[0] == val && v[0] == v[1]; }
+bool glm_ivec2_eq(ivec2 v, int val) {
+  return v[0] == val && v[0] == v[1];
+}
 
 /*!
  * @brief check if vector is equal to another
@@ -541,7 +553,9 @@ bool glm_ivec2_eq(ivec2 v, int val) { return v[0] == val && v[0] == v[1]; }
  * @param[in] b vector
  */
 CGLM_INLINE
-bool glm_ivec2_eqv(ivec2 a, ivec2 b) { return a[0] == b[0] && a[1] == b[1]; }
+bool glm_ivec2_eqv(ivec2 a, ivec2 b) {
+  return a[0] == b[0] && a[1] == b[1];
+}
 
 /*!
  * @brief set each member of dest to greater of vector a and b

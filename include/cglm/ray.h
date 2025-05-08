@@ -38,8 +38,12 @@
  * @return whether there is intersection
  */
 CGLM_INLINE
-bool glm_ray_triangle(vec3 origin, vec3 direction, vec3 v0, vec3 v1, vec3 v2,
-                      float *d) {
+bool glm_ray_triangle(vec3 origin,
+                      vec3 direction,
+                      vec3 v0,
+                      vec3 v1,
+                      vec3 v2,
+                      float* d) {
   vec3 edge1, edge2, p, t, q;
   float det, inv_det, u, v, dist;
   const float epsilon = 0.000001f;
@@ -49,23 +53,27 @@ bool glm_ray_triangle(vec3 origin, vec3 direction, vec3 v0, vec3 v1, vec3 v2,
   glm_vec3_cross(direction, edge2, p);
 
   det = glm_vec3_dot(edge1, p);
-  if (det > -epsilon && det < epsilon) return false;
+  if (det > -epsilon && det < epsilon)
+    return false;
 
   inv_det = 1.0f / det;
 
   glm_vec3_sub(origin, v0, t);
 
   u = inv_det * glm_vec3_dot(t, p);
-  if (u < 0.0f || u > 1.0f) return false;
+  if (u < 0.0f || u > 1.0f)
+    return false;
 
   glm_vec3_cross(t, edge1, q);
 
   v = inv_det * glm_vec3_dot(direction, q);
-  if (v < 0.0f || u + v > 1.0f) return false;
+  if (v < 0.0f || u + v > 1.0f)
+    return false;
 
   dist = inv_det * glm_vec3_dot(edge2, q);
 
-  if (d) *d = dist;
+  if (d)
+    *d = dist;
 
   return dist > epsilon;
 }
@@ -92,8 +100,11 @@ bool glm_ray_triangle(vec3 origin, vec3 direction, vec3 v0, vec3 v1, vec3 v2,
  * @returns whether there is intersection
  */
 CGLM_INLINE
-bool glm_ray_sphere(vec3 origin, vec3 dir, vec4 s, float *__restrict t1,
-                    float *__restrict t2) {
+bool glm_ray_sphere(vec3 origin,
+                    vec3 dir,
+                    vec4 s,
+                    float* __restrict t1,
+                    float* __restrict t2) {
   vec3 dp;
   float r2, ddp, dpp, dscr, q, tmp, _t1, _t2;
 

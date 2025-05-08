@@ -78,7 +78,9 @@ vec3s glms_vec3_(fill)(float val) {
  * @param[in] val value
  */
 CGLM_INLINE
-bool glms_vec3_(eq)(vec3s v, float val) { return glm_vec3_eq(v.raw, val); }
+bool glms_vec3_(eq)(vec3s v, float val) {
+  return glm_vec3_eq(v.raw, val);
+}
 
 /*!
  * @brief check if vector is equal to value (with epsilon)
@@ -97,7 +99,9 @@ bool glms_vec3_(eq_eps)(vec3s v, float val) {
  * @param[in] v   vector
  */
 CGLM_INLINE
-bool glms_vec3_(eq_all)(vec3s v) { return glm_vec3_eq_all(v.raw); }
+bool glms_vec3_(eq_all)(vec3s v) {
+  return glm_vec3_eq_all(v.raw);
+}
 
 /*!
  * @brief check if vector is equal to another (without epsilon)
@@ -106,7 +110,9 @@ bool glms_vec3_(eq_all)(vec3s v) { return glm_vec3_eq_all(v.raw); }
  * @param[in] b vector
  */
 CGLM_INLINE
-bool glms_vec3_(eqv)(vec3s a, vec3s b) { return glm_vec3_eqv(a.raw, b.raw); }
+bool glms_vec3_(eqv)(vec3s a, vec3s b) {
+  return glm_vec3_eqv(a.raw, b.raw);
+}
 
 /*!
  * @brief check if vector is equal to another (with epsilon)
@@ -125,7 +131,9 @@ bool glms_vec3_(eqv_eps)(vec3s a, vec3s b) {
  * @param[in] v vector
  */
 CGLM_INLINE
-float glms_vec3_(max)(vec3s v) { return glm_vec3_max(v.raw); }
+float glms_vec3_(max)(vec3s v) {
+  return glm_vec3_max(v.raw);
+}
 
 /*!
  * @brief min value of vector
@@ -133,7 +141,9 @@ float glms_vec3_(max)(vec3s v) { return glm_vec3_max(v.raw); }
  * @param[in] v vector
  */
 CGLM_INLINE
-float glms_vec3_(min)(vec3s v) { return glm_vec3_min(v.raw); }
+float glms_vec3_(min)(vec3s v) {
+  return glm_vec3_min(v.raw);
+}
 
 /*!
  * @brief check if one of items is NaN (not a number)
@@ -142,7 +152,9 @@ float glms_vec3_(min)(vec3s v) { return glm_vec3_min(v.raw); }
  * @param[in] v vector
  */
 CGLM_INLINE
-bool glms_vec3_(isnan)(vec3s v) { return glm_vec3_isnan(v.raw); }
+bool glms_vec3_(isnan)(vec3s v) {
+  return glm_vec3_isnan(v.raw);
+}
 
 /*!
  * @brief check if one of items is INFINITY
@@ -151,7 +163,9 @@ bool glms_vec3_(isnan)(vec3s v) { return glm_vec3_isnan(v.raw); }
  * @param[in] v vector
  */
 CGLM_INLINE
-bool glms_vec3_(isinf)(vec3s v) { return glm_vec3_isinf(v.raw); }
+bool glms_vec3_(isinf)(vec3s v) {
+  return glm_vec3_isinf(v.raw);
+}
 
 /*!
  * @brief check if all items are valid number
@@ -160,7 +174,9 @@ bool glms_vec3_(isinf)(vec3s v) { return glm_vec3_isinf(v.raw); }
  * @param[in] v vector
  */
 CGLM_INLINE
-bool glms_vec3_(isvalid)(vec3s v) { return glm_vec3_isvalid(v.raw); }
+bool glms_vec3_(isvalid)(vec3s v) {
+  return glm_vec3_isvalid(v.raw);
+}
 
 /*!
  * @brief get sign of 32 bit float as +1, -1, 0
@@ -268,7 +284,9 @@ vec3s glms_vec3_(stepr)(vec3s edge, float x) {
  * @return     sum of all vector's elements
  */
 CGLM_INLINE
-float glms_vec3_(hadd)(vec3s v) { return glm_vec3_hadd(v.raw); }
+float glms_vec3_(hadd)(vec3s v) {
+  return glm_vec3_hadd(v.raw);
+}
 
 /*!
  * @brief square root of each vector item

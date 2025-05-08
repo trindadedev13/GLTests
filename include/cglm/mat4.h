@@ -384,7 +384,8 @@ void glm_mat4_mulN(mat4* __restrict matrices[], uint32_t len, mat4 dest) {
 
   glm_mat4_mul(*matrices[0], *matrices[1], dest);
 
-  for (i = 2; i < len; i++) glm_mat4_mul(dest, *matrices[i], dest);
+  for (i = 2; i < len; i++)
+    glm_mat4_mul(dest, *matrices[i], dest);
 }
 
 /*!
@@ -420,7 +421,9 @@ void glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float glm_mat4_trace(mat4 m) { return m[0][0] + m[1][1] + m[2][2] + m[3][3]; }
+float glm_mat4_trace(mat4 m) {
+  return m[0][0] + m[1][1] + m[2][2] + m[3][3];
+}
 
 /*!
  * @brief trace of matrix (rotation part)
@@ -430,7 +433,9 @@ float glm_mat4_trace(mat4 m) { return m[0][0] + m[1][1] + m[2][2] + m[3][3]; }
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float glm_mat4_trace3(mat4 m) { return m[0][0] + m[1][1] + m[2][2]; }
+float glm_mat4_trace3(mat4 m) {
+  return m[0][0] + m[1][1] + m[2][2];
+}
 
 /*!
  * @brief convert mat4's rotation part to quaternion
@@ -821,7 +826,11 @@ void glm_mat4_make(const float* __restrict src, mat4 dest) {
  * @param[out] dest texture transform matrix
  */
 CGLM_INLINE
-void glm_mat4_textrans(float sx, float sy, float rot, float tx, float ty,
+void glm_mat4_textrans(float sx,
+                       float sy,
+                       float rot,
+                       float tx,
+                       float ty,
                        mat4 dest) {
   float c, s;
 

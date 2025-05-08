@@ -1,3 +1,4 @@
 for file in $(find . -name '*.[ch]'); do
-  clang-format -style=Google -i "$file"
+  clang-format -i "$file"
+  echo "$file formatted!"
 done

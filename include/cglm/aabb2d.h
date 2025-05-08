@@ -121,7 +121,9 @@ void glm_aabb2d_crop(vec2 aabb[2], vec2 cropAabb[2], vec2 dest[2]) {
  * @param[out] dest      cropped bounding aabb
  */
 CGLM_INLINE
-void glm_aabb2d_crop_until(vec2 aabb[2], vec2 cropAabb[2], vec2 clampAabb[2],
+void glm_aabb2d_crop_until(vec2 aabb[2],
+                           vec2 cropAabb[2],
+                           vec2 clampAabb[2],
                            vec2 dest[2]) {
   glm_aabb2d_crop(aabb, cropAabb, dest);
   glm_aabb2d_merge(clampAabb, dest, dest);
@@ -175,7 +177,9 @@ void glm_aabb2d_sizev(vec2 aabb[2], vec2 dest) {
  * @param[in]  aabb bounding aabb
  */
 CGLM_INLINE
-float glm_aabb2d_radius(vec2 aabb[2]) { return glm_aabb2d_diag(aabb) * 0.5f; }
+float glm_aabb2d_radius(vec2 aabb[2]) {
+  return glm_aabb2d_diag(aabb) * 0.5f;
+}
 
 /*!
  * @brief computes center point of AABB

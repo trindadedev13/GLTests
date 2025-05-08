@@ -96,8 +96,12 @@
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s glms_frustum(float left, float right, float bottom, float top,
-                   float nearZ, float farZ) {
+mat4s glms_frustum(float left,
+                   float right,
+                   float bottom,
+                   float top,
+                   float nearZ,
+                   float farZ) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   return glms_frustum_lh_zo(left, right, bottom, top, nearZ, farZ);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
@@ -121,7 +125,11 @@ mat4s glms_frustum(float left, float right, float bottom, float top,
  * @returns    result matrix
  */
 CGLM_INLINE
-mat4s glms_ortho(float left, float right, float bottom, float top, float nearZ,
+mat4s glms_ortho(float left,
+                 float right,
+                 float bottom,
+                 float top,
+                 float nearZ,
                  float farZ) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   return glms_ortho_lh_zo(left, right, bottom, top, nearZ, farZ);
@@ -311,8 +319,8 @@ mat4s glms_perspective_default(float aspect) {
  *        reized
  *
  * NOTE: if you dodn't want to create new matrix then use array api on
- * struct.raw like glms_perspective_resize(proj.raw, aspect) to avoid create new
- * mat4 each time
+ * struct.raw like glms_perspective_resize(proj.raw, aspect) to avoid create
+ * new mat4 each time
  *
  * @param[in, out] proj   perspective projection matrix
  * @param[in]      aspect aspect ratio ( width / height )
@@ -416,9 +424,12 @@ mat4s glms_look_anyup(vec3s eye, vec3s dir) {
  * @param[out] right   right
  */
 CGLM_INLINE
-void glms_persp_decomp(mat4s proj, float* __restrict nearZ,
-                       float* __restrict farZ, float* __restrict top,
-                       float* __restrict bottom, float* __restrict left,
+void glms_persp_decomp(mat4s proj,
+                       float* __restrict nearZ,
+                       float* __restrict farZ,
+                       float* __restrict top,
+                       float* __restrict bottom,
+                       float* __restrict left,
                        float* __restrict right) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glms_persp_decomp_lh_zo(proj, nearZ, farZ, top, bottom, left, right);
@@ -460,7 +471,8 @@ void glms_persp_decompv(mat4s proj, float dest[6]) {
  * @param[out] right right
  */
 CGLM_INLINE
-void glms_persp_decomp_x(mat4s proj, float* __restrict left,
+void glms_persp_decomp_x(mat4s proj,
+                         float* __restrict left,
                          float* __restrict right) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glms_persp_decomp_x_lh_zo(proj, left, right);
@@ -482,7 +494,8 @@ void glms_persp_decomp_x(mat4s proj, float* __restrict left,
  * @param[out] bottom bottom
  */
 CGLM_INLINE
-void glms_persp_decomp_y(mat4s proj, float* __restrict top,
+void glms_persp_decomp_y(mat4s proj,
+                         float* __restrict top,
                          float* __restrict bottom) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glms_persp_decomp_y_lh_zo(proj, top, bottom);
@@ -504,7 +517,8 @@ void glms_persp_decomp_y(mat4s proj, float* __restrict top,
  * @param[out] farZ    far
  */
 CGLM_INLINE
-void glms_persp_decomp_z(mat4s proj, float* __restrict nearZ,
+void glms_persp_decomp_z(mat4s proj,
+                         float* __restrict nearZ,
                          float* __restrict farZ) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glms_persp_decomp_z_lh_zo(proj, nearZ, farZ);

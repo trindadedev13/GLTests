@@ -105,7 +105,9 @@ void glm_aabb_crop(vec3 box[2], vec3 cropBox[2], vec3 dest[2]) {
  * @param[out] dest     cropped bounding box
  */
 CGLM_INLINE
-void glm_aabb_crop_until(vec3 box[2], vec3 cropBox[2], vec3 clampBox[2],
+void glm_aabb_crop_until(vec3 box[2],
+                         vec3 cropBox[2],
+                         vec3 clampBox[2],
                          vec3 dest[2]) {
   glm_aabb_crop(box, cropBox, dest);
   glm_aabb_merge(clampBox, dest, dest);
@@ -135,7 +137,8 @@ bool glm_aabb_frustum(vec3 box[2], vec4 planes[6]) {
     dp = p[0] * box[p[0] > 0.0f][0] + p[1] * box[p[1] > 0.0f][1] +
          p[2] * box[p[2] > 0.0f][2];
 
-    if (dp < -p[3]) return false;
+    if (dp < -p[3])
+      return false;
   }
 
   return true;
@@ -168,7 +171,9 @@ bool glm_aabb_isvalid(vec3 box[2]) {
  * @param[in]  box bounding box
  */
 CGLM_INLINE
-float glm_aabb_size(vec3 box[2]) { return glm_vec3_distance(box[0], box[1]); }
+float glm_aabb_size(vec3 box[2]) {
+  return glm_vec3_distance(box[0], box[1]);
+}
 
 /*!
  * @brief radius of sphere which surrounds AABB
@@ -176,7 +181,9 @@ float glm_aabb_size(vec3 box[2]) { return glm_vec3_distance(box[0], box[1]); }
  * @param[in]  box bounding box
  */
 CGLM_INLINE
-float glm_aabb_radius(vec3 box[2]) { return glm_aabb_size(box) * 0.5f; }
+float glm_aabb_radius(vec3 box[2]) {
+  return glm_aabb_size(box) * 0.5f;
+}
 
 /*!
  * @brief computes center point of AABB

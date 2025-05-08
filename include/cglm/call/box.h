@@ -23,7 +23,9 @@ CGLM_EXPORT
 void glmc_aabb_crop(vec3 box[2], vec3 cropBox[2], vec3 dest[2]);
 
 CGLM_EXPORT
-void glmc_aabb_crop_until(vec3 box[2], vec3 cropBox[2], vec3 clampBox[2],
+void glmc_aabb_crop_until(vec3 box[2],
+                          vec3 cropBox[2],
+                          vec3 clampBox[2],
                           vec3 dest[2]);
 
 CGLM_EXPORT

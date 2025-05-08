@@ -111,9 +111,11 @@ float glm_decasteljau(float prm, float p0, float c0, float c1, float p1) {
   float u, v, a, b, c, d, e, f;
   int i;
 
-  if (prm - p0 < CGLM_DECASTEL_SMALL) return 0.0f;
+  if (prm - p0 < CGLM_DECASTEL_SMALL)
+    return 0.0f;
 
-  if (p1 - prm < CGLM_DECASTEL_SMALL) return 1.0f;
+  if (p1 - prm < CGLM_DECASTEL_SMALL)
+    return 1.0f;
 
   u = 0.0f;
   v = 1.0f;
@@ -128,7 +130,8 @@ float glm_decasteljau(float prm, float p0, float c0, float c1, float p1) {
     f = (d + e) * 0.5f; /* this one is on the curve! */
 
     /* The curve point is close enough to our wanted t */
-    if (fabsf(f - prm) < CGLM_DECASTEL_EPS) return glm_clamp_zo((u + v) * 0.5f);
+    if (fabsf(f - prm) < CGLM_DECASTEL_EPS)
+      return glm_clamp_zo((u + v) * 0.5f);
 
     /* dichotomy */
     if (f < prm) {

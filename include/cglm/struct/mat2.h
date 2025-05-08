@@ -219,7 +219,9 @@ mat2s glms_mat2_(swap_row)(mat2s mat, int row1, int row2) {
  * @return[out] mat2s raw pointers determinant (float)
  */
 CGLM_INLINE
-float glms_mat2_(det)(mat2s m) { return glm_mat2_det(m.raw); }
+float glms_mat2_(det)(mat2s m) {
+  return glm_mat2_det(m.raw);
+}
 
 /*!
  * @brief Returns trace of matrix. Which is:
@@ -232,7 +234,9 @@ float glms_mat2_(det)(mat2s m) { return glm_mat2_det(m.raw); }
  * @return[out] mat2s raw pointers trace (float)
  */
 CGLM_INLINE
-float glms_mat2_(trace)(mat2s m) { return glm_mat2_trace(m.raw); }
+float glms_mat2_(trace)(mat2s m) {
+  return glm_mat2_trace(m.raw);
+}
 
 /*!
  * @brief Helper for  R (row vector) * M (matrix) * C (column vector)

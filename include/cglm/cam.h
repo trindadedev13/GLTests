@@ -97,8 +97,13 @@
  * @param[out] dest    result matrix
  */
 CGLM_INLINE
-void glm_frustum(float left, float right, float bottom, float top, float nearZ,
-                 float farZ, mat4 dest) {
+void glm_frustum(float left,
+                 float right,
+                 float bottom,
+                 float top,
+                 float nearZ,
+                 float farZ,
+                 mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_frustum_lh_zo(left, right, bottom, top, nearZ, farZ, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
@@ -122,8 +127,13 @@ void glm_frustum(float left, float right, float bottom, float top, float nearZ,
  * @param[out] dest    result matrix
  */
 CGLM_INLINE
-void glm_ortho(float left, float right, float bottom, float top, float nearZ,
-               float farZ, mat4 dest) {
+void glm_ortho(float left,
+               float right,
+               float bottom,
+               float top,
+               float nearZ,
+               float farZ,
+               mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_ortho_lh_zo(left, right, bottom, top, nearZ, farZ, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
@@ -249,7 +259,10 @@ void glm_ortho_default_s(float aspect, float size, mat4 dest) {
  * @param[out] dest    result matrix
  */
 CGLM_INLINE
-void glm_perspective(float fovy, float aspect, float nearZ, float farZ,
+void glm_perspective(float fovy,
+                     float aspect,
+                     float nearZ,
+                     float farZ,
                      mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_perspective_lh_zo(fovy, aspect, nearZ, farZ, dest);
@@ -313,7 +326,8 @@ void glm_perspective_default(float aspect, mat4 dest) {
  */
 CGLM_INLINE
 void glm_perspective_resize(float aspect, mat4 proj) {
-  if (proj[0][0] == 0.0f) return;
+  if (proj[0][0] == 0.0f)
+    return;
 
   proj[0][0] = proj[1][1] / aspect;
 }
@@ -392,9 +406,12 @@ void glm_look_anyup(vec3 eye, vec3 dir, mat4 dest) {
  * @param[out] right   right
  */
 CGLM_INLINE
-void glm_persp_decomp(mat4 proj, float* __restrict nearZ,
-                      float* __restrict farZ, float* __restrict top,
-                      float* __restrict bottom, float* __restrict left,
+void glm_persp_decomp(mat4 proj,
+                      float* __restrict nearZ,
+                      float* __restrict farZ,
+                      float* __restrict top,
+                      float* __restrict bottom,
+                      float* __restrict left,
                       float* __restrict right) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_persp_decomp_lh_zo(proj, nearZ, farZ, top, bottom, left, right);
@@ -436,7 +453,8 @@ void glm_persp_decompv(mat4 proj, float dest[6]) {
  * @param[out] right right
  */
 CGLM_INLINE
-void glm_persp_decomp_x(mat4 proj, float* __restrict left,
+void glm_persp_decomp_x(mat4 proj,
+                        float* __restrict left,
                         float* __restrict right) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_persp_decomp_x_lh_zo(proj, left, right);
@@ -458,7 +476,8 @@ void glm_persp_decomp_x(mat4 proj, float* __restrict left,
  * @param[out] bottom bottom
  */
 CGLM_INLINE
-void glm_persp_decomp_y(mat4 proj, float* __restrict top,
+void glm_persp_decomp_y(mat4 proj,
+                        float* __restrict top,
                         float* __restrict bottom) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_persp_decomp_y_lh_zo(proj, top, bottom);
@@ -480,7 +499,8 @@ void glm_persp_decomp_y(mat4 proj, float* __restrict top,
  * @param[out] farZ    far
  */
 CGLM_INLINE
-void glm_persp_decomp_z(mat4 proj, float* __restrict nearZ,
+void glm_persp_decomp_z(mat4 proj,
+                        float* __restrict nearZ,
                         float* __restrict farZ) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_persp_decomp_z_lh_zo(proj, nearZ, farZ);

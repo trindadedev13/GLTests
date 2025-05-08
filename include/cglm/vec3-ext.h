@@ -47,7 +47,9 @@
  * @param[out] d   dest
  */
 CGLM_INLINE
-void glm_vec3_broadcast(float val, vec3 d) { d[0] = d[1] = d[2] = val; }
+void glm_vec3_broadcast(float val, vec3 d) {
+  d[0] = d[1] = d[2] = val;
+}
 
 /*!
  * @brief fill a vector with specified value
@@ -56,7 +58,9 @@ void glm_vec3_broadcast(float val, vec3 d) { d[0] = d[1] = d[2] = val; }
  * @param[in]  val value
  */
 CGLM_INLINE
-void glm_vec3_fill(vec3 v, float val) { v[0] = v[1] = v[2] = val; }
+void glm_vec3_fill(vec3 v, float val) {
+  v[0] = v[1] = v[2] = val;
+}
 
 /*!
  * @brief check if vector is equal to value (without epsilon)
@@ -88,7 +92,9 @@ bool glm_vec3_eq_eps(vec3 v, float val) {
  * @param[in] v   vector
  */
 CGLM_INLINE
-bool glm_vec3_eq_all(vec3 v) { return glm_vec3_eq_eps(v, v[0]); }
+bool glm_vec3_eq_all(vec3 v) {
+  return glm_vec3_eq_eps(v, v[0]);
+}
 
 /*!
  * @brief check if vector is equal to another (without epsilon)
@@ -124,8 +130,10 @@ float glm_vec3_max(vec3 v) {
   float max;
 
   max = v[0];
-  if (v[1] > max) max = v[1];
-  if (v[2] > max) max = v[2];
+  if (v[1] > max)
+    max = v[1];
+  if (v[2] > max)
+    max = v[2];
 
   return max;
 }
@@ -140,8 +148,10 @@ float glm_vec3_min(vec3 v) {
   float min;
 
   min = v[0];
-  if (v[1] < min) min = v[1];
-  if (v[2] < min) min = v[2];
+  if (v[1] < min)
+    min = v[1];
+  if (v[2] < min)
+    min = v[2];
 
   return min;
 }
@@ -292,7 +302,9 @@ void glm_vec3_stepr(vec3 edge, float x, vec3 dest) {
  * @return     sum of all vector's elements
  */
 CGLM_INLINE
-float glm_vec3_hadd(vec3 v) { return v[0] + v[1] + v[2]; }
+float glm_vec3_hadd(vec3 v) {
+  return v[0] + v[1] + v[2];
+}
 
 /*!
  * @brief square root of each vector item

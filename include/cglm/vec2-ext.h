@@ -44,7 +44,9 @@
  * @param[in]  val value
  */
 CGLM_INLINE
-void glm_vec2_fill(vec2 v, float val) { v[0] = v[1] = val; }
+void glm_vec2_fill(vec2 v, float val) {
+  v[0] = v[1] = val;
+}
 
 /*!
  * @brief check if vector is equal to value (without epsilon)
@@ -53,7 +55,9 @@ void glm_vec2_fill(vec2 v, float val) { v[0] = v[1] = val; }
  * @param[in] val value
  */
 CGLM_INLINE
-bool glm_vec2_eq(vec2 v, float val) { return v[0] == val && v[0] == v[1]; }
+bool glm_vec2_eq(vec2 v, float val) {
+  return v[0] == val && v[0] == v[1];
+}
 
 /*!
  * @brief check if vector is equal to value (with epsilon)
@@ -73,7 +77,9 @@ bool glm_vec2_eq_eps(vec2 v, float val) {
  * @param[in] v   vector
  */
 CGLM_INLINE
-bool glm_vec2_eq_all(vec2 v) { return glm_vec2_eq_eps(v, v[0]); }
+bool glm_vec2_eq_all(vec2 v) {
+  return glm_vec2_eq_eps(v, v[0]);
+}
 
 /*!
  * @brief check if vector is equal to another (without epsilon)
@@ -82,7 +88,9 @@ bool glm_vec2_eq_all(vec2 v) { return glm_vec2_eq_eps(v, v[0]); }
  * @param[in] b vector
  */
 CGLM_INLINE
-bool glm_vec2_eqv(vec2 a, vec2 b) { return a[0] == b[0] && a[1] == b[1]; }
+bool glm_vec2_eqv(vec2 a, vec2 b) {
+  return a[0] == b[0] && a[1] == b[1];
+}
 
 /*!
  * @brief check if vector is equal to another (with epsilon)
@@ -102,7 +110,9 @@ bool glm_vec2_eqv_eps(vec2 a, vec2 b) {
  * @param[in] v vector
  */
 CGLM_INLINE
-float glm_vec2_max(vec2 v) { return glm_max(v[0], v[1]); }
+float glm_vec2_max(vec2 v) {
+  return glm_max(v[0], v[1]);
+}
 
 /*!
  * @brief min value of vector
@@ -110,7 +120,9 @@ float glm_vec2_max(vec2 v) { return glm_max(v[0], v[1]); }
  * @param[in] v vector
  */
 CGLM_INLINE
-float glm_vec2_min(vec2 v) { return glm_min(v[0], v[1]); }
+float glm_vec2_min(vec2 v) {
+  return glm_min(v[0], v[1]);
+}
 
 /*!
  * @brief check if one of items is NaN (not a number)

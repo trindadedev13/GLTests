@@ -242,15 +242,17 @@ float glm_vec4_dot(vec4 a, vec4 b) {
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf function twice but with this func we can avoid func call, maybe this is
- * not good name for this func
+ * sqrtf function twice but with this func we can avoid func call, maybe this
+ * is not good name for this func
  *
  * @param[in] v vec4
  *
  * @return norm * norm
  */
 CGLM_INLINE
-float glm_vec4_norm2(vec4 v) { return glm_vec4_dot(v, v); }
+float glm_vec4_norm2(vec4 v) {
+  return glm_vec4_dot(v, v);
+}
 
 /*!
  * @brief euclidean norm (magnitude), also called L2 norm
@@ -848,7 +850,9 @@ void glm_vec4_negate_to(vec4 v, vec4 dest) {
  * @param[in, out]  v  vector
  */
 CGLM_INLINE
-void glm_vec4_negate(vec4 v) { glm_vec4_negate_to(v, v); }
+void glm_vec4_negate(vec4 v) {
+  glm_vec4_negate_to(v, v);
+}
 
 /*!
  * @brief normalize vec4 to dest
@@ -907,7 +911,9 @@ void glm_vec4_normalize_to(vec4 v, vec4 dest) {
  * @param[in, out] v vector
  */
 CGLM_INLINE
-void glm_vec4_normalize(vec4 v) { glm_vec4_normalize_to(v, v); }
+void glm_vec4_normalize(vec4 v) {
+  glm_vec4_normalize_to(v, v);
+}
 
 /**
  * @brief distance between two vectors
@@ -1245,8 +1251,9 @@ void glm_vec4_reflect(vec4 v, vec4 n, vec4 dest) {
  * returns true.
  *
  * this implementation does not explicitly preserve the 'w' component of the
- * incident vector 'I' in the output 'dest', users requiring the preservation of
- * the 'w' component should manually adjust 'dest' after calling this function.
+ * incident vector 'I' in the output 'dest', users requiring the preservation
+ * of the 'w' component should manually adjust 'dest' after calling this
+ * function.
  *
  * @param[in]  v    normalized incident vector
  * @param[in]  n    normalized normal vector

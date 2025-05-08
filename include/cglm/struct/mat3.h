@@ -17,7 +17,7 @@
    CGLM_INLINE mat3s  glms_mat3_identity(void);
    CGLM_INLINE void   glms_mat3_identity_array(mat3s * __restrict mat, size_t
  count); CGLM_INLINE mat3s  glms_mat3_zero(void); CGLM_INLINE mat3s
- glms_mat3_mul(mat3s m1, mat3s m2); CGLM_INLINE ma3s   glms_mat3_transpose(mat3s
+ glms_mat3_mul(mat3s m1, mat3s m2); CGLM_INLINE ma3s glms_mat3_transpose(mat3s
  m); CGLM_INLINE vec3s  glms_mat3_mulv(mat3s m, vec3s v); CGLM_INLINE float
  glms_mat3_trace(mat3s m); CGLM_INLINE versor glms_mat3_quat(mat3s m);
    CGLM_INLINE mat3s  glms_mat3_scale(mat3s m, float s);
@@ -167,7 +167,9 @@ vec3s glms_mat3_(mulv)(mat3s m, vec3s v) {
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float glms_mat3_(trace)(mat3s m) { return glm_mat3_trace(m.raw); }
+float glms_mat3_(trace)(mat3s m) {
+  return glm_mat3_trace(m.raw);
+}
 
 /*!
  * @brief convert mat3 to quaternion
@@ -205,7 +207,9 @@ mat3s glms_mat3_(scale)(mat3s m, float s) {
  * @return determinant
  */
 CGLM_INLINE
-float glms_mat3_(det)(mat3s mat) { return glm_mat3_det(mat.raw); }
+float glms_mat3_(det)(mat3s mat) {
+  return glm_mat3_det(mat.raw);
+}
 
 /*!
  * @brief inverse mat3 and store in dest

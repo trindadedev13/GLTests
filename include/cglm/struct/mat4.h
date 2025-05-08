@@ -259,7 +259,9 @@ vec4s glms_mat4_(mulv)(mat4s m, vec4s v) {
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float glms_mat4_(trace)(mat4s m) { return glm_mat4_trace(m.raw); }
+float glms_mat4_(trace)(mat4s m) {
+  return glm_mat4_trace(m.raw);
+}
 
 /*!
  * @brief trace of matrix (rotation part)
@@ -269,7 +271,9 @@ float glms_mat4_(trace)(mat4s m) { return glm_mat4_trace(m.raw); }
  * @param[in]  m matrix
  */
 CGLM_INLINE
-float glms_mat4_(trace3)(mat4s m) { return glm_mat4_trace3(m.raw); }
+float glms_mat4_(trace3)(mat4s m) {
+  return glm_mat4_trace3(m.raw);
+}
 
 /*!
  * @brief convert mat4's rotation part to quaternion
@@ -349,7 +353,9 @@ mat4s glms_mat4_(scale)(mat4s m, float s) {
  * @return determinant
  */
 CGLM_INLINE
-float glms_mat4_(det)(mat4s mat) { return glm_mat4_det(mat.raw); }
+float glms_mat4_(det)(mat4s mat) {
+  return glm_mat4_det(mat.raw);
+}
 
 /*!
  * @brief inverse mat4 and store in dest

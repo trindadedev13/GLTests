@@ -183,7 +183,9 @@ void glm_quat(versor q, float angle, float x, float y, float z) {
  * @param[out] dest  destination
  */
 CGLM_INLINE
-void glm_quat_copy(versor q, versor dest) { glm_vec4_copy(q, dest); }
+void glm_quat_copy(versor q, versor dest) {
+  glm_vec4_copy(q, dest);
+}
 
 /*!
  * @brief compute quaternion rotating vector A to vector B
@@ -221,7 +223,9 @@ void glm_quat_from_vecs(vec3 a, vec3 b, versor dest) {
  * @param[in]  q  quaternion
  */
 CGLM_INLINE
-float glm_quat_norm(versor q) { return glm_vec4_norm(q); }
+float glm_quat_norm(versor q) {
+  return glm_vec4_norm(q);
+}
 
 /*!
  * @brief normalize quaternion and store result in dest
@@ -280,7 +284,9 @@ void glm_quat_normalize_to(versor q, versor dest) {
  * @param[in, out]  q  quaternion
  */
 CGLM_INLINE
-void glm_quat_normalize(versor q) { glm_quat_normalize_to(q, q); }
+void glm_quat_normalize(versor q) {
+  glm_quat_normalize_to(q, q);
+}
 
 /*!
  * @brief dot product of two quaternion
@@ -289,7 +295,9 @@ void glm_quat_normalize(versor q) { glm_quat_normalize_to(q, q); }
  * @param[in]  q  quaternion 2
  */
 CGLM_INLINE
-float glm_quat_dot(versor p, versor q) { return glm_vec4_dot(p, q); }
+float glm_quat_dot(versor p, versor q) {
+  return glm_vec4_dot(p, q);
+}
 
 /*!
  * @brief conjugate of quaternion
@@ -324,7 +332,9 @@ void glm_quat_inv(versor q, versor dest) {
  * @param[out]  dest result quaternion
  */
 CGLM_INLINE
-void glm_quat_add(versor p, versor q, versor dest) { glm_vec4_add(p, q, dest); }
+void glm_quat_add(versor p, versor q, versor dest) {
+  glm_vec4_add(p, q, dest);
+}
 
 /*!
  * @brief subtract (componentwise) two quaternions and store result in dest
@@ -334,7 +344,9 @@ void glm_quat_add(versor p, versor q, versor dest) { glm_vec4_add(p, q, dest); }
  * @param[out]  dest result quaternion
  */
 CGLM_INLINE
-void glm_quat_sub(versor p, versor q, versor dest) { glm_vec4_sub(p, q, dest); }
+void glm_quat_sub(versor p, versor q, versor dest) {
+  glm_vec4_sub(p, q, dest);
+}
 
 /*!
  * @brief returns real part of quaternion
@@ -342,7 +354,9 @@ void glm_quat_sub(versor p, versor q, versor dest) { glm_vec4_sub(p, q, dest); }
  * @param[in]   q    quaternion
  */
 CGLM_INLINE
-float glm_quat_real(versor q) { return q[3]; }
+float glm_quat_real(versor q) {
+  return q[3];
+}
 
 /*!
  * @brief returns imaginary part of quaternion
@@ -363,7 +377,9 @@ void glm_quat_imag(versor q, vec3 dest) {
  * @param[in]   q    quaternion
  */
 CGLM_INLINE
-void glm_quat_imagn(versor q, vec3 dest) { glm_normalize_to(q, dest); }
+void glm_quat_imagn(versor q, vec3 dest) {
+  glm_normalize_to(q, dest);
+}
 
 /*!
  * @brief returns length of imaginary part of quaternion
@@ -371,7 +387,9 @@ void glm_quat_imagn(versor q, vec3 dest) { glm_normalize_to(q, dest); }
  * @param[in]   q    quaternion
  */
 CGLM_INLINE
-float glm_quat_imaglen(versor q) { return glm_vec3_norm(q); }
+float glm_quat_imaglen(versor q) {
+  return glm_vec3_norm(q);
+}
 
 /*!
  * @brief returns angle of quaternion
@@ -395,7 +413,9 @@ float glm_quat_angle(versor q) {
  * @param[out]  dest axis of quaternion
  */
 CGLM_INLINE
-void glm_quat_axis(versor q, vec3 dest) { glm_quat_imagn(q, dest); }
+void glm_quat_axis(versor q, vec3 dest) {
+  glm_quat_imagn(q, dest);
+}
 
 /*!
  * @brief multiplies two quaternion and stores result in dest

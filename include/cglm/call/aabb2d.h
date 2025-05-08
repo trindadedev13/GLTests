@@ -32,7 +32,9 @@ CGLM_EXPORT
 void glmc_aabb2d_crop(vec2 aabb[2], vec2 cropAabb[2], vec2 dest[2]);
 
 CGLM_EXPORT
-void glmc_aabb2d_crop_until(vec2 aabb[2], vec2 cropAabb[2], vec2 clampAabb[2],
+void glmc_aabb2d_crop_until(vec2 aabb[2],
+                            vec2 cropAabb[2],
+                            vec2 clampAabb[2],
                             vec2 dest[2]);
 
 CGLM_EXPORT

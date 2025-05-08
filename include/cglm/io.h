@@ -267,7 +267,8 @@ void glm_ivec4_print(ivec4 vec, FILE* __restrict ostream) {
 
   fprintf(ostream, "Vector (int%d): " CGLM_PRINT_COLOR "\n  (", m);
 
-  for (i = 0; i < m; i++) fprintf(ostream, " % d", vec[i]);
+  for (i = 0; i < m; i++)
+    fprintf(ostream, " % d", vec[i]);
 
   fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
 
@@ -302,7 +303,8 @@ void glm_ivec3_print(ivec3 vec, FILE* __restrict ostream) {
 
   fprintf(ostream, "Vector (int%d): " CGLM_PRINT_COLOR "\n  (", m);
 
-  for (i = 0; i < m; i++) fprintf(ostream, " % d", vec[i]);
+  for (i = 0; i < m; i++)
+    fprintf(ostream, " % d", vec[i]);
 
   fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
 
@@ -337,7 +339,8 @@ void glm_ivec2_print(ivec2 vec, FILE* __restrict ostream) {
 
   fprintf(ostream, "Vector (int%d): " CGLM_PRINT_COLOR "\n  (", m);
 
-  for (i = 0; i < m; i++) fprintf(ostream, " % d", vec[i]);
+  for (i = 0; i < m; i++)
+    fprintf(ostream, " % d", vec[i]);
 
   fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
 
@@ -365,7 +368,8 @@ void glm_versor_print(versor vec, FILE* __restrict ostream) {
 }
 
 CGLM_INLINE
-void glm_aabb_print(vec3 bbox[2], const char* __restrict tag,
+void glm_aabb_print(vec3 bbox[2],
+                    const char* __restrict tag,
                     FILE* __restrict ostream) {
   int i, j;
 

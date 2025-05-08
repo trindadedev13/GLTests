@@ -30,7 +30,9 @@
  * @param[in]       v  translate vector [x, y]
  */
 CGLM_INLINE
-void glm_translated2d(mat3 m, vec2 v) { glm_vec2_add(m[2], v, m[2]); }
+void glm_translated2d(mat3 m, vec2 v) {
+  glm_vec2_add(m[2], v, m[2]);
+}
 
 /*!
  * @brief translate existing transform matrix by x factor
@@ -41,7 +43,9 @@ void glm_translated2d(mat3 m, vec2 v) { glm_vec2_add(m[2], v, m[2]); }
  * @param[in]       x  x factor
  */
 CGLM_INLINE
-void glm_translated2d_x(mat3 m, float x) { m[2][0] += x; }
+void glm_translated2d_x(mat3 m, float x) {
+  m[2][0] += x;
+}
 
 /*!
  * @brief translate existing transform matrix by y factor
@@ -52,7 +56,9 @@ void glm_translated2d_x(mat3 m, float x) { m[2][0] += x; }
  * @param[in]       y  y factor
  */
 CGLM_INLINE
-void glm_translated2d_y(mat3 m, float y) { m[2][1] += y; }
+void glm_translated2d_y(mat3 m, float y) {
+  m[2][1] += y;
+}
 
 /*!
  * @brief rotate existing transform matrix by angle

@@ -127,7 +127,8 @@ void glms_frustum_box(vec4s corners[8], mat4s m, vec3s box[2]) {
  *
  * this will be helpful if you want to split a frustum e.g. CSM/PSSM. This will
  * find planes' corners but you will need to one more plane.
- * Actually you have it, it is near, far or created previously with this func ;)
+ * Actually you have it, it is near, far or created previously with this func
+ * ;)
  *
  * @param[in]  corners view  frustum corners
  * @param[in]  splitDist     split distance
@@ -135,7 +136,9 @@ void glms_frustum_box(vec4s corners[8], mat4s m, vec3s box[2]) {
  * @param[out] planeCorners  plane corners [LB, LT, RT, RB]
  */
 CGLM_INLINE
-void glms_frustum_corners_at(vec4s corners[8], float splitDist, float farDist,
+void glms_frustum_corners_at(vec4s corners[8],
+                             float splitDist,
+                             float farDist,
                              vec4s planeCorners[4]) {
   vec4 rawCorners[8];
   vec4 rawPlaneCorners[4];

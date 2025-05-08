@@ -119,8 +119,12 @@ static inline __m128 glmm_abs(__m128 x) {
   return _mm_andnot_ps(glmm_float32x4_SIGNMASK_NEG, x);
 }
 
-static inline __m128 glmm_min(__m128 a, __m128 b) { return _mm_min_ps(a, b); }
-static inline __m128 glmm_max(__m128 a, __m128 b) { return _mm_max_ps(a, b); }
+static inline __m128 glmm_min(__m128 a, __m128 b) {
+  return _mm_min_ps(a, b);
+}
+static inline __m128 glmm_max(__m128 a, __m128 b) {
+  return _mm_max_ps(a, b);
+}
 
 static inline __m128 glmm_vhadd(__m128 v) {
   __m128 x0;
@@ -159,7 +163,9 @@ static inline __m128 glmm_vhmin(__m128 v) {
   return _mm_min_ss(x1, x2);
 }
 
-static inline float glmm_hmin(__m128 v) { return _mm_cvtss_f32(glmm_vhmin(v)); }
+static inline float glmm_hmin(__m128 v) {
+  return _mm_cvtss_f32(glmm_vhmin(v));
+}
 
 static inline __m128 glmm_vhmax(__m128 v) {
   __m128 x0, x1, x2;
@@ -169,7 +175,9 @@ static inline __m128 glmm_vhmax(__m128 v) {
   return _mm_max_ss(x1, x2);
 }
 
-static inline float glmm_hmax(__m128 v) { return _mm_cvtss_f32(glmm_vhmax(v)); }
+static inline float glmm_hmax(__m128 v) {
+  return _mm_cvtss_f32(glmm_vhmax(v));
+}
 
 static inline __m128 glmm_vdots(__m128 a, __m128 b) {
 #if (defined(__SSE4_1__) || defined(__SSE4_2__)) && defined(CGLM_SSE4_DOT)
@@ -237,7 +245,9 @@ static inline void glmm_store3(float v[3], __m128 vx) {
 }
 #endif
 
-static inline __m128 glmm_div(__m128 a, __m128 b) { return _mm_div_ps(a, b); }
+static inline __m128 glmm_div(__m128 a, __m128 b) {
+  return _mm_div_ps(a, b);
+}
 
 /* enable FMA macro for MSVC? */
 #if defined(_MSC_VER) && !defined(__FMA__) && defined(__AVX2__)

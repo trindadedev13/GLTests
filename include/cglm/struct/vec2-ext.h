@@ -63,7 +63,9 @@ vec2s glms_vec2_(fill)(float val) {
  * @param[in] val value
  */
 CGLM_INLINE
-bool glms_vec2_(eq)(vec2s v, float val) { return glm_vec2_eq(v.raw, val); }
+bool glms_vec2_(eq)(vec2s v, float val) {
+  return glm_vec2_eq(v.raw, val);
+}
 
 /*!
  * @brief check if vector is equal to value (with epsilon)
@@ -82,7 +84,9 @@ bool glms_vec2_(eq_eps)(vec2s v, float val) {
  * @param[in] v   vector
  */
 CGLM_INLINE
-bool glms_vec2_(eq_all)(vec2s v) { return glm_vec2_eq_all(v.raw); }
+bool glms_vec2_(eq_all)(vec2s v) {
+  return glm_vec2_eq_all(v.raw);
+}
 
 /*!
  * @brief check if vector is equal to another (without epsilon)
@@ -91,7 +95,9 @@ bool glms_vec2_(eq_all)(vec2s v) { return glm_vec2_eq_all(v.raw); }
  * @param[in] b vector
  */
 CGLM_INLINE
-bool glms_vec2_(eqv)(vec2s a, vec2s b) { return glm_vec2_eqv(a.raw, b.raw); }
+bool glms_vec2_(eqv)(vec2s a, vec2s b) {
+  return glm_vec2_eqv(a.raw, b.raw);
+}
 
 /*!
  * @brief check if vector is equal to another (with epsilon)
@@ -110,7 +116,9 @@ bool glms_vec2_(eqv_eps)(vec2s a, vec2s b) {
  * @param[in] v vector
  */
 CGLM_INLINE
-float glms_vec2_(max)(vec2s v) { return glm_vec2_max(v.raw); }
+float glms_vec2_(max)(vec2s v) {
+  return glm_vec2_max(v.raw);
+}
 
 /*!
  * @brief min value of vector
@@ -118,7 +126,9 @@ float glms_vec2_(max)(vec2s v) { return glm_vec2_max(v.raw); }
  * @param[in] v vector
  */
 CGLM_INLINE
-float glms_vec2_min(vec2s v) { return glm_vec2_min(v.raw); }
+float glms_vec2_min(vec2s v) {
+  return glm_vec2_min(v.raw);
+}
 
 /*!
  * @brief check if one of items is NaN (not a number)
@@ -127,7 +137,9 @@ float glms_vec2_min(vec2s v) { return glm_vec2_min(v.raw); }
  * @param[in] v vector
  */
 CGLM_INLINE
-bool glms_vec2_(isnan)(vec2s v) { return glm_vec2_isnan(v.raw); }
+bool glms_vec2_(isnan)(vec2s v) {
+  return glm_vec2_isnan(v.raw);
+}
 
 /*!
  * @brief check if one of items is INFINITY
@@ -136,7 +148,9 @@ bool glms_vec2_(isnan)(vec2s v) { return glm_vec2_isnan(v.raw); }
  * @param[in] v vector
  */
 CGLM_INLINE
-bool glms_vec2_(isinf)(vec2s v) { return glm_vec2_isinf(v.raw); }
+bool glms_vec2_(isinf)(vec2s v) {
+  return glm_vec2_isinf(v.raw);
+}
 
 /*!
  * @brief check if all items are valid number
@@ -145,7 +159,9 @@ bool glms_vec2_(isinf)(vec2s v) { return glm_vec2_isinf(v.raw); }
  * @param[in] v vector
  */
 CGLM_INLINE
-bool glms_vec2_isvalid(vec2s v) { return glm_vec2_isvalid(v.raw); }
+bool glms_vec2_isvalid(vec2s v) {
+  return glm_vec2_isvalid(v.raw);
+}
 
 /*!
  * @brief get sign of 32 bit float as +1, -1, 0

@@ -100,7 +100,9 @@ void glm_ivec3_copy(ivec3 a, ivec3 dest) {
  * @param[out] v vector
  */
 CGLM_INLINE
-void glm_ivec3_zero(ivec3 v) { v[0] = v[1] = v[2] = 0; }
+void glm_ivec3_zero(ivec3 v) {
+  v[0] = v[1] = v[2] = 0;
+}
 
 /*!
  * @brief set all members of [v] to one
@@ -108,7 +110,9 @@ void glm_ivec3_zero(ivec3 v) { v[0] = v[1] = v[2] = 0; }
  * @param[out] v vector
  */
 CGLM_INLINE
-void glm_ivec3_one(ivec3 v) { v[0] = v[1] = v[2] = 1; }
+void glm_ivec3_one(ivec3 v) {
+  v[0] = v[1] = v[2] = 1;
+}
 
 /*!
  * @brief ivec3 dot product
@@ -135,7 +139,9 @@ int glm_ivec3_dot(ivec3 a, ivec3 b) {
  * @return norm * norm
  */
 CGLM_INLINE
-int glm_ivec3_norm2(ivec3 v) { return glm_ivec3_dot(v, v); }
+int glm_ivec3_norm2(ivec3 v) {
+  return glm_ivec3_dot(v, v);
+}
 
 /*!
  * @brief euclidean norm (magnitude), also called L2 norm
@@ -146,7 +152,9 @@ int glm_ivec3_norm2(ivec3 v) { return glm_ivec3_dot(v, v); }
  * @return norm
  */
 CGLM_INLINE
-int glm_ivec3_norm(ivec3 v) { return (int)sqrtf((float)glm_ivec3_norm2(v)); }
+int glm_ivec3_norm(ivec3 v) {
+  return (int)sqrtf((float)glm_ivec3_norm2(v));
+}
 
 /*!
  * @brief add vector [a] to vector [b] and store result in [dest]
@@ -568,7 +576,9 @@ float glm_ivec3_distance(ivec3 a, ivec3 b) {
  * @param[in]  val value
  */
 CGLM_INLINE
-void glm_ivec3_fill(ivec3 v, int val) { v[0] = v[1] = v[2] = val; }
+void glm_ivec3_fill(ivec3 v, int val) {
+  v[0] = v[1] = v[2] = val;
+}
 
 /*!
  * @brief check if vector is equal to value
