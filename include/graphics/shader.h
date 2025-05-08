@@ -3,7 +3,16 @@
 
 #include <glad/gl.h>
 
-GLuint compile_shader(GLenum type, const char* source);
+struct shader {
+  const char* source;
+  GLenum type;
+};
+
+#define shader(source, type) shadermk(source, type)
+
+struct shader shadermk(const char*, GLenum);
+
+GLuint compile_shader(struct shader);
 
 GLuint load_shader_program(const char* vertex_path, const char* fragment_path);
 
