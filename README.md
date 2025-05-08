@@ -13,7 +13,7 @@ Simple OpenGL experiments for learning and testing purposes.
 Make sure the following dependencies are installed:
 
 ```bash
-sudo apt install build-essential gcc libglfw3-dev libgl1-mesa-dev
+sudo apt install build-essential gcc libglfw3-dev
 ```
 
 #### Build
@@ -48,7 +48,7 @@ A window should open displaying the OpenGL test.
 In Termux:
 
 ```bash
-pkg install make clang glfw opengl mesa-dev
+pkg install make clang glfw
 ```
 
 #### Build & Run
