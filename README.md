@@ -13,7 +13,7 @@ Simple OpenGL experiments for learning and testing purposes.
 Make sure the following dependencies are installed:
 
 ```bash
-sudo apt install build-essential gcc libglfw3-dev
+sudo apt install build-essential libglfw3-dev
 ```
 
 #### Build

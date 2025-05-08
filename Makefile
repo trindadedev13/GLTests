@@ -1,4 +1,4 @@
-CC            = gcc
+CC            = clang
 SRC_DIRS      = src extern/src
 OBJ_DIR       = obj
 VAR_FLAGS     = -DRUNNING_PATH="\"$(RUNNING_PATH)\"" -D$(PLATFORM)
