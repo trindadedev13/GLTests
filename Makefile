@@ -3,7 +3,7 @@ SRC_DIRS      = src extern/src
 OBJ_DIR       = obj
 VAR_FLAGS     = -DRUNNING_PATH="\"$(RUNNING_PATH)\"" -D$(PLATFORM)
 INCLUDE_FLAGS = -I/usr/include -Iinclude/ -Iextern/include/
-CFLAGS        = -Wall -std=c11 $(VAR_FLAGS) $(INCLUDE_FLAGS)
+CFLAGS        = -Wall $(VAR_FLAGS) $(INCLUDE_FLAGS)
 LDFLAGS       = -lglfw -lGL -lm -ldl
 
 SRCS := $(foreach dir,$(SRC_DIRS),$(shell find $(dir) -name '*.c'))
