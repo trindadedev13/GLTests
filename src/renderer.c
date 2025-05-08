@@ -27,6 +27,8 @@ void glrenderer_configure_window(struct glrenderer* renderer) {
   glfwMakeContextCurrent(renderer->window);
 
   glEnable(GL_DEPTH_TEST);
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LEQUAL);
 }
 
 void glrenderer_end(struct glrenderer* renderer) {

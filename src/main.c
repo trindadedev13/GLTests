@@ -31,9 +31,6 @@ int main() {
     return EXIT_FAILURE;
   }
 
-  glEnable(GL_DEPTH_TEST);
-  glDepthFunc(GL_LEQUAL);
-
   struct cube* cb = cube_create();
   if (cb == NULL) {
     gltsprintf("%sError: %s&s\n", T_COLOR_RED, strerror(errno), T_COLOR_RESET);
@@ -93,7 +90,7 @@ int main() {
     glm_mat4_mul(matrix_view, cb->cube_model_matrix, matrix_temp2);
     glm_mat4_mul(matrix_projection, matrix_temp2, matrix_mvp);
 
-    glm_mat4_copy(cb->matrix_mvp, matrix_mvp);
+    glm_mat4_copy(matrix_mvp, cb->matrix_mvp);
     cube_draw(cb);
 
     glrenderer_swap_buffers(&renderer);
