@@ -5,6 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
+#include "../types.h"
+
 #ifndef cglm_simd_x86_h
 #define cglm_simd_x86_h
 #include "intrin.h"
