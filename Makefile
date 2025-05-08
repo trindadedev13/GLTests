@@ -1,9 +1,10 @@
-CC        = gcc
-SRC_DIR   = src
-OBJ_DIR   = obj
-VAR_FLAGS = -DRUNNING_PATH="\"$(RUNNING_PATH)\"" -D$(PLATFORM)
-CFLAGS    = -Wall -std=c11 $(VAR_FLAGS) -I/usr/include -Iinclude/
-LDFLAGS   = -lglfw -lGL -lm -ldl
+CC            = gcc
+SRC_DIR       = src
+OBJ_DIR       = obj
+VAR_FLAGS     = -DRUNNING_PATH="\"$(RUNNING_PATH)\"" -D$(PLATFORM)
+INCLUDE_FLAGS = -I/usr/include -Iinclude/ -Iextern/
+CFLAGS        = -Wall -std=c11 $(VAR_FLAGS) $(INCLUDE_FLAGS)
+LDFLAGS       = -lglfw -lGL -lm -ldl
 
 SRCS := $(shell find $(SRC_DIR) -name '*.c')
 OBJS := $(patsubst %.c, %.o, $(subst $(SRC_DIR)/,$(OBJ_DIR)/,$(SRCS)))
