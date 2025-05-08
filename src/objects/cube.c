@@ -8,18 +8,41 @@
 #include "io/print.h"
 
 static const GLfloat cube_vertices[] = {
-    // Front
-    -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, -1, 1, 1,
-    // Back
-    -1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, 1, -1, -1,
-    // Left
-    -1, -1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, 1, -1,
-    // Right
-    1, -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, -1, 1,
-    // Top
-    -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, 1, 1, -1,
-    // Bottom
-    -1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1, 1};
+    -1, -1, -1, // 0
+     1, -1, -1, // 1
+     1,  1, -1, // 2
+    -1,  1, -1, // 3
+    -1, -1,  1, // 4
+     1, -1,  1, // 5
+     1,  1,  1, // 6
+    -1,  1,  1  // 7
+};
+
+static const GLuint cube_indices[] = {
+    // front
+    4, 5, 6,
+    6, 7, 8,
+
+    // back
+    0, 1, 2,
+    2, 3, 0,
+
+    // left
+    0, 4, 7,
+    7, 3, 0,
+
+    // right
+    1, 5, 6,
+    6, 2, 1,
+
+    // top
+    3, 7, 6,
+    6, 2, 3,
+
+    // bottom
+    0, 4, 5,
+    5, 1, 0
+};
 
 GLuint cube_shader_program() {
   char scfp[512];
@@ -36,15 +59,28 @@ struct cube* cube_create() {
   if (!cb) return NULL;
   cb->cube_vao = 0;
   cb->cube_vbo = 0;
+  cb->cube_ebo = 0;
   cb->cube_color = COLOR_WHITE;
   cb->cube_shader_program = cube_shader_program();
   glm_mat4_identity(cb->cube_model_matrix);
 
   glGenVertexArrays(1, &cb->cube_vao);
   glGenBuffers(1, &cb->cube_vbo);
+  glGenBuffers(1, &cb->cube_ebo);
+
+  glBindVertexArray(cb->cube_vao);
+
+  // VBO
   glBindBuffer(GL_ARRAY_BUFFER, cb->cube_vbo);
   glBufferData(GL_ARRAY_BUFFER, sizeof(cube_vertices), cube_vertices,
                GL_STATIC_DRAW);
+
+  // EBO
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cb->cube_ebo);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices,
+               GL_STATIC_DRAW);
+
+  // shader attribute vertex
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
                         (void*)0);
   glEnableVertexAttribArray(0);
@@ -76,8 +112,9 @@ void cube_draw(struct cube* cb) {
   }
 
   // Draw
-  glDrawArrays(GL_TRIANGLES, 0,
-               6 * 2 * 3);  // 6 faces * 2 triangles * 3 vertices
+  glDrawElements(GL_TRIANGLES,
+               sizeof(cube_indices) / sizeof(GLuint),
+               GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
 }
 

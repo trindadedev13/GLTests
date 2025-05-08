@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "config.h"
 #include "graphics/color.h"
@@ -60,6 +62,8 @@ int main() {
   mat4 matrix_model;
   glm_mat4_identity(matrix_model);
 
+  srand(time(NULL));
+
   while (!glfwWindowShouldClose(renderer.window)) {
     float time = glfwGetTime();
 
@@ -74,6 +78,11 @@ int main() {
     glm_mat4_mul(matrix_projection, matrix_temp, matrix_mvp);
 
     // draw cube
+
+    // uint8_t r = rand();
+    // uint8_t g = rand();
+    // uint8_t b = rand();
+    // cb->cube_color = mk8bcolor(r, g, b, 255);
 
     // first reset cube model matrix
     cube_reset_model_matrix(cb);

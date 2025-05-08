@@ -9,6 +9,7 @@
 struct cube {
   GLuint cube_vao;  // vertex array object
   GLuint cube_vbo;  // vertex buffer object
+  GLuint cube_ebo;  // element buffer object
   GLuint cube_shader_program;
   mat4 cube_model_matrix;
   color cube_color;
