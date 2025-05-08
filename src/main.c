@@ -15,34 +15,38 @@
 #include "renderer.h"
 #include "term/tcolor.h"
 
+static void print_running_info() {
+  gltsprintf("%sRunning Info:\n%s", T_COLOR_YELLOW, T_COLOR_RESET);
+  gltsprintf("%s", T_COLOR_BLUE);
+
+  gltsprintf("---- Platform: %s ----\n", GLTS_DEVICE_NAME);
+  gltsprintf("---- Environment Path: %s all resources will be used from it. ----\n", GLTS_RUNNING_PATH);
+  gltsprintf("---- GL Version: %s ---- \n", (const char*) glGetString(GL_VERSION));
+
+  gltsprintf("%s", T_COLOR_RESET);
+}
+
 int main() {
   if (!glfwInit())
     return -1;
 
-  gltsprintf("%sRunning Info:\n%s", T_COLOR_YELLOW, T_COLOR_RESET);
-  gltsprintf("%s", T_COLOR_BLUE);
-  gltsprintf("%s-- Platform: %s\n", T_COLOR_BLUE, GLTS_DEVICE_NAME);
-
-  gltsprintf("%s-- Environment Path: %s all resources will be used from it.\n",
-             T_COLOR_BLUE, GLTS_RUNNING_PATH);
-  gltsprintf("%s", T_COLOR_RESET);
-
   struct glrenderer renderer = {};
   if (glrenderer_init_window(&renderer) != EXIT_SUCCESS) {
-    gltsprintf("Failed to init window\n");
+    gltsperror("Failed to init window.");
     return EXIT_FAILURE;
   }
   glrenderer_configure_window(&renderer);
 
   if (!gladLoadGL(glfwGetProcAddress)) {
-    fprintf(stderr, "Failed to initialize GLAD\n");
-    fflush(stderr);
+    gltsperror("Failed to initialize GLAD.");
     return EXIT_FAILURE;
   }
 
+  print_running_info();
+
   struct cube* cb = cube_create();
   if (cb == NULL) {
-    gltsprintf("%sError: %s&s\n", T_COLOR_RED, strerror(errno), T_COLOR_RESET);
+    gltsperror("Failed to create cube.");
     return EXIT_FAILURE;
   }
   cb->cube_color = COLOR_BLUE;
@@ -93,11 +97,6 @@ int main() {
     glm_mat4_mul(matrix_projection, matrix_temp, matrix_mvp);
 
     // draw cube
-
-    // uint8_t r = rand();
-    // uint8_t g = rand();
-    // uint8_t b = rand();
-    // cb->cube_color = mk8bcolor(r, g, b, 255);
 
     // first reset cube model matrix
     cube_reset_model_matrix(cb);
