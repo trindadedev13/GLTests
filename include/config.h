@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define GL_WINDOW_NAME ""
+#define GL_WINDOW_NAME "Brutonium"
 
 #define GCG_RUNNING_PATH RUNNING_PATH
 

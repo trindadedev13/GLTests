@@ -1,8 +1,14 @@
-#version 330 core
+#version 450
 
-layout(location = 0) in vec4 vPosition;
-uniform mat4 uMVPMatrix;
+uniform mat4 projection;
+uniform mat4 model;
+
+in layout(location=0) vec3 vertexIn;
+in layout(location=1) vec3 colorIn;
+
+out vec3 colorOut;
 
 void main() {
-  gl_Position = uMVPMatrix * vPosition;
+  gl_Position = projection * model * vec4(vertexIn, 1.0);
+  colorOut = colorIn;
 }

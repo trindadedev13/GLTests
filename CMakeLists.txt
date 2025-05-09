@@ -17,23 +17,23 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
 set(SOURCES
-    src/graphics/shader.c
-    src/graphics/color.c
-    src/main.c
-    src/renderer.c
-    src/objects/cube.c
-    src/io/file.c
-    src/io/print.c)
+    src/main.cpp
+    src/BrutGame.cpp
+    src/BrutWindow.cpp
+    src/Error/BrutError.cpp
+    src/Graphics/BrutColor.cpp
+    src/Graphics/BrutShader.cpp
+    src/Objects/BrutCube.cpp)
 
 set(HEADERS
-    include/term/tcolor.h
-    include/config.h
-    include/graphics/shader.h
-    include/graphics/color.h
-    include/objects/cube.h
-    include/io/file.h
-    include/io/print.h
-    include/renderer.h)
+    include/BrutGame.hpp
+    include/BrutWindow.hpp
+    include/Error/BrutError.hpp
+    include/Graphics/BrutColor.hpp
+    include/Graphics/BrutShader.hpp
+    include/Objects/BrutCube.hpp
+    include/Terminal/TermColor.hpp
+    include/config.h)
 
 add_executable(${PROJECT_NAME}
     ${SOURCES}
@@ -50,7 +50,6 @@ target_compile_definitions(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
     m
-    cglm
     glad
     OpenGL::GL
     glfw

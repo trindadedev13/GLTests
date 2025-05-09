@@ -1,0 +1,13 @@
+#ifndef TERM_COLOR_H
+#define TERM_COLOR_H
+
+#define TERM_COLOR_RESET "\033[0m"
+#define TERM_COLOR_BLACK "\033[0;30m"
+#define TERM_COLOR_RED "\033[0;31m"
+#define TERM_COLOR_GREEN "\033[0;32m"
+#define TERM_COLOR_YELLOW "\033[0;33m"
+#define TERM_COLOR_BLUE "\033[0;34m"
+#define TERM_COLOR_MAGENTA "\033[0;35m"
+#define TERM_COLOR_CYAN "\033[0;36"
+
+#endif
