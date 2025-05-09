@@ -21,7 +21,8 @@ sudo apt install build-essential clang libglfw3-dev cmake
 From the project directory, run:
 
 ```bash
-chmod +x ./LinuxBuild [-c] # use -c for clean last build before new build
+chmod +x LinuxBuild.sh
+./LinuxBuild.sh [-c] # use -c for clean last build before new build
 ```
 
 #### Run
@@ -56,7 +57,7 @@ pkg install cmake clang glfw
 In the project directory, run:
 
 ```bash
-bash TermuxX11Build [-c] # use -c for clean last build before new build
+bash TermuxX11Build.sh [-c] # use -c for clean last build before new build
 ```
 
 This script will build the project and launch the game.
