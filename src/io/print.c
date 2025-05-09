@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-void gltsprintf(const char* fmt, ...) {
+void gcgprintf(const char* fmt, ...) {
   va_list args;
   va_start(args, fmt);
   vprintf(fmt, args);
@@ -11,7 +11,7 @@ void gltsprintf(const char* fmt, ...) {
   fflush(stdout);
 }
 
-void gltsprintferr(const char* fmt, ...) {
+void gcgprintferr(const char* fmt, ...) {
   va_list args;
   va_start(args, fmt);
   vfprintf(stderr, fmt, args);
@@ -19,7 +19,7 @@ void gltsprintferr(const char* fmt, ...) {
   fflush(stderr);
 }
 
-void gltsperror(const char* s) {
+void gcgperror(const char* s) {
   perror(s);
   fflush(stderr);
 }

@@ -16,14 +16,14 @@
 #include "term/tcolor.h"
 
 static void print_running_info() {
-  gltsprintf("%sRunning Info:\n%s", T_COLOR_YELLOW, T_COLOR_RESET);
-  gltsprintf("%s", T_COLOR_BLUE);
+  gcgprintf("%sRunning Info:\n%s", T_COLOR_YELLOW, T_COLOR_RESET);
+  gcgprintf("%s", T_COLOR_BLUE);
 
-  gltsprintf("---- Platform: %s ----\n", GLTS_DEVICE_NAME);
-  gltsprintf("---- Environment Path: %s all resources will be used from it. ----\n", GLTS_RUNNING_PATH);
-  gltsprintf("---- GL Version: %s ---- \n", (const char*) glGetString(GL_VERSION));
+  gcgprintf("---- Platform: %s ----\n", GCG_DEVICE_NAME);
+  gcgprintf("---- Environment Path: %s all resources will be used from it. ----\n", GCG_RUNNING_PATH);
+  gcgprintf("---- GL Version: %s ---- \n", (const char*) glGetString(GL_VERSION));
 
-  gltsprintf("%s", T_COLOR_RESET);
+  gcgprintf("%s", T_COLOR_RESET);
 }
 
 int main() {
@@ -32,13 +32,13 @@ int main() {
 
   struct glrenderer renderer = {};
   if (glrenderer_init_window(&renderer) != EXIT_SUCCESS) {
-    gltsperror("Failed to init window.");
+    gcgperror("Failed to init window.");
     return EXIT_FAILURE;
   }
   glrenderer_configure_window(&renderer);
 
   if (!gladLoadGL(glfwGetProcAddress)) {
-    gltsperror("Failed to initialize GLAD.");
+    gcgperror("Failed to initialize GLAD.");
     return EXIT_FAILURE;
   }
 
@@ -46,7 +46,7 @@ int main() {
 
   struct cube* cb = cube_create();
   if (cb == NULL) {
-    gltsperror("Failed to create cube.");
+    gcgperror("Failed to create cube.");
     return EXIT_FAILURE;
   }
   cb->cube_color = COLOR_BLUE;

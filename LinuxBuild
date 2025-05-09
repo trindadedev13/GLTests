@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
-export TARGET=gltests
+export TARGET=glcargame
 export RUNNING_PATH="\"$(pwd)\""
-export PLATFORM=GLTS_PLATFORM_LINUX
+export PLATFORM=GCG_PLATFORM_LINUX
 
 # compile
 if [ "$1" = "-c" ]; then

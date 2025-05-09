@@ -1,6 +1,6 @@
-# OpenGL Tests
+# GL Car Game
 
-Simple OpenGL experiments for learning and testing purposes.
+A car game I'm trying to make while learning opengl.
 
 ---
 
@@ -13,7 +13,7 @@ Simple OpenGL experiments for learning and testing purposes.
 Make sure the following dependencies are installed:
 
 ```bash
-sudo apt install build-essential libglfw3-dev
+sudo apt install build-essential clang libglfw3-dev
 ```
 
 #### Build
@@ -29,10 +29,10 @@ chmod +x ./LinuxBuild [-c] # use -c for clean last build before new build
 After building:
 
 ```bash
-./gltests
+./glcargame
 ```
 
-A window should open displaying the OpenGL test.
+A window should open displaying the game.
 
 ---
 
@@ -59,7 +59,7 @@ In the project directory, run:
 bash TermuxX11Build [-c] # use -c for clean last build before new build
 ```
 
-This script will build the project and launch the app.  
+This script will build the project and launch the game.
 Now open the **Termux:X11** app — the OpenGL window should appear.
 
 ---

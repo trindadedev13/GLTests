@@ -3,10 +3,10 @@
 
 #include <stdarg.h>
 
-void gltsprintf(const char* fmt, ...);
+void gcgprintf(const char* fmt, ...);
 
-void gltsprinterr(const char* fmt, ...);
+void gcgprinterr(const char* fmt, ...);
 
-void gltsperror(const char*);
+void gcgperror(const char*);
 
 #endif

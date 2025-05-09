@@ -41,8 +41,8 @@ GLuint cube_shader_program() {
   char scfp[512];
   char scvp[512];
 
-  snprintf(scfp, sizeof(scfp), "%s/shaders/cube/cube.vert", GLTS_RUNNING_PATH);
-  snprintf(scvp, sizeof(scvp), "%s/shaders/cube/cube.frag", GLTS_RUNNING_PATH);
+  snprintf(scfp, sizeof(scfp), "%s/shaders/cube/cube.vert", GCG_RUNNING_PATH);
+  snprintf(scvp, sizeof(scvp), "%s/shaders/cube/cube.frag", GCG_RUNNING_PATH);
 
   return load_shader_program(scfp, scvp);
 }
