@@ -13,7 +13,7 @@ A car game I'm trying to make while learning opengl.
 Make sure the following dependencies are installed:
 
 ```bash
-sudo apt install build-essential clang libglfw3-dev cmake
+sudo apt install build-essential clang cmake libglfw3-dev libglm-dev
 ```
 
 #### Build
@@ -49,7 +49,7 @@ A window should open displaying the game.
 In Termux:
 
 ```bash
-pkg install cmake clang glfw
+pkg install cmake clang glfw glm
 ```
 
 #### Build & Run
