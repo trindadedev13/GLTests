@@ -22,6 +22,7 @@ class Window {
 
  private:
   void initWindow();
+  void configureWindowPosition();
 
   const int width;
   const int height;

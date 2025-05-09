@@ -6,7 +6,7 @@
 namespace Brut {
 
 Cube::Cube()
-    : VAO(0), EBO(0), positionVBO(0), colorVBO(0), position(0.f), model(1.f) {
+    : VAO{0}, EBO{0}, positionVBO{0}, colorVBO{0}, position{0.f}, model{1.f} {
   initCube();
 }
 
@@ -100,23 +100,43 @@ void Cube::fillBuffers() {
       points[2]   // 23
   };
 
-  GLubyte colors[] = {// Front Red
-                      255, 0, 0, 255, 0, 0, 255, 0, 0, 255, 0, 0,
+  GLubyte colors[] = {
+      // Front Red
+      255, 0, 0,
+      255, 0, 0,
+      255, 0, 0,
+      255, 0, 0,
 
-                      // Back Green
-                      0, 255, 0, 0, 255, 0, 0, 255, 0, 0, 255, 0,
+      // Back Green
+      0, 255, 0,
+      0, 255, 0,
+      0, 255, 0,
+      0, 255, 0,
 
-                      // Right Blue
-                      0, 0, 255, 0, 0, 255, 0, 0, 255, 0, 0, 255,
+      // Right Blue
+      0, 0, 255,
+      0, 0, 255,
+      0, 0, 255,
+      0, 0, 255,
 
-                      // Left Yellow
-                      255, 255, 0, 255, 255, 0, 255, 255, 0, 255, 255, 0,
+      // Left Yellow
+      255, 255, 0,
+      255, 255, 0,
+      255, 255, 0,
+      255, 255, 0,
 
-                      // Top Magenta
-                      255, 0, 255, 255, 0, 255, 255, 0, 255, 255, 0, 255,
+      // Top Magenta
+      255, 0, 255,
+      255, 0, 255,
+      255, 0, 255,
+      255, 0, 255,
 
-                      // Bottom Cyan
-                      0, 255, 255, 0, 255, 255, 0, 255, 255, 0, 255, 255};
+      // Bottom Cyan
+      0, 255, 255,
+      0, 255, 255,
+      0, 255, 255,
+      0, 255, 255
+  };
 
   unsigned int indices[] = {
       0,  1,  2,  0,  2,  3,   // Front

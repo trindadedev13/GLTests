@@ -23,8 +23,10 @@ void Game::run() {
   glm::mat4 projection =
       glm::perspective(glm::radians(45.0f), 640.0f / 480.0f, 0.1f, 10.0f);
 
-  std::string vertFP = std::string(GCG_RUNNING_PATH) + "/shaders/cube/cube.vert";
-  std::string fragFP = std::string(GCG_RUNNING_PATH) + "/shaders/cube/cube.frag";
+  std::string vertFP =
+      std::string(GCG_RUNNING_PATH) + "/shaders/cube/cube.vert";
+  std::string fragFP =
+      std::string(GCG_RUNNING_PATH) + "/shaders/cube/cube.frag";
 
   Shader cubeShader(vertFP, fragFP);
 
@@ -46,8 +48,12 @@ void Game::run() {
 
     glm::mat4 cubeModel = glm::mat4(1.0f);
     cubeModel = glm::rotate(cubeModel, -deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
-    cubeModel = glm::rotate(cubeModel, 1.75f * deltaTime, glm::vec3(1.f, 0.f, 0.f));
-    cubeModel = glm::rotate(cubeModel, 0.75f * deltaTime, glm::vec3(0.f, 0.f, 1.f));
+    cubeModel =
+        glm::rotate(cubeModel, 1.75f * deltaTime, glm::vec3(1.f, 0.f, 0.f));
+    cubeModel =
+        glm::rotate(cubeModel, 0.75f * deltaTime, glm::vec3(0.f, 0.f, 1.f));
+    cubeModel =
+        glm::scale(cubeModel, glm::vec3(.5f, .5f, .5f));
 
     glm::mat4 cubeModelToWorld = cb.getPosition() * cubeModel;
     cubeShader.sendUniformData("model", cubeModelToWorld);

@@ -11,11 +11,11 @@
 namespace Brut {
 Shader::Shader(const std::string vertShaderFilePath,
                const std::string fragShaderFilePath)
-    : programID(0),
-      vertexShaderID(0),
-      fragmentShaderID(0),
-      vertexShaderFilePath(vertShaderFilePath),
-      fragmentShaderFilePath(fragShaderFilePath) {
+    : programID{0},
+      vertexShaderID{0},
+      fragmentShaderID{0},
+      vertexShaderFilePath{vertShaderFilePath},
+      fragmentShaderFilePath{fragShaderFilePath} {
   createShaders();
 }
 
