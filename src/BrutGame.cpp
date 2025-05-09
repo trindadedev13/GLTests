@@ -24,9 +24,9 @@ void Game::run() {
       glm::perspective(glm::radians(45.0f), 640.0f / 480.0f, 0.1f, 10.0f);
 
   std::string vertFP =
-      std::string(GCG_RUNNING_PATH) + "/shaders/cube/cube.vert";
+      std::string(BRUT_RUNNING_PATH) + "/shaders/cube/cube.vert";
   std::string fragFP =
-      std::string(GCG_RUNNING_PATH) + "/shaders/cube/cube.frag";
+      std::string(BRUT_RUNNING_PATH) + "/shaders/cube/cube.frag";
 
   Shader cubeShader(vertFP, fragFP);
 

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 export RUNNING_PATH="\"$(pwd)\""
-export PLATFORM=GCG_PLATFORM_LINUX
+export PLATFORM=BRUT_PLATFORM_LINUX
 
 # compile
 if [ "$1" = "-c" ]; then

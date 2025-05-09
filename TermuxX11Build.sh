@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 export RUNNING_PATH="\"$(pwd)\""
-export PLATFORM=GCG_PLATFORM_TERMUX_X11
+export PLATFORM=BRUT_PLATFORM_TERMUX_X11
 
 # compile
 if [ "$1" = "-c" ]; then
