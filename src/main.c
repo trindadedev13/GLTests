@@ -20,8 +20,11 @@ static void print_running_info() {
   gcgprintf("%s", T_COLOR_BLUE);
 
   gcgprintf("---- Platform: %s ----\n", GCG_DEVICE_NAME);
-  gcgprintf("---- Environment Path: %s all resources will be used from it. ----\n", GCG_RUNNING_PATH);
-  gcgprintf("---- GL Version: %s ---- \n", (const char*) glGetString(GL_VERSION));
+  gcgprintf(
+      "---- Environment Path: %s all resources will be used from it. ----\n",
+      GCG_RUNNING_PATH);
+  gcgprintf("---- GL Version: %s ---- \n",
+            (const char*)glGetString(GL_VERSION));
 
   gcgprintf("%s", T_COLOR_RESET);
 }

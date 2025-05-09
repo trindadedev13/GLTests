@@ -20,7 +20,7 @@ jobs:
       run: |
         echo "Updating package list and installing required dependencies..."
         sudo apt-get update -y
-        sudo apt-get install -y build-essential clang libglfw3-dev
+        sudo apt-get install -y build-essential clang libglfw3-dev cmake
 
     - name: Give execute permission to LinuxBuild
       run: chmod +x LinuxBuild
