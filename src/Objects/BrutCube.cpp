@@ -1,6 +1,8 @@
+#include <array>
 #include <glad/gl.h>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Graphics/BrutColor.hpp"
 #include "Objects/BrutCube.hpp"
 
 namespace Brut {
@@ -100,44 +102,6 @@ void Cube::fillBuffers() {
       points[2]   // 23
   };
 
-  GLubyte colors[] = {
-      // Front Red
-      255, 0, 0,
-      255, 0, 0,
-      255, 0, 0,
-      255, 0, 0,
-
-      // Back Green
-      0, 255, 0,
-      0, 255, 0,
-      0, 255, 0,
-      0, 255, 0,
-
-      // Right Blue
-      0, 0, 255,
-      0, 0, 255,
-      0, 0, 255,
-      0, 0, 255,
-
-      // Left Yellow
-      255, 255, 0,
-      255, 255, 0,
-      255, 255, 0,
-      255, 255, 0,
-
-      // Top Magenta
-      255, 0, 255,
-      255, 0, 255,
-      255, 0, 255,
-      255, 0, 255,
-
-      // Bottom Cyan
-      0, 255, 255,
-      0, 255, 255,
-      0, 255, 255,
-      0, 255, 255
-  };
-
   unsigned int indices[] = {
       0,  1,  2,  0,  2,  3,   // Front
       4,  5,  6,  4,  6,  7,   // Back
@@ -156,9 +120,8 @@ void Cube::fillBuffers() {
   glBindBuffer(GL_ARRAY_BUFFER, positionVBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-  // Fill with colors
-  glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+  // Fill cube with color
+  setColors(faceColors);
 }
 
 void Cube::linkBuffers() {
@@ -168,18 +131,32 @@ void Cube::linkBuffers() {
 
     glBindBuffer(GL_ARRAY_BUFFER, positionVBO);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_UNSIGNED_BYTE, GL_TRUE, 3 * sizeof(GLubyte),
-                          0);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
   }
   glBindVertexArray(0);
 }
 
 void Cube::updatePosition() {
   model = glm::translate(glm::mat4(1.f), position);
+}
+
+void Cube::setColors(const std::array<Color, 6>& newFaceColors) {
+  Color vertexColors[24] = {};
+
+  for (int face = 0; face < 6; ++face) {
+    faceColors[face] = newFaceColors[face];
+    for (int i = 0; i < 4; ++i) {
+      vertexColors[face * 4 + i] = faceColors[face];
+    }
+  }
+
+  glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertexColors), vertexColors,
+               GL_STATIC_DRAW);
 }
 
 }  // namespace Brut

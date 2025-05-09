@@ -38,6 +38,11 @@ void Game::run() {
 
   float startTime = glfwGetTime();
 
+  std::cout << sizeof(cb.faceColors) << std::endl;
+
+  cb.setColors({Color::Red, Color::Green, Color::Blue, Color::Yellow,
+                Color::Cyan, Color::Magenta});
+
   while (!window.shouldClose()) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(Color::White.r, Color::White.g, Color::White.b,
@@ -52,8 +57,7 @@ void Game::run() {
         glm::rotate(cubeModel, 1.75f * deltaTime, glm::vec3(1.f, 0.f, 0.f));
     cubeModel =
         glm::rotate(cubeModel, 0.75f * deltaTime, glm::vec3(0.f, 0.f, 1.f));
-    cubeModel =
-        glm::scale(cubeModel, glm::vec3(.5f, .5f, .5f));
+    cubeModel = glm::scale(cubeModel, glm::vec3(.5f, .5f, .5f));
 
     glm::mat4 cubeModelToWorld = cb.getPosition() * cubeModel;
     cubeShader.sendUniformData("model", cubeModelToWorld);

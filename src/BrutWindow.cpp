@@ -29,7 +29,7 @@ void Window::configureWindowPosition() {
   GLFWmonitor* monitor = glfwGetPrimaryMonitor();
   const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
-  int xPos = (mode->width  - width) / 2;
+  int xPos = (mode->width - width) / 2;
   int yPos = (mode->height - height) / 2;
 
   glfwSetWindowPos(window, xPos, yPos);
