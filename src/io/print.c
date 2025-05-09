@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-void gcgprintf(const char* fmt, ...) {
+void brutoniumprintf(const char* fmt, ...) {
   va_list args;
   va_start(args, fmt);
   vprintf(fmt, args);
@@ -11,7 +11,7 @@ void gcgprintf(const char* fmt, ...) {
   fflush(stdout);
 }
 
-void gcgprintferr(const char* fmt, ...) {
+void brutoniumprintferr(const char* fmt, ...) {
   va_list args;
   va_start(args, fmt);
   vfprintf(stderr, fmt, args);
@@ -19,7 +19,7 @@ void gcgprintferr(const char* fmt, ...) {
   fflush(stderr);
 }
 
-void gcgperror(const char* s) {
+void brutoniumperror(const char* s) {
   perror(s);
   fflush(stderr);
 }

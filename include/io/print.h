@@ -3,10 +3,10 @@
 
 #include <stdarg.h>
 
-void gcgprintf(const char* fmt, ...);
+void brutoniumprintf(const char* fmt, ...);
 
-void gcgprinterr(const char* fmt, ...);
+void brutoniumprinterr(const char* fmt, ...);
 
-void gcgperror(const char*);
+void brutoniumperror(const char*);
 
 #endif

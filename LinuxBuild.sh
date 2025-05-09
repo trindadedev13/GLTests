@@ -14,4 +14,4 @@ cd build
 cmake ..
 make
 
-cp glcargame ../
+cp brutonium ../

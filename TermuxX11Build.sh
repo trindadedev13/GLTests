@@ -16,11 +16,11 @@ make
 
 cd ..
 
-cp build/glcargame .
+cp build/brutonium .
 
 # copy executable to home
-cp glcargame $HOME/glcargame
-rm glcargame
+cp brutonium $HOME/brutonium
+rm brutonium
 
 # start termux-x11 in background and save its PID
 termux-x11 :0 &
@@ -43,8 +43,8 @@ sleep 3
 export DISPLAY=:0
 
 # run program
-chmod +x $HOME/glcargame
-$HOME/glcargame
+chmod +x $HOME/brutonium
+$HOME/brutonium
 
 # cleanup after program ends
 cleanup

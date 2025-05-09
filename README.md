@@ -1,4 +1,4 @@
-# GL Car Game
+# Brutonium
 
 A car game I'm trying to make while learning opengl.
 
@@ -30,7 +30,7 @@ chmod +x LinuxBuild.sh
 After building:
 
 ```bash
-./glcargame
+./brutonium
 ```
 
 A window should open displaying the game.

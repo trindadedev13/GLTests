@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define GL_WINDOW_NAME "glcargame"
+#define GL_WINDOW_NAME ""
 
 #define GCG_RUNNING_PATH RUNNING_PATH
 
