@@ -28,6 +28,8 @@ set(SOURCES
 set(HEADERS
     include/BrutGame.hpp
     include/BrutWindow.hpp
+    include/Buffer/BrutBuffer.hpp
+    include/Buffer/BrutBuffer.tpp
     include/Error/BrutError.hpp
     include/Graphics/BrutColor.hpp
     include/Graphics/BrutShader.hpp

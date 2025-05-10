@@ -2,20 +2,18 @@
 #include <glad/gl.h>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Buffer/BrutBuffer.hpp"
 #include "Graphics/BrutColor.hpp"
 #include "Objects/BrutCube.hpp"
 
 namespace Brut {
 
 Cube::Cube()
-    : VAO{0}, EBO{0}, positionVBO{0}, colorVBO{0}, position{0.f}, model{1.f} {
+    : VAO{0}, EBO{}, positionVBO{}, colorVBO{}, position{0.f}, model{1.f} {
   initCube();
 }
 
 Cube::~Cube() {
-  glDeleteBuffers(1, &positionVBO);
-  glDeleteBuffers(1, &colorVBO);
-  glDeleteBuffers(1, &EBO);
   glDeleteVertexArrays(1, &VAO);
 }
 
@@ -25,28 +23,8 @@ void Cube::initCube() {
   linkBuffers();
 }
 
-void Cube::setPosition(float x, float y, float z) {
-  position = glm::vec3(x, y, z);
-  updatePosition();
-}
-
-glm::mat4 Cube::getPosition() const {
-  return model;
-}
-
-void Cube::draw() {
-  glBindVertexArray(VAO);
-  {
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-  }
-  glBindVertexArray(0);
-}
-
 void Cube::createBuffers() {
   glGenVertexArrays(1, &VAO);
-  glGenBuffers(1, &EBO);
-  glGenBuffers(1, &positionVBO);
-  glGenBuffers(1, &colorVBO);
 }
 
 void Cube::fillBuffers() {
@@ -111,14 +89,11 @@ void Cube::fillBuffers() {
       20, 21, 22, 20, 22, 23   // Bottom
   };
 
-  // Fill with indices
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
-               GL_STATIC_DRAW);
+  EBO.bind();
+  EBO.putData(indices, sizeof(indices));
 
-  // Fill with vertices
-  glBindBuffer(GL_ARRAY_BUFFER, positionVBO);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+  positionVBO.bind();
+  positionVBO.putData(vertices, sizeof(vertices));
 
   // Fill cube with color
   setColors(faceColors);
@@ -127,15 +102,31 @@ void Cube::fillBuffers() {
 void Cube::linkBuffers() {
   glBindVertexArray(VAO);
   {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, positionVBO);
+    EBO.bind();
+    positionVBO.bind();
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-    glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
+    colorVBO.bind();
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
+  }
+  glBindVertexArray(0);
+}
+
+void Cube::setPosition(float x, float y, float z) {
+  position = glm::vec3(x, y, z);
+  updatePosition();
+}
+
+glm::mat4 Cube::getPosition() const {
+  return model;
+}
+
+void Cube::draw() {
+  glBindVertexArray(VAO);
+  {
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
   }
   glBindVertexArray(0);
 }
@@ -154,9 +145,8 @@ void Cube::setColors(const std::array<Color, 6>& newFaceColors) {
     }
   }
 
-  glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertexColors), vertexColors,
-               GL_STATIC_DRAW);
+  colorVBO.bind();
+  colorVBO.putData(vertexColors, sizeof(vertexColors));
 }
 
 }  // namespace Brut
