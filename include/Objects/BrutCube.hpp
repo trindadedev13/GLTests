@@ -2,6 +2,7 @@
 #define BRUT_CUBE_HPP
 
 #include "Buffer/BrutBuffer.hpp"
+#include "Buffer/BrutVertexArrayBuffer.hpp"
 #include "Graphics/BrutColor.hpp"
 
 #include <array>
@@ -25,11 +26,7 @@ class Cube {
   void draw();
 
  private:
-  unsigned int VAO;
-  // unsigned int EBO;
-  // unsigned int positionVBO;
-  // unsigned int colorVBO;
-
+  VertexArrayBuffer VAO;
   ArrayBuffer positionVBO;
   ArrayBuffer colorVBO;
   ElementArrayBuffer EBO;

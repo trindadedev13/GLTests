@@ -20,6 +20,7 @@ set(SOURCES
     src/main.cpp
     src/BrutGame.cpp
     src/BrutWindow.cpp
+    src/Buffer/BrutVertexArrayBuffer.cpp
     src/Error/BrutError.cpp
     src/Graphics/BrutColor.cpp
     src/Graphics/BrutShader.cpp
@@ -30,6 +31,7 @@ set(HEADERS
     include/BrutWindow.hpp
     include/Buffer/BrutBuffer.hpp
     include/Buffer/BrutBuffer.tpp
+    include/Buffer/BrutVertexArrayBuffer.hpp
     include/Error/BrutError.hpp
     include/Graphics/BrutColor.hpp
     include/Graphics/BrutShader.hpp

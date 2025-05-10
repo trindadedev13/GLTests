@@ -9,22 +9,15 @@
 namespace Brut {
 
 Cube::Cube()
-    : VAO{0}, EBO{}, positionVBO{}, colorVBO{}, position{0.f}, model{1.f} {
+    : VAO{}, EBO{}, positionVBO{}, colorVBO{}, position{0.f}, model{1.f} {
   initCube();
 }
 
-Cube::~Cube() {
-  glDeleteVertexArrays(1, &VAO);
-}
+Cube::~Cube() {}
 
 void Cube::initCube() {
-  createBuffers();
   fillBuffers();
   linkBuffers();
-}
-
-void Cube::createBuffers() {
-  glGenVertexArrays(1, &VAO);
 }
 
 void Cube::fillBuffers() {
@@ -100,7 +93,7 @@ void Cube::fillBuffers() {
 }
 
 void Cube::linkBuffers() {
-  glBindVertexArray(VAO);
+  VAO.bind();
   {
     EBO.bind();
     positionVBO.bind();
@@ -111,7 +104,7 @@ void Cube::linkBuffers() {
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
   }
-  glBindVertexArray(0);
+  VAO.unbind();
 }
 
 void Cube::setPosition(float x, float y, float z) {
@@ -124,11 +117,11 @@ glm::mat4 Cube::getPosition() const {
 }
 
 void Cube::draw() {
-  glBindVertexArray(VAO);
+  VAO.bind();
   {
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
   }
-  glBindVertexArray(0);
+  VAO.unbind();
 }
 
 void Cube::updatePosition() {
