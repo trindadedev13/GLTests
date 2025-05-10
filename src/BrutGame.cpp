@@ -8,7 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Graphics/BrutColor.hpp"
-#include "Graphics/BrutShader.hpp"
+#include "Graphics/Shader/BrutShader.hpp"
 #include "Objects/BrutCube.hpp"
 #include "config.h"
 
@@ -25,12 +25,7 @@ void Game::run() {
   glm::mat4 projection =
       glm::perspective(glm::radians(45.0f), 640.0f / 480.0f, 0.1f, 10.0f);
 
-  std::string vertFP =
-      std::string(BRUT_RUNNING_PATH) + "/shaders/cube/cube.vert";
-  std::string fragFP =
-      std::string(BRUT_RUNNING_PATH) + "/shaders/cube/cube.frag";
-
-  Shader cubeShader(vertFP, fragFP);
+  Shader cubeShader = shadersManager.get("cube");
 
   Cube cb;
   cb.setPosition(0.0f, 0.0f, -5.0f);

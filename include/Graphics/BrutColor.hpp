@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 namespace Brut {
+
 class Color {
  public:
   Color();
@@ -24,5 +25,6 @@ class Color {
   static const Color Cyan;
   static const Color Magenta;
 };
+
 }  // namespace Brut
 #endif

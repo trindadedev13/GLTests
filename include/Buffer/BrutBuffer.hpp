@@ -6,6 +6,7 @@
 #include <glad/gl.h>
 
 namespace Brut {
+
 template <GLenum T>
 class Buffer {
  public:

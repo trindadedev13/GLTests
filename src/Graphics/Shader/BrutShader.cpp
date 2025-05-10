@@ -1,4 +1,4 @@
-#include "Graphics/BrutShader.hpp"
+#include "Graphics/Shader/BrutShader.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -11,6 +11,7 @@
 #include "Error/BrutError.hpp"
 
 namespace Brut {
+
 Shader::Shader(const std::string vertShaderFilePath,
                const std::string fragShaderFilePath)
     : programID{0},
@@ -167,4 +168,5 @@ void Shader::checkLinkError(const unsigned int programId) {
     std::cout << "Shader link was successful! \n";
   }
 }
+
 }  // namespace Brut

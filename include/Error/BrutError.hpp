@@ -4,7 +4,9 @@
 #include <string>
 
 namespace Brut {
+
 void fatalError(const std::string errorMessage);
+
 }
 
 #endif

@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 
 namespace Brut {
+
 class Shader {
  public:
   Shader(const std::string vertShaderFilePath,
@@ -35,6 +36,7 @@ class Shader {
   int getUniformLocation(const std::string& varName);
   std::string readProgramSource(const std::string filePath);
 };
+
 }  // namespace Brut
 
 #endif

@@ -23,7 +23,8 @@ set(SOURCES
     src/Buffer/BrutVertexArrayBuffer.cpp
     src/Error/BrutError.cpp
     src/Graphics/BrutColor.cpp
-    src/Graphics/BrutShader.cpp
+    src/Graphics/Shader/BrutShader.cpp
+    src/Graphics/Shader/BrutShadersManager.cpp
     src/Objects/BrutCube.cpp)
 
 set(HEADERS
@@ -34,7 +35,8 @@ set(HEADERS
     include/Buffer/BrutVertexArrayBuffer.hpp
     include/Error/BrutError.hpp
     include/Graphics/BrutColor.hpp
-    include/Graphics/BrutShader.hpp
+    include/Graphics/Shader/BrutShader.hpp
+    include/Graphics/Shader/BrutShadersManager.hpp
     include/Objects/BrutCube.hpp
     include/Terminal/TermColor.hpp
     include/config.h)
