@@ -35,7 +35,6 @@ class Cube {
   glm::mat4 model;
 
   void initCube();
-  void createBuffers();
   void fillBuffers();
   void linkBuffers();
 
