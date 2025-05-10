@@ -1,12 +1,13 @@
 #ifndef BRUT_CUBE_HPP
 #define BRUT_CUBE_HPP
 
+#include <array>
+
+#include <glm/glm.hpp>
+
 #include "Buffer/BrutBuffer.hpp"
 #include "Buffer/BrutVertexArrayBuffer.hpp"
 #include "Graphics/BrutColor.hpp"
-
-#include <array>
-#include <glm/glm.hpp>
 
 namespace Brut {
 

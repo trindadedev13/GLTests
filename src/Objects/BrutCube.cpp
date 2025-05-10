@@ -1,10 +1,12 @@
+#include "Objects/BrutCube.hpp"
+
 #include <array>
+
 #include <glad/gl.h>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Buffer/BrutBuffer.hpp"
 #include "Graphics/BrutColor.hpp"
-#include "Objects/BrutCube.hpp"
 
 namespace Brut {
 

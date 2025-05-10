@@ -1,8 +1,10 @@
 #ifndef BRUT_WINDOW_HPP
 #define BRUT_WINDOW_HPP
 
-#include <GLFW/glfw3.h>
 #include <string>
+
+#include <glad/gl.h>
+#include <GLFW/glfw3.h>
 
 namespace Brut {
 

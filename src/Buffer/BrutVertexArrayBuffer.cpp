@@ -1,6 +1,6 @@
-#include <glad/gl.h>
-
 #include "Buffer/BrutVertexArrayBuffer.hpp"
+
+#include <glad/gl.h>
 
 namespace Brut {
 

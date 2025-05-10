@@ -2,6 +2,7 @@
 #define BRUT_BUFFER_HPP
 
 #include <cstdlib>
+
 #include <glad/gl.h>
 
 namespace Brut {

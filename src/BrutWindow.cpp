@@ -1,7 +1,7 @@
+#include "BrutWindow.hpp"
+
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
-
-#include "BrutWindow.hpp"
 
 namespace Brut {
 

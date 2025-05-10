@@ -2,8 +2,9 @@
 #define BRUT_SHADER_HPP
 
 #include <string>
-#include <glm/glm.hpp>
 #include <unordered_map>
+
+#include <glm/glm.hpp>
 
 namespace Brut {
 class Shader {

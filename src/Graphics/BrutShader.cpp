@@ -1,12 +1,14 @@
 #include "Graphics/BrutShader.hpp"
-#include "Error/BrutError.hpp"
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
 #include <glad/gl.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "Error/BrutError.hpp"
 
 namespace Brut {
 Shader::Shader(const std::string vertShaderFilePath,
