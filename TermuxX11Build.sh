@@ -16,11 +16,11 @@ make
 
 cd ..
 
-cp build/brutonium .
+cp build/brut .
 
 # copy executable to home
-cp brutonium $HOME/brutonium
-rm brutonium
+cp brut $HOME/brut
+rm brut
 
 # start termux-x11 in background and save its PID
 termux-x11 :0 &
@@ -43,8 +43,8 @@ sleep 3
 export DISPLAY=:0
 
 # run program
-chmod +x $HOME/brutonium
-$HOME/brutonium
+chmod +x $HOME/brut
+$HOME/brut
 
 # cleanup after program ends
 cleanup

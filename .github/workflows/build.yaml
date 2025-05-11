@@ -1,4 +1,4 @@
-name: Build Brutonium
+name: Build Brut
 
 on:
   push:
@@ -33,5 +33,5 @@ jobs:
     - name: Upload compiled binary as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: brutonium
-        path: brutonium
+        name: brut
+        path: brut

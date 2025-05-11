@@ -1,7 +1,6 @@
-# Brutonium
+# Brut
 
-A car game I'm trying to make while learning opengl.
-
+- A Open World car game
 ---
 
 ## How to Run
@@ -30,7 +29,7 @@ chmod +x LinuxBuild.sh
 After building:
 
 ```bash
-./brutonium
+./brut
 ```
 
 A window should open displaying the game.

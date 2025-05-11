@@ -14,4 +14,4 @@ cd build
 cmake ..
 make
 
-cp brutonium ../
+cp brut ../
