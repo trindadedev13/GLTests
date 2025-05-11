@@ -22,8 +22,10 @@ Game::Game() {
 Game::~Game() {}
 
 void Game::run() {
+  float aspectRatio = static_cast<float>(GL_WINDOW_WIDTH) / GL_WINDOW_HEIGHT;
+
   glm::mat4 projection =
-      glm::perspective(glm::radians(45.0f), 640.0f / 480.0f, 0.1f, 10.0f);
+      glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 10.0f);
 
   Shader cubeShader = shadersManager.get("cube");
 
