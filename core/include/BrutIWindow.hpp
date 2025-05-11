@@ -22,8 +22,8 @@ class IWindow {
   /** poll events, keyword, mouse etc.. */
   virtual void pollEvents() = 0;
 
-  const int width;
-  const int height;
+  int width;
+  int height;
   const std::string windowName;
 };
 
