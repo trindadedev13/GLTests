@@ -14,13 +14,13 @@ cd build
 cmake ..
 make
 
+cp desktop/brut_desktop ../
+
 cd ..
 
-cp build/brut .
-
 # copy executable to home
-cp brut $HOME/brut
-rm brut
+cp brut_desktop $HOME/brut_desktop
+rm brut_desktop
 
 # start termux-x11 in background and save its PID
 termux-x11 :0 &
@@ -43,8 +43,8 @@ sleep 3
 export DISPLAY=:0
 
 # run program
-chmod +x $HOME/brut
-$HOME/brut
+chmod +x $HOME/brut_desktop
+$HOME/brut_desktop
 
 # cleanup after program ends
 cleanup

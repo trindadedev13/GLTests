@@ -1,5 +1,5 @@
-#ifndef TERM_COLOR_H
-#define TERM_COLOR_H
+#ifndef TERM_COLOR_HPP
+#define TERM_COLOR_HPP
 
 #define TERM_COLOR_RESET "\033[0m"
 #define TERM_COLOR_BLACK "\033[0;30m"

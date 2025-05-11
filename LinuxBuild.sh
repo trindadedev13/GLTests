@@ -14,4 +14,4 @@ cd build
 cmake ..
 make
 
-cp brut ../
+cp desktop/brut_desktop ../

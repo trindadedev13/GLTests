@@ -1,7 +1,7 @@
 add_library(
     glad
-    include/glad/gl.h
-    src/glad/gl.c)
+    include/glad/glad.h
+    src/glad/glad.c)
 
 target_link_libraries(
     glad

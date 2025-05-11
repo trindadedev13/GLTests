@@ -2,28 +2,28 @@
 
 #include <iostream>
 
-#include <glad/gl.h>
+#include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "BrutConfig.hpp"
+#include "BrutIWindow.hpp"
 #include "Graphics/BrutColor.hpp"
 #include "Graphics/Shader/BrutShader.hpp"
 #include "Objects/BrutCube.hpp"
 #include "Objects/BrutTerrain.hpp"
-#include "config.h"
 
 namespace Brut {
 
-Game::Game() {
-  gladLoadGL(glfwGetProcAddress);
+Game::Game(IWindow* _window) : window(_window) {
   glEnable(GL_DEPTH_TEST);
 }
 
 Game::~Game() {}
 
 void Game::run() {
-  float aspectRatio = static_cast<float>(GL_WINDOW_WIDTH) / GL_WINDOW_HEIGHT;
+  float aspectRatio = static_cast<float>(window->width) / window->height;
 
   glm::mat4 projection =
       glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 10.0f);
@@ -45,17 +45,17 @@ void Game::run() {
   terrainShader.sendUniformData("model", glm::mat4(1.0f));
   terrainShader.unbind();
 
-  float startTime = glfwGetTime();
+  float startTime = gameClock.getTime();
 
   cb.setColors({Color::Red, Color::Green, Color::Blue, Color::Yellow,
                 Color::Cyan, Color::Magenta});
 
-  while (!window.shouldClose()) {
+  while (!window->shouldClose()) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(Color::Black.r, Color::Black.g, Color::Black.b,
                  Color::Black.a);
 
-    float currentTime = glfwGetTime();
+    float currentTime = gameClock.getTime();
     float deltaTime = currentTime - startTime;
 
     glm::mat4 cubeModel = glm::mat4(1.0f);
@@ -81,8 +81,8 @@ void Game::run() {
       terrainShader.unbind();
     }
 
-    window.swapBuffers();
-    glfwPollEvents();
+    window->swapBuffers();
+    window->pollEvents();
   }
 }
 

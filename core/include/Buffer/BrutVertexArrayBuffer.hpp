@@ -1,7 +1,7 @@
 #ifndef BRUT_VERTEX_ARRAY_BUFFER
 #define BRUT_VERTEX_ARRAY_BUFFER
 
-#include <glad/gl.h>
+#include <glad/glad.h>
 
 namespace Brut {
 

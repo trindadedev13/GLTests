@@ -3,22 +3,24 @@
 
 #include <string>
 
-#include "BrutWindow.hpp"
-#include "config.h"
+#include "BrutConfig.hpp"
+#include "BrutGameClock.hpp"
+#include "BrutIWindow.hpp"
 #include "Graphics/Shader/BrutShadersManager.hpp"
 
 namespace Brut {
 
 class Game {
  public:
-  Game();
+  Game(IWindow* window);
   ~Game();
 
   void run();
 
  private:
-  Window window{GL_WINDOW_WIDTH, GL_WINDOW_HEIGHT, GL_WINDOW_NAME};
+  IWindow* window;
   ShadersManager shadersManager{std::string(BRUT_RUNNING_PATH) + "/shaders/"};
+  GameClock gameClock{};
 };
 
 }  // namespace Brut
