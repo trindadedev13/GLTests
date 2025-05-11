@@ -25,7 +25,8 @@ set(SOURCES
     src/Graphics/BrutColor.cpp
     src/Graphics/Shader/BrutShader.cpp
     src/Graphics/Shader/BrutShadersManager.cpp
-    src/Objects/BrutCube.cpp)
+    src/Objects/BrutCube.cpp
+    src/Objects/BrutTerrain.cpp)
 
 set(HEADERS
     include/BrutGame.hpp
@@ -38,6 +39,7 @@ set(HEADERS
     include/Graphics/Shader/BrutShader.hpp
     include/Graphics/Shader/BrutShadersManager.hpp
     include/Objects/BrutCube.hpp
+    include/Objects/BrutTerrain.hpp
     include/Terminal/TermColor.hpp
     include/config.h)
 
