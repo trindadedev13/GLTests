@@ -29,22 +29,22 @@ void Game::run() {
   glm::mat4 projection =
       glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 15.0f);
 
-  Shader cubeShader = shadersManager.get("cube");
-  Shader terrainShader = shadersManager.get("terrain");
+  Shader defShader = shadersManager.get("defShader");
+  Shader minorShader = shadersManager.get("minorShader");
 
   Cube cb;
   cb.setPosition(glm::vec3(1.0f, 0.0f, -5.0f));
 
-  cubeShader.bind();
-  cubeShader.sendUniformData("projection", projection);
-  cubeShader.unbind();
+  defShader.bind();
+  defShader.sendUniformData("projection", projection);
+  defShader.unbind();
 
   Terrain terrain;
 
-  terrainShader.bind();
-  terrainShader.sendUniformData("projection", projection);
-  terrainShader.sendUniformData("model", glm::mat4(1.0f));
-  terrainShader.unbind();
+  minorShader.bind();
+  minorShader.sendUniformData("projection", projection);
+  minorShader.sendUniformData("model", glm::mat4(1.0f));
+  minorShader.unbind();
 
   Pyramid pyramid;
   pyramid.setPosition(glm::vec3(-0.5f, 0.0f, -3.0f));
@@ -75,24 +75,24 @@ void Game::run() {
 
     {
       glm::mat4 cubeModelToWorld = cb.getPosition() * cubeModel;
-      cubeShader.bind();
-      cubeShader.sendUniformData("model", cubeModelToWorld);
+      defShader.bind();
+      defShader.sendUniformData("model", cubeModelToWorld);
       cb.draw();
-      cubeShader.unbind();
+      defShader.unbind();
     }
 
     {
       glm::mat4 pyramidModelToWorld = pyramid.getPosition() * cubeModel;
-      cubeShader.bind();
-      cubeShader.sendUniformData("model", pyramidModelToWorld);
+      defShader.bind();
+      defShader.sendUniformData("model", pyramidModelToWorld);
       pyramid.draw();
-      cubeShader.unbind();
+      defShader.unbind();
     }
 
     {
-      terrainShader.bind();
+      minorShader.bind();
       terrain.draw();
-      terrainShader.unbind();
+      minorShader.unbind();
     }
 
     window->swapBuffers();
