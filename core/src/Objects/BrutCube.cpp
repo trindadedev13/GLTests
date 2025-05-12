@@ -10,8 +10,7 @@
 
 namespace Brut {
 
-Cube::Cube()
-    : VAO{}, EBO{}, positionVBO{}, colorVBO{}, position{0.f}, model{1.f} {
+Cube::Cube() {
   initCube();
 }
 
@@ -87,8 +86,8 @@ void Cube::fillBuffers() {
   EBO.bind();
   EBO.putData(indices, sizeof(indices));
 
-  positionVBO.bind();
-  positionVBO.putData(vertices, sizeof(vertices));
+  verticesVBO.bind();
+  verticesVBO.putData(vertices, sizeof(vertices));
 
   // Fill cube with color
   setColors(faceColors);
@@ -98,7 +97,7 @@ void Cube::linkBuffers() {
   VAO.bind();
   {
     EBO.bind();
-    positionVBO.bind();
+    verticesVBO.bind();
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
@@ -109,25 +108,12 @@ void Cube::linkBuffers() {
   VAO.unbind();
 }
 
-void Cube::setPosition(float x, float y, float z) {
-  position = glm::vec3(x, y, z);
-  updatePosition();
-}
-
-glm::mat4 Cube::getPosition() const {
-  return model;
-}
-
 void Cube::draw() {
   VAO.bind();
   {
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
   }
   VAO.unbind();
-}
-
-void Cube::updatePosition() {
-  model = glm::translate(glm::mat4(1.f), position);
 }
 
 void Cube::setColors(const std::array<Color, 6>& newFaceColors) {

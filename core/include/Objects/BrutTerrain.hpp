@@ -6,24 +6,21 @@
 #include "Buffer/BrutBuffer.hpp"
 #include "Buffer/BrutVertexArrayBuffer.hpp"
 #include "Graphics/BrutColor.hpp"
+#include "Objects/BrutObject.hpp"
 
 namespace Brut {
 
-class Terrain {
+class Terrain : public Object {
  public:
   Terrain(float side = 50.0f);
   ~Terrain();
 
   Color color{Color::White};
 
-  void draw();
+  void draw() override;
   void setColor(Color color);
 
  private:
-  VertexArrayBuffer VAO;
-  ArrayBuffer verticesVBO;
-  ArrayBuffer colorVBO;
-  ElementArrayBuffer EBO;
   float side;
   unsigned int totalIndices;
   std::vector<Color> colors{};

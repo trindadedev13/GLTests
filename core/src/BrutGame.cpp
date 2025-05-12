@@ -32,7 +32,7 @@ void Game::run() {
   Shader terrainShader = shadersManager.get("terrain");
 
   Cube cb;
-  cb.setPosition(0.0f, 0.0f, -5.0f);
+  cb.setPosition(glm::vec3(0.0f, 0.0f, -5.0f));
 
   cubeShader.bind();
   cubeShader.sendUniformData("projection", projection);

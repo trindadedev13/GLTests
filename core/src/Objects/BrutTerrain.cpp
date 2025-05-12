@@ -10,8 +10,7 @@
 
 namespace Brut {
 
-Terrain::Terrain(float side)
-    : VAO{}, EBO{}, verticesVBO{}, colorVBO{}, side{side}, totalIndices{0} {
+Terrain::Terrain(float side) : side{side}, totalIndices{0} {
   initTerrain();
 }
 

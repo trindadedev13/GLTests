@@ -8,10 +8,11 @@
 #include "Buffer/BrutBuffer.hpp"
 #include "Buffer/BrutVertexArrayBuffer.hpp"
 #include "Graphics/BrutColor.hpp"
+#include "Objects/BrutObject.hpp"
 
 namespace Brut {
 
-class Cube {
+class Cube : public Object {
  public:
   Cube();
   ~Cube();
@@ -19,27 +20,14 @@ class Cube {
   std::array<Color, 6> faceColors = {Color::White, Color::White, Color::White,
                                      Color::White, Color::White, Color::White};
 
-  void setPosition(float x, float y, float z);
   void setColors(const std::array<Color, 6>& newFaceColors);
 
-  glm::mat4 getPosition() const;
-
-  void draw();
+  void draw() override;
 
  private:
-  VertexArrayBuffer VAO;
-  ArrayBuffer positionVBO;
-  ArrayBuffer colorVBO;
-  ElementArrayBuffer EBO;
-
-  glm::vec3 position;
-  glm::mat4 model;
-
   void initCube();
   void fillBuffers();
   void linkBuffers();
-
-  void updatePosition();
 };
 
 }  // namespace Brut
