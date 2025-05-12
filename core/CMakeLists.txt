@@ -19,6 +19,7 @@ set(SOURCES
     src/Graphics/Shader/BrutShadersManager.cpp
     src/Objects/Primitives/BrutCube.cpp
     src/Objects/Primitives/BrutObject.cpp
+    src/Objects/Primitives/BrutPyramid.cpp
     src/Objects/Primitives/BrutTerrain.cpp)
 
 set(HEADERS
@@ -34,6 +35,7 @@ set(HEADERS
     include/Graphics/Shader/BrutShadersManager.hpp
     include/Objects/Primitives/BrutCube.hpp
     include/Objects/Primitives/BrutObject.hpp
+    include/Objects/Primitives/BrutPyramid.hpp
     include/Objects/Primitives/BrutTerrain.hpp
     include/Terminal/TermColor.hpp
     include/BrutConfig.hpp)
