@@ -13,10 +13,12 @@ set(SOURCES
     src/BrutGameClock.cpp
     src/BrutIWindow.cpp
     src/Buffer/BrutVertexArrayBuffer.cpp
+    src/Camera/BrutCamera.cpp
     src/Error/BrutError.cpp
     src/Graphics/BrutColor.cpp
     src/Graphics/Shader/BrutShader.cpp
     src/Graphics/Shader/BrutShadersManager.cpp
+    src/Input/BrutInputHandler.cpp
     src/Objects/Primitives/BrutCube.cpp
     src/Objects/Primitives/BrutObject.cpp
     src/Objects/Primitives/BrutPyramid.cpp
@@ -26,6 +28,7 @@ set(HEADERS
     include/BrutGame.hpp
     include/BrutGameClock.hpp
     include/BrutIWindow.hpp
+    include/Camera/BrutCamera.hpp
     include/Buffer/BrutBuffer.hpp
     include/Buffer/BrutBuffer.tpp
     include/Buffer/BrutVertexArrayBuffer.hpp
@@ -33,6 +36,7 @@ set(HEADERS
     include/Graphics/BrutColor.hpp
     include/Graphics/Shader/BrutShader.hpp
     include/Graphics/Shader/BrutShadersManager.hpp
+    include/Input/BrutInputHandler.hpp
     include/Objects/Primitives/BrutCube.hpp
     include/Objects/Primitives/BrutObject.hpp
     include/Objects/Primitives/BrutPyramid.hpp

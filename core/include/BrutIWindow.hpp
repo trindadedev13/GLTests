@@ -22,6 +22,9 @@ class IWindow {
   /** poll events, keyword, mouse etc.. */
   virtual void pollEvents() = 0;
 
+  /** closes the window */
+  virtual void close() = 0;
+
   int width;
   int height;
   const std::string windowName;

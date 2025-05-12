@@ -9,19 +9,42 @@
 
 #include "BrutConfig.hpp"
 #include "BrutIWindow.hpp"
+#include "Camera/BrutCamera.hpp"
 #include "Graphics/BrutColor.hpp"
 #include "Graphics/Shader/BrutShader.hpp"
+#include "Input/BrutInputHandler.hpp"
 #include "Objects/Primitives/BrutCube.hpp"
 #include "Objects/Primitives/BrutPyramid.hpp"
 #include "Objects/Primitives/BrutTerrain.hpp"
 
 namespace Brut {
 
-Game::Game(IWindow* _window) : window(_window) {
+Game::Game(IWindow* _window, InputHandler* _inputHandler)
+    : window(_window), inputHandler(_inputHandler) {
   glEnable(GL_DEPTH_TEST);
 }
 
 Game::~Game() {}
+
+void Game::events() {
+  inputHandler->setOnKeyCallback([this](int key, int action) {
+    if (key == BRUT_KEY_ESC && action == BRUT_KEY_ACTION_PRESS) {
+      window->close();
+    } else if (key == BRUT_KEY_W && (action == BRUT_KEY_ACTION_PRESS ||
+                                     action == BRUT_KEY_ACTION_REPEAT)) {
+      camera.moveForward();
+    } else if (key == BRUT_KEY_A && (action == BRUT_KEY_ACTION_PRESS ||
+                                     action == BRUT_KEY_ACTION_REPEAT)) {
+      camera.moveLeft();
+    } else if (key == BRUT_KEY_S && (action == BRUT_KEY_ACTION_PRESS ||
+                                     action == BRUT_KEY_ACTION_REPEAT)) {
+      camera.moveBack();
+    } else if (key == BRUT_KEY_D && (action == BRUT_KEY_ACTION_PRESS ||
+                                     action == BRUT_KEY_ACTION_REPEAT)) {
+      camera.moveRight();
+    }
+  });
+}
 
 void Game::run() {
   float aspectRatio = static_cast<float>(window->width) / window->height;
@@ -62,38 +85,57 @@ void Game::run() {
     glClearColor(Color::Black.r, Color::Black.g, Color::Black.b,
                  Color::Black.a);
 
+    glm::mat4 viewMatrix = camera.enable();
+
     float currentTime = gameClock.getTime();
     float deltaTime = currentTime - startTime;
 
-    glm::mat4 cubeModel = glm::mat4(1.0f);
-    cubeModel = glm::rotate(cubeModel, -deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
-    cubeModel =
-        glm::rotate(cubeModel, 1.75f * deltaTime, glm::vec3(1.f, 0.f, 0.f));
-    cubeModel =
-        glm::rotate(cubeModel, 0.75f * deltaTime, glm::vec3(0.f, 0.f, 1.f));
-    cubeModel = glm::scale(cubeModel, glm::vec3(.5f, .5f, .5f));
-
+    // terrain
     {
+      minorShader.bind();
+      minorShader.sendUniformData("view", viewMatrix);
+      terrain.draw();
+      minorShader.unbind();
+    }
+
+    // cube
+    {
+      glm::mat4 cubeModel = glm::mat4(1.0f);
+      cubeModel =
+          glm::rotate(cubeModel, -deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
+      cubeModel =
+          glm::rotate(cubeModel, 1.75f * deltaTime, glm::vec3(1.f, 0.f, 0.f));
+      cubeModel =
+          glm::rotate(cubeModel, 0.75f * deltaTime, glm::vec3(0.f, 0.f, 1.f));
+      cubeModel = glm::scale(cubeModel, glm::vec3(.5f, .5f, .5f));
+
       glm::mat4 cubeModelToWorld = cb.getPosition() * cubeModel;
       defShader.bind();
       defShader.sendUniformData("model", cubeModelToWorld);
+      defShader.sendUniformData("view", viewMatrix);
       cb.draw();
       defShader.unbind();
     }
 
+    // pyramid
     {
-      glm::mat4 pyramidModelToWorld = pyramid.getPosition() * cubeModel;
+      glm::mat4 pyramidModel = glm::mat4(1.0f);
+      pyramidModel =
+          glm::rotate(pyramidModel, -deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
+      pyramidModel = glm::rotate(pyramidModel, 1.75f * deltaTime,
+                                 glm::vec3(1.f, 0.f, 0.f));
+      pyramidModel = glm::rotate(pyramidModel, 0.75f * deltaTime,
+                                 glm::vec3(0.f, 0.f, 1.f));
+      pyramidModel = glm::scale(pyramidModel, glm::vec3(.5f, .5f, .5f));
+      glm::mat4 pyramidModelToWorld = pyramid.getPosition() * pyramidModel;
       defShader.bind();
       defShader.sendUniformData("model", pyramidModelToWorld);
+      defShader.sendUniformData("view", viewMatrix);
       pyramid.draw();
       defShader.unbind();
     }
 
-    {
-      minorShader.bind();
-      terrain.draw();
-      minorShader.unbind();
-    }
+    events();
 
     window->swapBuffers();
     window->pollEvents();

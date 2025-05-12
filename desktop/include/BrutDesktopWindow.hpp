@@ -18,17 +18,19 @@ class DesktopWindow : public IWindow {
   DesktopWindow(const DesktopWindow&) = delete;
   DesktopWindow& operator=(const DesktopWindow&) = delete;
 
+  GLFWwindow* glfwWindow;
+
   bool shouldClose() override;
 
   void swapBuffers() override;
 
   void pollEvents() override;
 
+  void close() override;
+
  private:
   void initWindow();
   void configureWindowPosition();
-
-  GLFWwindow* glfwWindow;
 };
 
 }  // namespace Brut

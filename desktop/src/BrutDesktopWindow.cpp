@@ -53,4 +53,8 @@ void DesktopWindow::pollEvents() {
   glfwPollEvents();
 }
 
+void DesktopWindow::close() {
+  glfwSetWindowShouldClose(glfwWindow, GL_TRUE);
+}
+
 }  // namespace Brut

@@ -13,10 +13,12 @@ find_package(glfw3 REQUIRED)
 
 set(DESKTOP_SOURCES
     src/main.cpp
-    src/BrutDesktopWindow.cpp)
+    src/BrutDesktopWindow.cpp
+    src/BrutDesktopInputHandler)
 
 set(DESKTOP_HEADERS
-    include/BrutDesktopWindow.hpp)
+    include/BrutDesktopWindow.hpp
+    include/BrutDesktopInputHandler)
 
 add_executable(${PROJECT_NAME}
     ${DESKTOP_SOURCES}
