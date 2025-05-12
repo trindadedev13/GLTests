@@ -1,4 +1,4 @@
-#include "Objects/BrutObject.hpp"
+#include "Objects/Primitives/BrutObject.hpp"
 
 #include <glm/glm.hpp>
 #define GLM_ENABLE_EXPERIMENTAL

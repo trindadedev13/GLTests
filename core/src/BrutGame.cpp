@@ -11,8 +11,8 @@
 #include "BrutIWindow.hpp"
 #include "Graphics/BrutColor.hpp"
 #include "Graphics/Shader/BrutShader.hpp"
-#include "Objects/BrutCube.hpp"
-#include "Objects/BrutTerrain.hpp"
+#include "Objects/Primitives/BrutCube.hpp"
+#include "Objects/Primitives/BrutTerrain.hpp"
 
 namespace Brut {
 

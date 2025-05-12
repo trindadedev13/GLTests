@@ -1,4 +1,4 @@
-#include "Objects/BrutCube.hpp"
+#include "Objects/Primitives/BrutCube.hpp"
 
 #include <array>
 

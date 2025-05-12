@@ -8,7 +8,7 @@
 #include "Buffer/BrutBuffer.hpp"
 #include "Buffer/BrutVertexArrayBuffer.hpp"
 #include "Graphics/BrutColor.hpp"
-#include "Objects/BrutObject.hpp"
+#include "Objects/Primitives/BrutObject.hpp"
 
 namespace Brut {
 

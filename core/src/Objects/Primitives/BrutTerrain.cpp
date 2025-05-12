@@ -1,4 +1,4 @@
-#include "Objects/BrutTerrain.hpp"
+#include "Objects/Primitives/BrutTerrain.hpp"
 
 #include <vector>
 
