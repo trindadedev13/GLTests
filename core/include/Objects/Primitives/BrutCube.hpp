@@ -20,9 +20,9 @@ class Cube : public Object {
   std::array<Color, 6> faceColors = {Color::White, Color::White, Color::White,
                                      Color::White, Color::White, Color::White};
 
-  void setColors(const std::array<Color, 6>& newFaceColors);
-
   void draw() override;
+
+  void setColors(const std::array<Color, 6>& newFaceColors);
 
  private:
   void initCube();
