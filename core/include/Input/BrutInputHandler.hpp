@@ -15,6 +15,10 @@
 #define BRUT_KEY_SPACE 8
 #define BRUT_KEY_LEFT_CTRL 9
 #define BRUT_KEY_RIGHT_CTRL 10
+#define BRUT_KEY_LEFT 11
+#define BRUT_KEY_RIGHT 12
+#define BRUT_KEY_UP 13
+#define BRUT_KEY_DOWN 14
 
 #include <functional>
 

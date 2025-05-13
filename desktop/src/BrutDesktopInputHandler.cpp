@@ -45,6 +45,18 @@ void keyCallback(GLFWwindow* window,
     case GLFW_KEY_RIGHT_CONTROL:
       brutKey = BRUT_KEY_RIGHT_CTRL;
       break;
+    case GLFW_KEY_LEFT:
+      brutKey = BRUT_KEY_LEFT;
+      break;
+    case GLFW_KEY_RIGHT:
+      brutKey = BRUT_KEY_RIGHT;
+      break;
+    case GLFW_KEY_UP:
+      brutKey = BRUT_KEY_UP;
+      break;
+    case GLFW_KEY_DOWN:
+      brutKey = BRUT_KEY_DOWN;
+      break;
     default:
       return;  // dont call callback if key not recognized
   };

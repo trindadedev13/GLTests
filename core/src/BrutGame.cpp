@@ -30,17 +30,21 @@ void Game::inputs() {
   inputHandler->setOnKeyCallback([this](int key, int action) {
     if (key == BRUT_KEY_ESCAPE && action == BRUT_KEY_ACTION_PRESS) {
       window->close();
-    } else if (key == BRUT_KEY_W && (action == BRUT_KEY_ACTION_PRESS ||
-                                     action == BRUT_KEY_ACTION_REPEAT)) {
+    } else if ((key == BRUT_KEY_W || key == BRUT_KEY_UP) &&
+               (action == BRUT_KEY_ACTION_PRESS ||
+                action == BRUT_KEY_ACTION_REPEAT)) {
       camera.moveForward();
-    } else if (key == BRUT_KEY_A && (action == BRUT_KEY_ACTION_PRESS ||
-                                     action == BRUT_KEY_ACTION_REPEAT)) {
+    } else if ((key == BRUT_KEY_A || key == BRUT_KEY_LEFT) &&
+               (action == BRUT_KEY_ACTION_PRESS ||
+                action == BRUT_KEY_ACTION_REPEAT)) {
       camera.moveLeft();
-    } else if (key == BRUT_KEY_S && (action == BRUT_KEY_ACTION_PRESS ||
-                                     action == BRUT_KEY_ACTION_REPEAT)) {
+    } else if ((key == BRUT_KEY_S || key == BRUT_KEY_DOWN) &&
+               (action == BRUT_KEY_ACTION_PRESS ||
+                action == BRUT_KEY_ACTION_REPEAT)) {
       camera.moveBack();
-    } else if (key == BRUT_KEY_D && (action == BRUT_KEY_ACTION_PRESS ||
-                                     action == BRUT_KEY_ACTION_REPEAT)) {
+    } else if ((key == BRUT_KEY_D || key == BRUT_KEY_RIGHT) &&
+               (action == BRUT_KEY_ACTION_PRESS ||
+                action == BRUT_KEY_ACTION_REPEAT)) {
       camera.moveRight();
     } else if (key == BRUT_KEY_LEFT_CTRL || key == BRUT_KEY_RIGHT_CTRL) {
       ctrl = action != BRUT_KEY_ACTION_RELEASE;
