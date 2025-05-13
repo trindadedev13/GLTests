@@ -56,8 +56,8 @@ add_library(
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-    glm::glm
-    glad)
+    glad
+    glm::glm)
 
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC

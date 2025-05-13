@@ -26,9 +26,9 @@ Game::Game(IWindow* _window, InputHandler* _inputHandler)
 
 Game::~Game() {}
 
-void Game::events() {
+void Game::inputs() {
   inputHandler->setOnKeyCallback([this](int key, int action) {
-    if (key == BRUT_KEY_ESC && action == BRUT_KEY_ACTION_PRESS) {
+    if (key == BRUT_KEY_ESCAPE && action == BRUT_KEY_ACTION_PRESS) {
       window->close();
     } else if (key == BRUT_KEY_W && (action == BRUT_KEY_ACTION_PRESS ||
                                      action == BRUT_KEY_ACTION_REPEAT)) {
@@ -42,7 +42,13 @@ void Game::events() {
     } else if (key == BRUT_KEY_D && (action == BRUT_KEY_ACTION_PRESS ||
                                      action == BRUT_KEY_ACTION_REPEAT)) {
       camera.moveRight();
+    } else if (key == BRUT_KEY_LEFT_CTRL || key == BRUT_KEY_RIGHT_CTRL) {
+      ctrl = action != BRUT_KEY_ACTION_RELEASE;
     }
+  });
+  inputHandler->setOnMouseCallback([this](const glm::vec2 position) {
+    if (!ctrl)
+      camera.mouseUpdate(position);
   });
 }
 
@@ -135,7 +141,10 @@ void Game::run() {
       defShader.unbind();
     }
 
-    events();
+    // just call inputs if inputHandler not null
+    if (inputHandler) {
+      inputs();
+    }
 
     window->swapBuffers();
     window->pollEvents();

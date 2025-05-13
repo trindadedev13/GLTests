@@ -24,12 +24,15 @@ add_executable(${PROJECT_NAME}
     ${DESKTOP_SOURCES}
     ${DESKTOP_HEADERS})
 
+find_package(glm REQUIRED)
+
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
     brut_core
     glad
     glfw
-    OpenGL::GL)
+    OpenGL::GL
+    glm::glm)
 
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC
