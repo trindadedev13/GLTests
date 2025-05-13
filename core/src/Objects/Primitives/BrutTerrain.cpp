@@ -99,10 +99,13 @@ void Terrain::setColor(Color newColor) {
   colors.clear();
 
   float increment = 1.0f;
+  unsigned int columnSize = 2 * static_cast<unsigned int>(side) + 1;
 
-  for (float z = -side; z <= side; z += increment) {
+  unsigned int totalVertices = columnSize * columnSize;
+  for (unsigned int i = 0; i < totalVertices; ++i) {
     colors.push_back(newColor);
   }
+
   colorVBO.bind();
   colorVBO.putData(colors.data(), colors.size() * sizeof(Color));
 }

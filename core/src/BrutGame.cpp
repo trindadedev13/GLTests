@@ -89,6 +89,8 @@ void Game::run() {
   pyramid.setColors(
       {Color::Red, Color::Green, Color::Blue, Color::Yellow, Color::Cyan});
 
+  terrain.setColor(Color::Blue);
+
   while (!window->shouldClose()) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(Color::Black.r, Color::Black.g, Color::Black.b,
