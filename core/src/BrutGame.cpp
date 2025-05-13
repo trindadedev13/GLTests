@@ -20,7 +20,9 @@
 namespace Brut {
 
 Game::Game(IWindow* _window, InputHandler* _inputHandler)
-    : window(_window), inputHandler(_inputHandler) {
+    : window(_window),
+      inputHandler(_inputHandler),
+      camera(window->width, window->height) {
   glEnable(GL_DEPTH_TEST);
 }
 
@@ -57,10 +59,7 @@ void Game::inputs() {
 }
 
 void Game::run() {
-  float aspectRatio = static_cast<float>(window->width) / window->height;
-
-  glm::mat4 projection =
-      glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 15.0f);
+  glm::mat4 perspectiveProjection = camera.getPerspectiveProjectionMatrix();
 
   Shader defShader = shadersManager.get("defShader");
   Shader minorShader = shadersManager.get("minorShader");
@@ -69,13 +68,13 @@ void Game::run() {
   cb.setPosition(glm::vec3(1.0f, 0.0f, -5.0f));
 
   defShader.bind();
-  defShader.sendUniformData("projection", projection);
+  defShader.sendUniformData("projection", perspectiveProjection);
   defShader.unbind();
 
   Terrain terrain;
 
   minorShader.bind();
-  minorShader.sendUniformData("projection", projection);
+  minorShader.sendUniformData("projection", perspectiveProjection);
   minorShader.sendUniformData("model", glm::mat4(1.0f));
   minorShader.unbind();
 
@@ -95,7 +94,7 @@ void Game::run() {
     glClearColor(Color::Black.r, Color::Black.g, Color::Black.b,
                  Color::Black.a);
 
-    glm::mat4 viewMatrix = camera.enable();
+    glm::mat4 viewMatrix = camera.getViewMatrix();
 
     float currentTime = gameClock.getTime();
     float deltaTime = currentTime - startTime;

@@ -7,10 +7,9 @@ namespace Brut {
 
 class Camera {
  public:
-  Camera();
+  Camera(float windowWidth, float windowHeight);
   ~Camera();
 
-  glm::mat4 enable();
   void moveForward();
   void moveBack();
   void moveLeft();
@@ -20,10 +19,24 @@ class Camera {
 
   void setSensitivity(const float nSensitivity);
 
+  glm::mat4 getViewMatrix() const;
+  glm::mat4 getPerspectiveProjectionMatrix() const;
+
  private:
   glm::vec3 position;
   glm::vec3 viewDirection;
   glm::vec3 left;
+  glm::mat4 perspectiveProjection;
+
+  /** window width & height */
+  float windowWidth;
+  float windowHeight;
+
+  /** The fov of camera */
+  float fov;
+  /** The render distance, aka ZFar */
+  float renderDistance;
+  /** The sensivity of camera mouse move */
   float sensitivity;
 
   const glm::vec3 UP;

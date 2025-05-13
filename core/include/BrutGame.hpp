@@ -31,10 +31,11 @@ class Game {
   /** The clock counts from the start of the game. */
   GameClock gameClock{};
   /** Game Camera. */
-  Camera camera{};
+  Camera camera;
   /** Callbacks for input handler. Requires each platform implementation (see
    * BrutInputHandler.hpp)*/
   InputHandler* inputHandler{};
+  /** The fov */
   /** true if ctrl is pressed. */
   bool ctrl{false};
 };

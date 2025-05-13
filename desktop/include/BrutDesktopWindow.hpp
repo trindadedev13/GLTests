@@ -30,7 +30,6 @@ class DesktopWindow : public IWindow {
 
  private:
   void initWindow();
-  void configureWindowPosition();
 };
 
 }  // namespace Brut
