@@ -22,7 +22,8 @@ set(SOURCES
     src/Objects/Primitives/BrutCube.cpp
     src/Objects/Primitives/BrutObject.cpp
     src/Objects/Primitives/BrutPyramid.cpp
-    src/Objects/Primitives/BrutTerrain.cpp)
+    src/Objects/Primitives/BrutTerrain.cpp
+    src/Objects/Primitives/2D/BrutSquare.cpp)
 
 set(HEADERS
     include/BrutGame.hpp
@@ -41,6 +42,7 @@ set(HEADERS
     include/Objects/Primitives/BrutObject.hpp
     include/Objects/Primitives/BrutPyramid.hpp
     include/Objects/Primitives/BrutTerrain.hpp
+    include/Objects/Primitives/2D/BrutSquare.hpp
     include/Terminal/TermColor.hpp
     include/BrutConfig.hpp)
 
