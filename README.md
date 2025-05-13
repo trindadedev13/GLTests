@@ -1,6 +1,6 @@
 # Brut
 
-- A Open World car game
+- A Voxel game
 ---
 
 ## How to Run
