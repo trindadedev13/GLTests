@@ -3,9 +3,8 @@ add_library(
     include/glad/glad.h
     src/glad/glad.c)
 
-target_link_libraries(
-    glad
-    PRIVATE
+target_link_libraries(glad
+    PUBLIC
     KHR)
 
 target_include_directories(

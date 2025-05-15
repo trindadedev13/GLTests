@@ -2,11 +2,9 @@ name: Build Brut
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -18,9 +16,20 @@ jobs:
 
     - name: Install build tools and dependencies
       run: |
-        echo "Updating package list and installing required dependencies..."
         sudo apt-get update -y
-        sudo apt-get install -y build-essential clang cmake libglfw3-dev libglm-dev
+        sudo apt-get install -y build-essential clang cmake ninja-build libglm-dev \
+          libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev libxinerama-dev \
+          libxss-dev libwayland-dev libxkbcommon-dev wayland-protocols libdrm-dev
+
+    - name: Clone and build SDL3
+      run: |
+        git clone https://github.com/libsdl-org/SDL.git
+        cd SDL
+        mkdir build && cd build
+        cmake .. -G Ninja -DSDL_VENDOR_INFO="CI-Build"
+        ninja
+        sudo ninja install
+        sudo ldconfig
 
     - name: Give execute permission to LinuxBuild
       run: chmod +x LinuxBuild.sh
@@ -30,6 +39,7 @@ jobs:
         echo "Starting the build process..."
         ./LinuxBuild.sh
         echo "Build finished."
+
     - name: Upload compiled binary as artifact
       uses: actions/upload-artifact@v4
       with:

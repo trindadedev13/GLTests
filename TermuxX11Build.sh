@@ -37,7 +37,7 @@ cleanup() {
 trap cleanup SIGINT
 
 # wait for X11 to start
-sleep 3
+sleep 5
 
 # set display
 export DISPLAY=:0

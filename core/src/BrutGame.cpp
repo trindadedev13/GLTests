@@ -6,56 +6,92 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <SDL3/SDL.h>
 
 #include "BrutConfig.hpp"
-#include "BrutIWindow.hpp"
 #include "Camera/BrutCamera.hpp"
 #include "Graphics/BrutColor.hpp"
 #include "Graphics/Shader/BrutShader.hpp"
-#include "Input/BrutInputHandler.hpp"
 #include "Objects/Primitives/BrutCube.hpp"
 #include "Objects/Primitives/BrutPyramid.hpp"
 #include "Objects/Primitives/BrutTerrain.hpp"
+#include "Window/BrutIWindow.hpp"
 
 namespace Brut {
 
-Game::Game(IWindow* _window, InputHandler* _inputHandler)
-    : window(_window),
-      inputHandler(_inputHandler),
-      camera(window->width, window->height) {
+Game::Game(IWindow* _window)
+    : window(_window), camera(window->width, window->height) {
   glEnable(GL_DEPTH_TEST);
 }
 
 Game::~Game() {}
 
 void Game::inputs() {
-  inputHandler->setOnKeyCallback([this](int key, int action) {
-    if (key == BRUT_KEY_ESCAPE && action == BRUT_KEY_ACTION_PRESS) {
-      window->close();
-    } else if ((key == BRUT_KEY_W || key == BRUT_KEY_UP) &&
-               (action == BRUT_KEY_ACTION_PRESS ||
-                action == BRUT_KEY_ACTION_REPEAT)) {
-      camera.moveForward();
-    } else if ((key == BRUT_KEY_A || key == BRUT_KEY_LEFT) &&
-               (action == BRUT_KEY_ACTION_PRESS ||
-                action == BRUT_KEY_ACTION_REPEAT)) {
-      camera.moveLeft();
-    } else if ((key == BRUT_KEY_S || key == BRUT_KEY_DOWN) &&
-               (action == BRUT_KEY_ACTION_PRESS ||
-                action == BRUT_KEY_ACTION_REPEAT)) {
-      camera.moveBack();
-    } else if ((key == BRUT_KEY_D || key == BRUT_KEY_RIGHT) &&
-               (action == BRUT_KEY_ACTION_PRESS ||
-                action == BRUT_KEY_ACTION_REPEAT)) {
-      camera.moveRight();
-    } else if (key == BRUT_KEY_LEFT_CTRL || key == BRUT_KEY_RIGHT_CTRL) {
-      ctrl = action != BRUT_KEY_ACTION_RELEASE;
+  SDL_Event event;
+  while (SDL_PollEvent(&event)) {
+    switch (event.type) {
+      case SDL_EVENT_QUIT:
+        window->close();
+        break;
+
+      case SDL_EVENT_KEY_DOWN:
+      case SDL_EVENT_KEY_UP: {
+        bool isPressed = event.key.down;
+        SDL_Keycode keycode = event.key.key;
+
+        switch (keycode) {
+          case SDLK_ESCAPE:
+            if (isPressed)
+              window->close();
+            break;
+
+          case SDLK_W:
+          case SDLK_UP:
+            if (isPressed)
+              camera.moveForward();
+            break;
+
+          case SDLK_A:
+          case SDLK_LEFT:
+            if (isPressed)
+              camera.moveLeft();
+            break;
+
+          case SDLK_S:
+          case SDLK_DOWN:
+            if (isPressed)
+              camera.moveBack();
+            break;
+
+          case SDLK_D:
+          case SDLK_RIGHT:
+            if (isPressed)
+              camera.moveRight();
+            break;
+
+          case SDLK_LCTRL:
+          case SDLK_RCTRL:
+            ctrl = isPressed;
+            break;
+
+          default:
+            break;
+        }
+        break;
+      }
+
+      case SDL_EVENT_MOUSE_MOTION: {
+        if (!ctrl) {
+          glm::vec2 mousePos(event.motion.x, event.motion.y);
+          camera.mouseUpdate(mousePos);
+        }
+        break;
+      }
+
+      default:
+        break;
     }
-  });
-  inputHandler->setOnMouseCallback([this](const glm::vec2 position) {
-    if (!ctrl)
-      camera.mouseUpdate(position);
-  });
+  }
 }
 
 void Game::run() {
@@ -91,7 +127,7 @@ void Game::run() {
 
   terrain.setColor(Color::Blue);
 
-  while (!window->shouldClose()) {
+  while (window->isRunning()) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(Color::Black.r, Color::Black.g, Color::Black.b,
                  Color::Black.a);
@@ -146,13 +182,9 @@ void Game::run() {
       defShader.unbind();
     }
 
-    // just call inputs if inputHandler not null
-    if (inputHandler) {
-      inputs();
-    }
+    inputs();
 
     window->swapBuffers();
-    window->pollEvents();
   }
 }
 

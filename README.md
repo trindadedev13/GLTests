@@ -12,7 +12,7 @@
 Make sure the following dependencies are installed:
 
 ```bash
-sudo apt install build-essential clang cmake libglfw3-dev libglm-dev
+sudo apt install build-essential clang cmake libsdl3-dev libglm-dev
 ```
 
 #### Build
@@ -48,7 +48,7 @@ A window should open displaying the game.
 In Termux:
 
 ```bash
-pkg install cmake clang glfw glm
+pkg install cmake clang sdl3 glm
 ```
 
 #### Build & Run

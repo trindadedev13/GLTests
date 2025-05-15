@@ -13,14 +13,11 @@ class IWindow {
   IWindow(int w, int h, std::string name);
   virtual ~IWindow() = default;
 
-  /** checks if user closed window or whatever. */
-  virtual bool shouldClose() = 0;
+  /** return if window is open/running. */
+  virtual bool isRunning() = 0;
 
   /** swap back and front buffers. */
   virtual void swapBuffers() = 0;
-
-  /** poll events, keyword, mouse etc.. */
-  virtual void pollEvents() = 0;
 
   /** closes the window */
   virtual void close() = 0;

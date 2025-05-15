@@ -11,24 +11,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SOURCES
     src/BrutGame.cpp
     src/BrutGameClock.cpp
-    src/BrutIWindow.cpp
     src/Buffer/BrutVertexArrayBuffer.cpp
     src/Camera/BrutCamera.cpp
     src/Error/BrutError.cpp
     src/Graphics/BrutColor.cpp
     src/Graphics/Shader/BrutShader.cpp
     src/Graphics/Shader/BrutShadersManager.cpp
-    src/Input/BrutInputHandler.cpp
     src/Objects/Primitives/BrutCube.cpp
     src/Objects/Primitives/BrutObject.cpp
     src/Objects/Primitives/BrutPyramid.cpp
     src/Objects/Primitives/BrutTerrain.cpp
-    src/Objects/Primitives/2D/BrutSquare.cpp)
+    src/Objects/Primitives/2D/BrutSquare.cpp
+    src/Window/BrutIWindow.cpp
+    src/Window/BrutSDLWindow.cpp)
 
 set(HEADERS
+    include/BrutConfig.hpp
     include/BrutGame.hpp
     include/BrutGameClock.hpp
-    include/BrutIWindow.hpp
     include/Camera/BrutCamera.hpp
     include/Buffer/BrutBuffer.hpp
     include/Buffer/BrutBuffer.tpp
@@ -37,16 +37,18 @@ set(HEADERS
     include/Graphics/BrutColor.hpp
     include/Graphics/Shader/BrutShader.hpp
     include/Graphics/Shader/BrutShadersManager.hpp
-    include/Input/BrutInputHandler.hpp
     include/Objects/Primitives/BrutCube.hpp
     include/Objects/Primitives/BrutObject.hpp
     include/Objects/Primitives/BrutPyramid.hpp
     include/Objects/Primitives/BrutTerrain.hpp
     include/Objects/Primitives/2D/BrutSquare.hpp
     include/Terminal/TermColor.hpp
-    include/BrutConfig.hpp)
+    include/Window/BrutIWindow.hpp
+    include/Window/BrutSDLWindow.hpp
+    include/Window/BrutWindowConfig.hpp)
 
 find_package(glm REQUIRED)
+find_package(SDL3 REQUIRED)
 
 add_library(
     ${PROJECT_NAME}
@@ -57,7 +59,12 @@ add_library(
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
     glad
-    glm::glm)
+    glm::glm
+    SDL3)
+
+target_compile_definitions(${PROJECT_NAME}
+    PUBLIC
+    $ENV{PLATFORM})
 
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC
