@@ -22,6 +22,9 @@ set(SOURCES
     src/Objects/Primitives/BrutPyramid.cpp
     src/Objects/Primitives/BrutTerrain.cpp
     src/Objects/Primitives/2D/BrutSquare.cpp
+    src/Player/BrutInventory.cpp
+    src/Player/BrutInventoryItem.cpp
+    src/Player/BrutPlayer.cpp
     src/Window/BrutIWindow.cpp
     src/Window/BrutSDLWindow.cpp)
 
@@ -42,6 +45,9 @@ set(HEADERS
     include/Objects/Primitives/BrutPyramid.hpp
     include/Objects/Primitives/BrutTerrain.hpp
     include/Objects/Primitives/2D/BrutSquare.hpp
+    include/Player/BrutInventory.hpp
+    include/Player/BrutInventoryItem.hpp
+    include/Player/BrutPlayer.hpp
     include/Terminal/TermColor.hpp
     include/Window/BrutIWindow.hpp
     include/Window/BrutSDLWindow.hpp

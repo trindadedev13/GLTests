@@ -48,25 +48,25 @@ void Game::inputs() {
           case SDLK_W:
           case SDLK_UP:
             if (isPressed)
-              camera.moveForward();
+              player.moveForward();
             break;
 
           case SDLK_A:
           case SDLK_LEFT:
             if (isPressed)
-              camera.moveLeft();
+              player.moveLeft();
             break;
 
           case SDLK_S:
           case SDLK_DOWN:
             if (isPressed)
-              camera.moveBack();
+              player.moveBack();
             break;
 
           case SDLK_D:
           case SDLK_RIGHT:
             if (isPressed)
-              camera.moveRight();
+              player.moveRight();
             break;
 
           case SDLK_LCTRL:
@@ -83,7 +83,7 @@ void Game::inputs() {
       case SDL_EVENT_MOUSE_MOTION: {
         if (!ctrl) {
           glm::vec2 mousePos(event.motion.x, event.motion.y);
-          camera.mouseUpdate(mousePos);
+          player.mouseUpdate(mousePos);
         }
         break;
       }
@@ -132,6 +132,7 @@ void Game::run() {
     glClearColor(Color::Black.r, Color::Black.g, Color::Black.b,
                  Color::Black.a);
 
+    camera.followPlayer(player);
     glm::mat4 viewMatrix = camera.getViewMatrix();
 
     float currentTime = gameClock.getTime();

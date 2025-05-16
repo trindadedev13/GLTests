@@ -29,6 +29,8 @@ class Game {
   ShadersManager shadersManager{std::string(BRUT_RUNNING_PATH) + "/shaders/"};
   /** The clock counts from the start of the game. */
   GameClock gameClock{};
+  /** Game Player */
+  Player player{};
   /** Game Camera. */
   Camera camera;
   /** The fov */
