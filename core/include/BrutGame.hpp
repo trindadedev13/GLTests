@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "BrutConfig.hpp"
+#include "BrutConfig.h"
 #include "BrutGameClock.hpp"
 #include "Camera/BrutCamera.hpp"
 #include "Graphics/Shader/BrutShadersManager.hpp"

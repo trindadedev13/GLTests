@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "Terminal/TermColor.hpp"
+#include "Terminal/TermColor.h"
 
 namespace Brut {
 

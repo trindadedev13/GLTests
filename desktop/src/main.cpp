@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 #include "BrutGame.hpp"
-#include "Window/BrutWindowConfig.hpp"
+#include "Window/BrutWindowConfig.h"
 #include "Window/BrutSDLWindow.hpp"
 
 int main() {

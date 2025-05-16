@@ -8,7 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <SDL3/SDL.h>
 
-#include "BrutConfig.hpp"
+#include "BrutConfig.h"
 #include "Camera/BrutCamera.hpp"
 #include "Graphics/BrutColor.hpp"
 #include "Graphics/Shader/BrutShader.hpp"

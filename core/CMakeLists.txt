@@ -29,7 +29,7 @@ set(SOURCES
     src/Window/BrutSDLWindow.cpp)
 
 set(HEADERS
-    include/BrutConfig.hpp
+    include/BrutConfig.h
     include/BrutGame.hpp
     include/BrutGameClock.hpp
     include/Camera/BrutCamera.hpp
@@ -48,10 +48,10 @@ set(HEADERS
     include/Player/BrutInventory.hpp
     include/Player/BrutInventoryItem.hpp
     include/Player/BrutPlayer.hpp
-    include/Terminal/TermColor.hpp
+    include/Terminal/TermColor.h
     include/Window/BrutIWindow.hpp
     include/Window/BrutSDLWindow.hpp
-    include/Window/BrutWindowConfig.hpp)
+    include/Window/BrutWindowConfig.h)
 
 find_package(glm REQUIRED)
 find_package(SDL3 REQUIRED)
