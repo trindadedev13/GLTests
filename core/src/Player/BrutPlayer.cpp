@@ -13,7 +13,6 @@ Player::Player()
       position{0.0f, 0.0f, 0.0f},
       viewDirection{glm::vec3{0.0f, 0.0f, -1.0f}},
       left{glm::vec3{-1.0f, 0.0f, 0.0f}},
-      speed{0.45f},
       sensitivity{50.0f},
       pitchAngle{0.0f} {}
 
@@ -44,16 +43,25 @@ void Player::moveLeft() {
   position = position + left * speed;
 }
 
-const glm::vec3& Player::getPosition() const {
-  return position;
+void Player::jump() {
+  if (!isJumping) {
+    velocityY = jumpStrength;
+    jumpOldY = position.y;
+    isJumping = true;
+  }
 }
 
-const glm::vec3& Player::getViewDirection() const {
-  return viewDirection;
-}
+void Player::update() {
+  if (isJumping) {
+    velocityY += gravity;
+    position.y += velocityY;
 
-const glm::vec3& Player::getLeft() const {
-  return left;
+    if (position.y <= jumpOldY) {
+      position.y = jumpOldY;
+      velocityY = 0.0f;
+      isJumping = false;
+    }
+  }
 }
 
 void Player::mouseUpdate(const glm::vec2& nPosition) {
@@ -87,6 +95,18 @@ void Player::mouseUpdate(const glm::vec2& nPosition) {
     viewDirection = glm::normalize(viewDirection);
     pitchAngle = newPitch;
   }
+}
+
+const glm::vec3& Player::getPosition() const {
+  return position;
+}
+
+const glm::vec3& Player::getViewDirection() const {
+  return viewDirection;
+}
+
+const glm::vec3& Player::getLeft() const {
+  return left;
 }
 
 }  // namespace Brut

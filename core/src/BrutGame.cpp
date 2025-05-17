@@ -74,6 +74,10 @@ void Game::inputs() {
             ctrl = isPressed;
             break;
 
+          case SDLK_SPACE:
+            player.jump();
+            break;
+
           default:
             break;
         }
@@ -133,6 +137,8 @@ void Game::run() {
                  Color::Black.a);
 
     camera.followPlayer(player);
+    player.update();
+
     glm::mat4 viewMatrix = camera.getViewMatrix();
 
     float currentTime = gameClock.getTime();
