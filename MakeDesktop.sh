@@ -5,49 +5,56 @@ export PLATFORM=BRUT_PLATFORM_TERMUX_X11
 
 EXECUTABLE="brut_desktop"
 
-P1="$1"
+# Flags
+TERMUX_MODE=false
+USE_DISPLAY_SIZE=false
 
-mkdir build
+# Process all input arguments
+for arg in "$@"; do
+  case "$arg" in
+    -termux)
+      TERMUX_MODE=true
+      ;;
+    -displaysize)
+      USE_DISPLAY_SIZE=true
+      ;;
+    *)
+      echo "Unknown argument: $arg"
+      ;;
+  esac
+done
 
-cmake -S . -B build
-cmake --build build --target $EXECUTABLE
-
-cp build/desktop/$EXECUTABLE .
-
-if [ ! "$P1" = "-termux" ]; then
-  chmod +x $EXECUTABLE
-  ./$EXECUTABLE
+if [ "$USE_DISPLAY_SIZE" = true ]; then
+  export BRUT_WINDOW_USE_DISPLAY_SIZE=true
 fi
 
-if [ "$P1" = "-termux" ]; then
+mkdir -p build
 
-  cp $EXECUTABLE $HOME/
-  rm $EXECUTABLE
+cmake -S . -B build
+cmake --build build --target "$EXECUTABLE"
 
-  # start termux-x11 in background and save its PID
+ cp build/desktop/"$EXECUTABLE" .
+
+if [ "$TERMUX_MODE" = true ]; then
+  cp "$EXECUTABLE" "$HOME/"
+  rm "$EXECUTABLE"
+
   termux-x11 :0 &
   X11_PID=$!
 
-  # define cleanup function to kill termux-x11
   cleanup() {
     echo "Shutting down termux-x11..."
-    kill $X11_PID
+    kill "$X11_PID"
     exit
   }
 
-  # trap Ctrl+C (SIGINT) and call cleanup
   trap cleanup SIGINT
 
-  # wait for X11 to start
   sleep 5
-
-  # set display
   export DISPLAY=:0
 
-  # run program
-  chmod +x $HOME/$EXECUTABLE
-  $HOME/$EXECUTABLE
+  chmod +x "$HOME/$EXECUTABLE"
+  "$HOME/$EXECUTABLE"
 
-  # cleanup after program ends
   cleanup
 fi

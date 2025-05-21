@@ -32,12 +32,12 @@ jobs:
         sudo ldconfig
 
     - name: Give execute permission to LinuxBuild
-      run: chmod +x LinuxBuild.sh
+      run: chmod +x MakeDesktop.sh
 
     - name: Compile the project
       run: |
         echo "Starting the build process..."
-        ./LinuxBuild.sh
+        ./MakeDesktop.sh
         echo "Build finished."
 
     - name: Upload compiled binary as artifact

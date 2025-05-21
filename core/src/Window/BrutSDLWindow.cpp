@@ -41,6 +41,14 @@ void SDLWindow::initWindow() {
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 #endif
 
+#ifdef BRUT_WINDOW_USE_DISPLAY_SIZE
+  // sets window size to display size
+  const SDL_DisplayID displayId = SDL_GetPrimaryDisplay();
+  const SDL_DisplayMode* mode = SDL_GetCurrentDisplayMode(displayId);
+  width = mode->w;
+  height = mode->h;
+#endif
+
   // create window
   sdlWindow = SDL_CreateWindow(windowName.c_str(), width, height,
                                SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);

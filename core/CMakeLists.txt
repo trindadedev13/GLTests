@@ -76,6 +76,12 @@ target_compile_definitions(${PROJECT_NAME}
     PUBLIC
     RUNNING_PATH=$ENV{RUNNING_PATH})
 
+if(DEFINED ENV{BRUT_WINDOW_USE_DISPLAY_SIZE})
+  target_compile_definitions(${PROJECT_NAME}
+      PUBLIC
+      BRUT_WINDOW_USE_DISPLAY_SIZE)
+endif()
+
 target_include_directories(${PROJECT_NAME}
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include)

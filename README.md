@@ -20,8 +20,8 @@ sudo apt install build-essential clang cmake libsdl3-dev libglm-dev
 From the project directory, run:
 
 ```bash
-chmod +x LinuxBuild.sh
-bash DesktopMake.sh
+chmod +x MakeDesktop.sh
+bash MakeDesktop.sh # use [-displaysize] to use display size (fullscreen)
 ```
 
 #### Run
@@ -56,7 +56,7 @@ pkg install cmake clang sdl3 glm
 In the project directory, run:
 
 ```bash
-bash DesktopMake.sh -termux
+bash MakeDesktop.sh -termux # use [-displaysize] to use display size (fullscreen)
 ```
 
 This script will build the project and launch the game.
