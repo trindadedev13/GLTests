@@ -21,7 +21,7 @@ From the project directory, run:
 
 ```bash
 chmod +x LinuxBuild.sh
-./LinuxBuild.sh [-c] # use -c for clean last build before new build
+bash DesktopMake.sh
 ```
 
 #### Run
@@ -56,7 +56,7 @@ pkg install cmake clang sdl3 glm
 In the project directory, run:
 
 ```bash
-bash TermuxX11Build.sh [-c] # use -c for clean last build before new build
+bash DesktopMake.sh -termux
 ```
 
 This script will build the project and launch the game.
