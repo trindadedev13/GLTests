@@ -1,4 +1,4 @@
-name: Build Brut
+name: Build Brut Desktop
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-desktop:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
@@ -43,5 +43,5 @@ jobs:
     - name: Upload compiled binary as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: brut
-        path: brut
+        name: brut-desktop
+        path: brut_desktop
