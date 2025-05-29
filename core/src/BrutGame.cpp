@@ -9,7 +9,9 @@
 #include <SDL3/SDL.h>
 
 #include "BrutConfig.h"
+#include "Assets/BrutIAssetsManager.hpp"
 #include "Camera/BrutCamera.hpp"
+#include "Error/BrutError.hpp"
 #include "Graphics/BrutColor.hpp"
 #include "Graphics/Shader/BrutShader.hpp"
 #include "Objects/Primitives/BrutCube.hpp"
@@ -19,10 +21,11 @@
 
 namespace Brut {
 
-Game::Game(IWindow* _window)
-    : window(_window), camera(window->width, window->height) {
-  glEnable(GL_DEPTH_TEST);
-}
+Game::Game(IWindow* _window, IAssetsManager* _assetsManager)
+    : window(_window),
+      assetsManager(_assetsManager),
+      shadersManager(_assetsManager),
+      camera(window->width, window->height) {}
 
 Game::~Game() {}
 
@@ -99,10 +102,16 @@ void Game::inputs() {
 }
 
 void Game::run() {
+  auto defShaderOp = shadersManager.get("defShader");
+
+  if (!defShaderOp)
+    fatalError("Default shader not found");
+
+  Shader& defShader = defShaderOp->get();
+
   glm::mat4 perspectiveProjection = camera.getPerspectiveProjectionMatrix();
 
-  Shader defShader = shadersManager.get("defShader");
-  Shader minorShader = shadersManager.get("minorShader");
+  glEnable(GL_DEPTH_TEST);
 
   Cube cb;
   cb.setPosition(glm::vec3(1.0f, 0.0f, -5.0f));
@@ -112,11 +121,6 @@ void Game::run() {
   defShader.unbind();
 
   Terrain terrain;
-
-  minorShader.bind();
-  minorShader.sendUniformData("projection", perspectiveProjection);
-  minorShader.sendUniformData("model", glm::mat4(1.0f));
-  minorShader.unbind();
 
   Pyramid pyramid;
   pyramid.setPosition(glm::vec3(-0.5f, 0.0f, -3.0f));
@@ -146,10 +150,11 @@ void Game::run() {
 
     // terrain
     {
-      minorShader.bind();
-      minorShader.sendUniformData("view", viewMatrix);
+      defShader.bind();
+      defShader.sendUniformData("model", glm::mat4(1.0f));
+      defShader.sendUniformData("view", viewMatrix);
       terrain.draw();
-      minorShader.unbind();
+      defShader.unbind();
     }
 
     // cube

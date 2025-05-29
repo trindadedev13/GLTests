@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.22)
 
 project(brut_core
     LANGUAGES
@@ -32,10 +32,11 @@ set(HEADERS
     include/BrutConfig.h
     include/BrutGame.hpp
     include/BrutGameClock.hpp
-    include/Camera/BrutCamera.hpp
+    include/Assets/BrutIAssetsManager.hpp
     include/Buffer/BrutBuffer.hpp
     include/Buffer/BrutBuffer.tpp
     include/Buffer/BrutVertexArrayBuffer.hpp
+    include/Camera/BrutCamera.hpp
     include/Error/BrutError.hpp
     include/Graphics/BrutColor.hpp
     include/Graphics/Shader/BrutShader.hpp
@@ -53,8 +54,7 @@ set(HEADERS
     include/Window/BrutSDLWindow.hpp
     include/Window/BrutWindowConfig.h)
 
-find_package(glm REQUIRED)
-find_package(SDL3 REQUIRED)
+add_subdirectory("../extern" "${CMAKE_BINARY_DIR}/extern_build")
 
 add_library(
     ${PROJECT_NAME}
@@ -62,15 +62,13 @@ add_library(
     ${SOURCES}
     ${HEADERS})
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CheckPackages.cmake)
+
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
     glad
     glm::glm
-    SDL3)
-
-target_compile_definitions(${PROJECT_NAME}
-    PUBLIC
-    $ENV{PLATFORM})
+    SDL3::SDL3)
 
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC

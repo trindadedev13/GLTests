@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.22)
 
 project(brut_android_src)
 
@@ -23,9 +23,19 @@ Possible ways to fix this:
 ")
 endif()
 
+set(SOURCES
+    main.cpp
+    Assets/BrutAndroidAssetsManager.cpp
+    Assets/jni/brut_android_assets_manager_jni.c)
+
+set(HEADERS
+    Assets/BrutAndroidAssetsManager.hpp
+    Assets/jni/brut_android_assets_manager_jni.h)
+
 add_library(main
     SHARED
-    main.cpp)
+    ${SOURCES}
+    ${HEADERS})
 
 target_include_directories(main
     PRIVATE
@@ -33,4 +43,6 @@ target_include_directories(main
 
 target_link_libraries(main
     PRIVATE
+    android
+    brut_core
     SDL3::SDL3)

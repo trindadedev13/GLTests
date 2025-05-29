@@ -1,6 +1,9 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.22)
 project(brut_project)
 
 add_subdirectory(core)
+
+# Build desktop
 add_subdirectory(desktop)
-add_subdirectory(extern)
+
+# Build android here????

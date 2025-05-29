@@ -1,20 +1,21 @@
 #include "Graphics/Shader/BrutShader.hpp"
 
 #include <iostream>
-#include <fstream>
-#include <sstream>
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Assets/BrutIAssetsManager.hpp"
 #include "Error/BrutError.hpp"
 
 namespace Brut {
 
-Shader::Shader(const std::string vertShaderFilePath,
+Shader::Shader(IAssetsManager* _assetsManager,
+               const std::string vertShaderFilePath,
                const std::string fragShaderFilePath)
-    : programID{0},
+    : assetsManager{_assetsManager},
+      programID{0},
       vertexShaderID{0},
       fragmentShaderID{0},
       vertexShaderFilePath{vertShaderFilePath},
@@ -106,18 +107,8 @@ int Shader::getUniformLocation(const std::string& variableName) {
   return id;
 }
 
-std::string Shader::readProgramSource(const std::string filePath) {
-  std::fstream file(filePath);
-
-  std::stringstream ss;
-  std::string line;
-
-  while (getline(file, line)) {
-    ss << line << "\n";
-  }
-  file.close();
-
-  return ss.str();
+std::string Shader::readProgramSource(const std::string& filePath) {
+  return assetsManager->readTextFile(filePath);
 }
 
 void Shader::checkCompileError(unsigned int shaderID, int shaderType) {

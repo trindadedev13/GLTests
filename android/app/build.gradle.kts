@@ -58,5 +58,5 @@ android {
     }
   }
 
-  sourceSets["main"].java.srcDirs("src/main/java")
+  sourceSets["main"].assets.srcDirs("../../assets")
 }

@@ -1,6 +1,6 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef BRUT_CONFIG_HPP
+#define BRUT_CONFIG_HPP
 
-#define GAME_RUNNING_PATH RUNNING_PATH
+#define BRUT_RUNNING_PATH RUNNING_PATH
 
 #endif

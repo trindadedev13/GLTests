@@ -29,7 +29,7 @@ void SDLWindow::initWindow() {
   }
 
 // configures gl
-#ifdef BRUT_USE_OPENGL_ES
+#ifdef BRUT_ANDROID
   // OpenGL ES 3.2
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
@@ -63,8 +63,10 @@ void SDLWindow::initWindow() {
                std::string(SDL_GetError()));
   }
 
+  SDL_GL_MakeCurrent(sdlWindow, glContext);
+
 // init glad
-#ifdef BRUT_USE_OPENGL_ES
+#ifdef BRUT_ANDROID
   if (!gladLoadGLES2Loader((GLADloadproc)SDL_GL_GetProcAddress)) {
     fatalError("Failed to initialze GLAD Open GL ES 2");
   }

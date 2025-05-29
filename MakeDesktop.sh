@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
 export RUNNING_PATH="\"$(pwd)\""
-export PLATFORM=BRUT_PLATFORM_TERMUX_X11
 
 EXECUTABLE="brut_desktop"
 
@@ -12,10 +11,16 @@ USE_DISPLAY_SIZE=false
 # Process all input arguments
 for arg in "$@"; do
   case "$arg" in
-    -termux)
+    -t)
       TERMUX_MODE=true
       ;;
-    -displaysize)
+    --termux)
+      TERMUX_MODE=true
+      ;;
+    -d)
+      USE_DISPLAY_SIZE=true
+      ;;
+    --displaysize)
       USE_DISPLAY_SIZE=true
       ;;
     *)
@@ -24,16 +29,18 @@ for arg in "$@"; do
   esac
 done
 
+export DISPLAY=:0
+
 if [ "$USE_DISPLAY_SIZE" = true ]; then
   export BRUT_WINDOW_USE_DISPLAY_SIZE=true
 fi
 
 mkdir -p build
 
-cmake -S . -B build
+cmake -DCMAKE_SYSTEM_NAME=Linux -S . -B build
 cmake --build build --target "$EXECUTABLE"
 
- cp build/desktop/"$EXECUTABLE" .
+cp build/desktop/"$EXECUTABLE" .
 
 if [ "$TERMUX_MODE" = true ]; then
   cp "$EXECUTABLE" "$HOME/"
@@ -51,7 +58,6 @@ if [ "$TERMUX_MODE" = true ]; then
   trap cleanup SIGINT
 
   sleep 5
-  export DISPLAY=:0
 
   chmod +x "$HOME/$EXECUTABLE"
   "$HOME/$EXECUTABLE"
