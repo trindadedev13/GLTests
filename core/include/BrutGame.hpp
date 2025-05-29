@@ -5,6 +5,7 @@
 
 #include "BrutConfig.h"
 #include "BrutGameClock.hpp"
+#include "Assets/BrutIAssetsManager.hpp"
 #include "Camera/BrutCamera.hpp"
 #include "Graphics/Shader/BrutShadersManager.hpp"
 #include "Window/BrutIWindow.hpp"
@@ -13,7 +14,7 @@ namespace Brut {
 
 class Game {
  public:
-  Game(IWindow* window);
+  Game(IWindow* window, IAssetsManager* assetsManager);
   ~Game();
 
   /** Run the game */
@@ -25,8 +26,10 @@ class Game {
   /** The game window. Requires each platform implementation (see
    * BrutIWindow.hpp). */
   IWindow* window;
+  /** The game assets manager */
+  IAssetsManager* assetsManager;
   /** Stores all shaders by name */
-  ShadersManager shadersManager{std::string(BRUT_RUNNING_PATH) + "/shaders/"};
+  ShadersManager shadersManager;
   /** The clock counts from the start of the game. */
   GameClock gameClock{};
   /** Game Player */

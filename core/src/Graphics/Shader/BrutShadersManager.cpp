@@ -1,33 +1,51 @@
 #include "Graphics/Shader/BrutShadersManager.hpp"
 
 #include <iostream>
-#include <filesystem>
+#include <optional>
 #include <string>
 #include <stdexcept>
 
-#include "Graphics/Shader/BrutShader.hpp"
+#include <SDL3/SDL.h>
 
-namespace fs = std::filesystem;
+#include "Assets/BrutIAssetsManager.hpp"
+#include "Graphics/Shader/BrutShader.hpp"
 
 namespace Brut {
 
-ShadersManager::ShadersManager(const std::string shadersPath) {
-  for (const auto& entry : fs::directory_iterator(shadersPath)) {
-    std::string shaderName = entry.path().string().substr(
-        entry.path().string().find_last_of("/") + 1);
-    std::string shaderPath = entry.path().string();
-    shaders[shaderName] = shaderPath;
+ShadersManager::ShadersManager(IAssetsManager* _assetsManager)
+    : assetsManager(_assetsManager) {
+#ifdef BRUT_ANDROID
+  std::string shadersPath = "shaders/android";
+#else
+  std::string shadersPath = "shaders/desktop";
+#endif
+  std::vector<std::string> fileList = assetsManager->listFiles(shadersPath);
+  for (const std::string& filename : fileList) {
+    SDL_Log("%s", filename.c_str());
+    std::string fullPath = shadersPath + "/" + filename;
+    shaders[filename] = fullPath;
   }
-};
+}
 
 ShadersManager::~ShadersManager() {}
 
-Shader ShadersManager::get(const std::string shaderName) {
-  if (shaders.find(shaderName) != shaders.end()) {
-    return Shader(shaders[shaderName] + "/main.vert",
-                  shaders[shaderName] + "/main.frag");
+std::optional<std::reference_wrapper<Shader>> ShadersManager::get(
+    const std::string& shaderName) {
+  auto it = loadedShaders.find(shaderName);
+  if (it != loadedShaders.end()) {
+    return it->second;
   }
-  throw std::runtime_error("Shader not found: " + shaderName);
+
+  auto shaderPath = shaders.find(shaderName);
+  if (shaderPath == shaders.end())
+    return std::nullopt;
+
+  auto [insertIt, inserted] = loadedShaders.emplace(
+      std::piecewise_construct, std::forward_as_tuple(shaderName),
+      std::forward_as_tuple(assetsManager, shaderPath->second + "/main.vert",
+                            shaderPath->second + "/main.frag"));
+
+  return insertIt->second;
 }
 
 }  // namespace Brut

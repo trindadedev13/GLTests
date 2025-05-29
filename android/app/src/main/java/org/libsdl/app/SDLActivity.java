@@ -443,6 +443,8 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
             }
         }
 
+	// SDLActivity.initAssets(getAssets());
+
         // Set up JNI
         SDL.setupJNI();
 

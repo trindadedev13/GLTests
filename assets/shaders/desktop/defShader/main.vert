@@ -1,11 +1,11 @@
-#version 450
+#version 450 core
 
 uniform mat4 projection;
 uniform mat4 view;
 uniform mat4 model;
 
-in layout(location=0) vec3 vertexIn;
-in layout(location=1) vec4 colorIn;
+layout(location=0) in vec3 vertexIn;
+layout(location=1) in vec4 colorIn;
 
 out vec4 colorOut;
 
