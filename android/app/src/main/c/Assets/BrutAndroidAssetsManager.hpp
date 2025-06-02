@@ -25,8 +25,8 @@ class AssetsManager : public IAssetsManager {
   BrutAssetsManagerJNI* asmgr;
 };
 
-}
+}  // namespace Android
 
-}
+}  // namespace Brut
 
 #endif

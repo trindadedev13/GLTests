@@ -119,9 +119,7 @@ public class HIDDeviceManager {
     //            spedit.commit();
     //        }
     //        else
-    {
-      mNextDeviceId = mSharedPreferences.getInt("next_device_id", 0);
-    }
+    { mNextDeviceId = mSharedPreferences.getInt("next_device_id", 0); }
   }
 
   Context getContext() {

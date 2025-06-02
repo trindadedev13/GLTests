@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
 
   if (!asmgr) {
     if (!SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error",
-                                 "!! ASSET MANAGER IS NULL !!", NULL)) {
+                                  "!! ASSET MANAGER IS NULL !!", NULL)) {
       SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Assets manager is null");
     }
     SDL_Quit();

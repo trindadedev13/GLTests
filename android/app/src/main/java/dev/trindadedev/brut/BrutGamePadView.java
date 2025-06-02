@@ -36,7 +36,7 @@ public final class BrutGamePadView extends View {
   private int mRippleAlpha = 100;
   private boolean mIsTouchDown;
   private Vec2f mTouchPos;
-  
+
   private final Handler mHandler = new android.os.Handler();
   private final Runnable mHoldRunnable = new Runnable() {
     @Override
@@ -65,13 +65,13 @@ public final class BrutGamePadView extends View {
   }
 
   public BrutGamePadView(
-    final Context context, AttributeSet attrSet, int styleResId, int attrResId) {
+          final Context context, AttributeSet attrSet, int styleResId, int attrResId) {
     super(context, attrSet, styleResId, attrResId);
     init(context, attrSet, styleResId, attrResId);
   }
 
   private final void init(
-    final Context context, AttributeSet attrSet, int styleResId, int attrResId) {
+          final Context context, AttributeSet attrSet, int styleResId, int attrResId) {
     mPaint = new Paint();
     mPaint.setColor(Color.GRAY);
     mPaint.setStyle(Paint.Style.FILL);
@@ -92,14 +92,14 @@ public final class BrutGamePadView extends View {
     mTouchPos = new Vec2f(0f, 0f);
 
     mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
-        @Override
-        public boolean onDoubleTap(final MotionEvent event) {
-          final Vec2f pos = new Vec2f(event.getX(), event.getY());
-          final int key = getKeyCodeEvent(pos);
-          if (mGamePadListener != null && key != -1) mGamePadListener.onDoublePress(key);
-          return true;
-        }
-      });
+      @Override
+      public boolean onDoubleTap(final MotionEvent event) {
+        final Vec2f pos = new Vec2f(event.getX(), event.getY());
+        final int key = getKeyCodeEvent(pos);
+        if (mGamePadListener != null && key != -1) mGamePadListener.onDoublePress(key);
+        return true;
+      }
+    });
   }
 
   public final void setGamePadListener(final GamePadListener gamePadListener) {
@@ -170,7 +170,7 @@ public final class BrutGamePadView extends View {
 
   // Draw a text centered in rect
   private final void drawCenteredText(
-    final Canvas canvas, final RectF rect, final String text, final Paint paint) {
+          final Canvas canvas, final RectF rect, final String text, final Paint paint) {
     // initial sizd (too big)
     float textSize = rect.height() * 0.5f;
     paint.setTextSize(textSize);
@@ -203,11 +203,11 @@ public final class BrutGamePadView extends View {
     final float centerY = h / 2f;
     mUpRect.set(centerX - size / 2, centerY - size * 1.5f, centerX + size / 2, centerY - size / 2);
     mDownRect.set(
-      centerX - size / 2, centerY + size / 2, centerX + size / 2, centerY + size * 1.5f);
+            centerX - size / 2, centerY + size / 2, centerX + size / 2, centerY + size * 1.5f);
     mLeftRect.set(
-      centerX - size * 1.5f, centerY - size / 2, centerX - size / 2, centerY + size / 2);
+            centerX - size * 1.5f, centerY - size / 2, centerX - size / 2, centerY + size / 2);
     mRightRect.set(
-      centerX + size / 2, centerY - size / 2, centerX + size * 1.5f, centerY + size / 2);
+            centerX + size / 2, centerY - size / 2, centerX + size * 1.5f, centerY + size / 2);
   }
 
   @Override
@@ -217,11 +217,11 @@ public final class BrutGamePadView extends View {
     mPaint.setColor(Color.LTGRAY);
     canvas.drawRoundRect(mUpRect, mGamePadConfig.buttonRadius, mGamePadConfig.buttonRadius, mPaint);
     canvas.drawRoundRect(
-      mLeftRect, mGamePadConfig.buttonRadius, mGamePadConfig.buttonRadius, mPaint);
+            mLeftRect, mGamePadConfig.buttonRadius, mGamePadConfig.buttonRadius, mPaint);
     canvas.drawRoundRect(
-      mDownRect, mGamePadConfig.buttonRadius, mGamePadConfig.buttonRadius, mPaint);
+            mDownRect, mGamePadConfig.buttonRadius, mGamePadConfig.buttonRadius, mPaint);
     canvas.drawRoundRect(
-      mRightRect, mGamePadConfig.buttonRadius, mGamePadConfig.buttonRadius, mPaint);
+            mRightRect, mGamePadConfig.buttonRadius, mGamePadConfig.buttonRadius, mPaint);
 
     if (mRippleClipRect != null) {
       canvas.save();
@@ -234,7 +234,7 @@ public final class BrutGamePadView extends View {
       final float bottom = mRippleClipRect.bottom;
 
       canvas.drawRoundRect(left, top, right, bottom, mGamePadConfig.buttonRadius,
-                           mGamePadConfig.buttonRadius, mRipplePaint);
+              mGamePadConfig.buttonRadius, mRipplePaint);
       canvas.restore();
 
       if (mIsTouchDown) {
@@ -309,4 +309,3 @@ public final class BrutGamePadView extends View {
     void onHold(final int key);
   }
 }
-

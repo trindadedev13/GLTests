@@ -12,17 +12,18 @@ namespace Brut {
 
 namespace Android {
 
-AssetsManager::AssetsManager(BrutAssetsManagerJNI* _asmgr): asmgr(_asmgr) {}
+AssetsManager::AssetsManager(BrutAssetsManagerJNI* _asmgr) : asmgr(_asmgr) {}
 
 std::string AssetsManager::readTextFile(const std::string& path) {
   const char* contentC = BrutAssetsManagerJNI_ReadTextFile(path.c_str());
   if (contentC == nullptr) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to read text file %s\n", path.c_str());
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to read text file %s\n",
+                 path.c_str());
     return "";
   }
-  
+
   std::string content{contentC};
-  free((void*) contentC);
+  free((void*)contentC);
 
   return content;
 }
@@ -36,7 +37,8 @@ std::vector<std::string> AssetsManager::listFiles(const std::string& path) {
   char** cFilesArray = BrutAssetsManagerJNI_ListFiles(path.c_str(), &fileCount);
 
   if (cFilesArray == nullptr) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to list files or not found\n");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "Failed to list files or not found\n");
     return {};
   }
 
@@ -51,6 +53,6 @@ std::vector<std::string> AssetsManager::listFiles(const std::string& path) {
   return files;
 }
 
-}
+}  // namespace Android
 
-}
+}  // namespace Brut

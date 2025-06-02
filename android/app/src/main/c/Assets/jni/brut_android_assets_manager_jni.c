@@ -10,9 +10,10 @@
 BrutAssetsManagerJNI* asmgr = NULL;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
-  asmgr = (BrutAssetsManagerJNI*) malloc(sizeof(BrutAssetsManagerJNI));
+  asmgr = (BrutAssetsManagerJNI*)malloc(sizeof(BrutAssetsManagerJNI));
   if (!asmgr) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to allocate memory for BrutAssetsManagerJNI*");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "Failed to allocate memory for BrutAssetsManagerJNI*");
     return JNI_ERR;
   }
   asmgr->jvm = vm;
@@ -22,9 +23,12 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
 }
 
 JNIEXPORT void JNICALL
-Java_dev_trindadedev_brut_BrutActivity_initAssets(JNIEnv* env, jclass clazz, jobject mgr) {
+Java_dev_trindadedev_brut_BrutActivity_initAssets(JNIEnv* env,
+                                                  jclass clazz,
+                                                  jobject mgr) {
   if (!asmgr) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to allocate memory for BrutAssetsManagerJNI*");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "Failed to allocate memory for BrutAssetsManagerJNI*");
     return;
   }
 
@@ -50,7 +54,7 @@ static JNIEnv* BrutAssetsManagerJNI_GetEnv() {
     }
   }
   return env;
-} 
+}
 
 // Reads text file
 // Calls BrutAssetsManager.java#readTextFile with JNI
@@ -62,30 +66,25 @@ char* BrutAssetsManagerJNI_ReadTextFile(const char* filepath) {
     return NULL;
   }
 
-  jmethodID jmethod_id = (*env)->GetMethodID(
-    env,
-    asmgr->c_brut_assets_manager,
-    "readTextFile",
-    "(Ljava/lang/String;)Ljava/lang/String;"
-  );
+  jmethodID jmethod_id =
+      (*env)->GetMethodID(env, asmgr->c_brut_assets_manager, "readTextFile",
+                          "(Ljava/lang/String;)Ljava/lang/String;");
 
   if (jmethod_id == NULL) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "JNI readTextFile method id not found");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "JNI readTextFile method id not found");
     return NULL;
   }
 
   jstring jfilepath = (*env)->NewStringUTF(env, filepath);
   if (jfilepath == NULL) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to create jstring for jfilepath");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "Failed to create jstring for jfilepath");
     return NULL;
   }
 
   jstring jresult = (jstring)(*env)->CallObjectMethod(
-    env,
-    asmgr->o_brut_assets_manager,
-    jmethod_id,
-    jfilepath
-  );
+      env, asmgr->o_brut_assets_manager, jmethod_id, jfilepath);
 
   (*env)->DeleteLocalRef(env, jfilepath);
 
@@ -113,29 +112,23 @@ bool BrutAssetsManagerJNI_FileExists(const char* filepath) {
   }
 
   jmethodID jmethod_id = (*env)->GetMethodID(
-    env,
-    asmgr->c_brut_assets_manager,
-    "fileExists",
-    "(Ljava/lang/String;)Z"
-  );
+      env, asmgr->c_brut_assets_manager, "fileExists", "(Ljava/lang/String;)Z");
 
   if (jmethod_id == NULL) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "JNI readTextFile method id not found");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "JNI readTextFile method id not found");
     return false;
   }
 
   jstring jfilepath = (*env)->NewStringUTF(env, filepath);
   if (jfilepath == NULL) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to create jstring for jfilepath");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "Failed to create jstring for jfilepath");
     return false;
   }
 
-  jboolean jresult = (jboolean) (*env)->CallBooleanMethod(
-    env,
-    asmgr->o_brut_assets_manager,
-    jmethod_id,
-    jfilepath
-  );
+  jboolean jresult = (jboolean)(*env)->CallBooleanMethod(
+      env, asmgr->o_brut_assets_manager, jmethod_id, jfilepath);
 
   (*env)->DeleteLocalRef(env, jfilepath);
 
@@ -149,7 +142,8 @@ bool BrutAssetsManagerJNI_FileExists(const char* filepath) {
 // To get the quantity, pass a pointer to outCount (can be NULL)
 // Calls BrutAssetsManager.java#listFiles with JNI
 char** BrutAssetsManagerJNI_ListFiles(const char* filepath, int* outCount) {
-  if (outCount) *outCount = 0;
+  if (outCount)
+    *outCount = 0;
 
   JNIEnv* env = BrutAssetsManagerJNI_GetEnv();
   if (env == NULL) {
@@ -157,15 +151,13 @@ char** BrutAssetsManagerJNI_ListFiles(const char* filepath, int* outCount) {
     return NULL;
   }
 
-  jmethodID jmethod_id = (*env)->GetMethodID(
-    env,
-    asmgr->c_brut_assets_manager,
-    "listFiles",
-    "(Ljava/lang/String;)[Ljava/lang/String;"
-  );
+  jmethodID jmethod_id =
+      (*env)->GetMethodID(env, asmgr->c_brut_assets_manager, "listFiles",
+                          "(Ljava/lang/String;)[Ljava/lang/String;");
 
   if (jmethod_id == NULL) {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "JNI listFiles method id not found");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "JNI listFiles method id not found");
     return NULL;
   }
 
@@ -176,11 +168,7 @@ char** BrutAssetsManagerJNI_ListFiles(const char* filepath, int* outCount) {
   }
 
   jobjectArray jresult = (jobjectArray)(*env)->CallObjectMethod(
-    env,
-    asmgr->o_brut_assets_manager,
-    jmethod_id,
-    jfilepath
-  );
+      env, asmgr->o_brut_assets_manager, jmethod_id, jfilepath);
 
   (*env)->DeleteLocalRef(env, jfilepath);
 
@@ -192,7 +180,8 @@ char** BrutAssetsManagerJNI_ListFiles(const char* filepath, int* outCount) {
   jsize len = (*env)->GetArrayLength(env, jresult);
   if (len == 0) {
     (*env)->DeleteLocalRef(env, jresult);
-    if (outCount) *outCount = 0;
+    if (outCount)
+      *outCount = 0;
     return NULL;
   }
 
@@ -244,14 +233,16 @@ char** BrutAssetsManagerJNI_ListFiles(const char* filepath, int* outCount) {
 
   (*env)->DeleteLocalRef(env, jresult);
 
-  if (outCount) *outCount = len;
+  if (outCount)
+    *outCount = len;
 
   return result_copy;
 }
 
 // free the returned array when it is no longer needed
 void BrutAssetsManagerJNI_FreeFileList(char** list, int count) {
-  if (!list) return;
+  if (!list)
+    return;
   for (int i = 0; i < count; i++) {
     free((void*)list[i]);
   }

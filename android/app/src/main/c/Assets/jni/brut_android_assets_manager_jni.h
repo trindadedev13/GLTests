@@ -12,7 +12,7 @@ extern "C" {
 
 typedef struct {
   jobject o_brut_assets_manager;
-  jclass  c_brut_assets_manager;
+  jclass c_brut_assets_manager;
   JavaVM* jvm;
 } BrutAssetsManagerJNI;
 
