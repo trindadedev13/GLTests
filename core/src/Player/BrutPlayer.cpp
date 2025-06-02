@@ -13,7 +13,7 @@ Player::Player()
       position{0.0f, 0.0f, 0.0f},
       viewDirection{glm::vec3{0.0f, 0.0f, -1.0f}},
       left{glm::vec3{-1.0f, 0.0f, 0.0f}},
-      sensitivity{50.0f},
+      sensitivity{250.0f},
       pitchAngle{0.0f} {}
 
 Player::~Player() {}
