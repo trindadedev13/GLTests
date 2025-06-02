@@ -1,8 +1,12 @@
 #ifndef BRUT_PLAYER_HPP
 #define BRUT_PLAYER_HPP
 
+#include <memory>
+#include <vector>
+
 #include <glm/glm.hpp>
 
+#include "Objects/Primitives/BrutCube.hpp"
 #include "Player/BrutInventory.hpp"
 
 namespace Brut {
@@ -31,7 +35,7 @@ class Player {
   // mouse
   void mouseUpdate(const glm::vec2& nPos);
 
-  // getterz
+  // getters
   const glm::vec3& getPosition() const;
   const glm::vec3& getViewDirection() const;
   const glm::vec3& getLeft() const;

@@ -3,6 +3,7 @@
 #include <array>
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Buffer/BrutBuffer.hpp"
@@ -110,9 +111,7 @@ void Cube::linkBuffers() {
 
 void Cube::draw() {
   VAO.bind();
-  {
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-  }
+  { glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0); }
   VAO.unbind();
 }
 

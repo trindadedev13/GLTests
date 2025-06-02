@@ -10,7 +10,8 @@
 namespace Brut {
 
 void fatalError(const std::string errorMessage) {
-  SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "ERROR: %s\n", errorMessage.c_str());
+  SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "ERROR: %s\n",
+               errorMessage.c_str());
   std::cerr << TERM_COLOR_RED << "ERROR: " << errorMessage << TERM_COLOR_RESET
             << "\n";
   std::cin.get();

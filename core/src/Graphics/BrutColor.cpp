@@ -23,5 +23,6 @@ const Color Color::Blue = {0.0f, 0.0f, 1.0f, 1.0f};
 const Color Color::Yellow = {1.0f, 1.0f, 0.1f, 1.0f};
 const Color Color::Cyan = {0.0f, 1.0f, 1.0f, 1.0f};
 const Color Color::Magenta = {1.0f, 0.0f, 1.0f, 1.0f};
+const Color Color::Brown = {0.647f, 0.165f, 0.165f, 1.0f};
 
 }  // namespace Brut

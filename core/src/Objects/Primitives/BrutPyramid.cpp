@@ -82,9 +82,7 @@ void Pyramid::linkBuffers() {
 
 void Pyramid::draw() {
   VAO.bind();
-  {
-    glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
-  }
+  { glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0); }
   VAO.unbind();
 }
 

@@ -1,9 +1,13 @@
 #include "Player/BrutPlayer.hpp"
 
+#include <memory>
+#include <vector>
+
 #include <glm/glm.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 
+#include "Objects/Primitives/BrutCube.hpp"
 #include "Player/BrutInventory.hpp"
 
 namespace Brut {

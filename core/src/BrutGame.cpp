@@ -16,7 +16,7 @@
 #include "Graphics/Shader/BrutShader.hpp"
 #include "Objects/Primitives/BrutCube.hpp"
 #include "Objects/Primitives/BrutPyramid.hpp"
-#include "Objects/Primitives/BrutTerrain.hpp"
+#include "Objects/Terrain/BrutPlanTerrain.hpp"
 #include "Window/BrutIWindow.hpp"
 
 namespace Brut {
@@ -113,6 +113,8 @@ void Game::run() {
 
   glEnable(GL_DEPTH_TEST);
 
+  player.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+
   Cube cb;
   cb.setPosition(glm::vec3(1.0f, 0.0f, -5.0f));
 
@@ -120,7 +122,9 @@ void Game::run() {
   defShader.sendUniformData("projection", perspectiveProjection);
   defShader.unbind();
 
-  Terrain terrain;
+  PlanTerrain terrain{64, 64};
+  // terrain.generate(0.1f, 123.0f);
+  terrain.generate();
 
   Pyramid pyramid;
   pyramid.setPosition(glm::vec3(-0.5f, 0.0f, -3.0f));
@@ -133,14 +137,14 @@ void Game::run() {
   pyramid.setColors(
       {Color::Red, Color::Green, Color::Blue, Color::Yellow, Color::Cyan});
 
-  terrain.setColor(Color::Blue);
+  // terrain.setColor(Color::Blue);
 
   while (window->isRunning()) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(Color::Black.r, Color::Black.g, Color::Black.b,
-                 Color::Black.a);
+    glClearColor(0.40f, 0.65f, 0.85f, 1.0f);
 
     camera.followPlayer(player);
+
     player.update();
 
     glm::mat4 viewMatrix = camera.getViewMatrix();
@@ -149,13 +153,7 @@ void Game::run() {
     float deltaTime = currentTime - startTime;
 
     // terrain
-    {
-      defShader.bind();
-      defShader.sendUniformData("model", glm::mat4(1.0f));
-      defShader.sendUniformData("view", viewMatrix);
-      terrain.draw();
-      defShader.unbind();
-    }
+    { terrain.draw(defShader, viewMatrix); }
 
     // cube
     {

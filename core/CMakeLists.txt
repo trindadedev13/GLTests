@@ -20,8 +20,10 @@ set(SOURCES
     src/Objects/Primitives/BrutCube.cpp
     src/Objects/Primitives/BrutObject.cpp
     src/Objects/Primitives/BrutPyramid.cpp
-    src/Objects/Primitives/BrutTerrain.cpp
     src/Objects/Primitives/2D/BrutSquare.cpp
+    src/Objects/Terrain/BrutTerrain.cpp
+    src/Objects/Terrain/BrutPlanTerrain.cpp
+    src/Perlin/BrutPerlinNoise.cpp
     src/Player/BrutInventory.cpp
     src/Player/BrutInventoryItem.cpp
     src/Player/BrutPlayer.cpp
@@ -44,8 +46,10 @@ set(HEADERS
     include/Objects/Primitives/BrutCube.hpp
     include/Objects/Primitives/BrutObject.hpp
     include/Objects/Primitives/BrutPyramid.hpp
-    include/Objects/Primitives/BrutTerrain.hpp
     include/Objects/Primitives/2D/BrutSquare.hpp
+    include/Objects/Terrain/BrutTerrain.hpp
+    include/Objects/Terrain/BrutPlanTerrain.hpp
+    include/Perlin/BrutPerlinNoise.hpp
     include/Player/BrutInventory.hpp
     include/Player/BrutInventoryItem.hpp
     include/Player/BrutPlayer.hpp
