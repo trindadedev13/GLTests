@@ -35,6 +35,21 @@ void Shader::unbind() const {
   glUseProgram(0);
 }
 
+void Shader::sendUniformData(const std::string& varName, const float data) {
+  int id = getUniformLocation(varName);
+  glUniform1f(id, data);
+}
+
+void Shader::sendUniformData(const std::string& varName, const int data) {
+  int id = getUniformLocation(varName);
+  glUniform1i(id, data);
+}
+
+void Shader::sendUniformData(const std::string& varName, const float data[]) {
+  int id = getUniformLocation(varName);
+  glUniformMatrix4fv(id, 1, GL_FALSE, data);
+}
+
 void Shader::sendUniformData(const std::string& varName,
                              const glm::mat4& data) {
   int id = getUniformLocation(varName);

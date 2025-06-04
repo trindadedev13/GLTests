@@ -6,7 +6,6 @@
 
 #include <glm/glm.hpp>
 
-#include "Objects/Primitives/BrutCube.hpp"
 #include "Player/BrutInventory.hpp"
 
 namespace Brut {

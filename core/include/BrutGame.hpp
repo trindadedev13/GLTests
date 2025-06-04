@@ -1,12 +1,14 @@
 #ifndef BRUT_GAME_HPP
 #define BRUT_GAME_HPP
 
+#include <memory>
 #include <string>
 
 #include "BrutConfig.h"
 #include "BrutGameClock.hpp"
 #include "Assets/BrutIAssetsManager.hpp"
 #include "Camera/BrutCamera.hpp"
+#include "FreeTypeGL/BrutFreeTypeGL.hpp"
 #include "Graphics/Shader/BrutShadersManager.hpp"
 #include "Window/BrutIWindow.hpp"
 
@@ -23,20 +25,20 @@ class Game {
   void inputs();
 
  private:
-  /** The game window. Requires each platform implementation (see
-   * BrutIWindow.hpp). */
+  /** The game window */
   IWindow* window;
   /** The game assets manager */
   IAssetsManager* assetsManager;
   /** Stores all shaders by name */
-  ShadersManager shadersManager;
+  std::shared_ptr<ShadersManager> shadersManager;
+  /** The font renderer to draw text */
+  std::shared_ptr<Ftgl::FontRenderer> fontRenderer;
   /** The clock counts from the start of the game. */
   GameClock gameClock{};
   /** Game Player */
   Player player{};
   /** Game Camera. */
   Camera camera;
-  /** The fov */
   /** true if ctrl is pressed. */
   bool ctrl{false};
 };

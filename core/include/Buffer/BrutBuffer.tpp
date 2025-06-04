@@ -49,8 +49,12 @@ void Buffer<T>::unbind() {
 
 template <GLenum T>
 void Buffer<T>::putData(const void* data, size_t size, GLenum usage) {
-  glBindBuffer(T, bufferID);
   glBufferData(T, size, data, usage);
+}
+
+template <GLenum T>
+void Buffer<T>::subData(const void* data, size_t size, GLintptr offset) {
+  glBufferSubData(T, offset, size, data);
 }
 
 template <GLenum T>

@@ -7,6 +7,7 @@ extern "C" {
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #include <jni.h>
 
@@ -16,6 +17,11 @@ typedef struct {
   JavaVM* jvm;
 } BrutAssetsManagerJNI;
 
+typedef struct {
+  int8_t* data;
+  size_t size;
+} Int8Array;
+
 extern BrutAssetsManagerJNI* asmgr;
 
 jint JNI_OnLoad(JavaVM*, void*);
@@ -24,6 +30,8 @@ JNIEXPORT void JNICALL
 Java_dev_trindadedev_brut_BrutActivity_initAssets(JNIEnv*, jclass, jobject);
 
 char* BrutAssetsManagerJNI_ReadTextFile(const char*);
+
+Int8Array* BrutAssetsManagerJNI_ReadBinaryFile(const char*);
 
 bool BrutAssetsManagerJNI_FileExists(const char*);
 

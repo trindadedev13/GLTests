@@ -1,6 +1,7 @@
 #include "Graphics/Shader/BrutShadersManager.hpp"
 
 #include <iostream>
+#include <memory>
 #include <optional>
 #include <string>
 #include <stdexcept>
@@ -29,23 +30,23 @@ ShadersManager::ShadersManager(IAssetsManager* _assetsManager)
 
 ShadersManager::~ShadersManager() {}
 
-std::optional<std::reference_wrapper<Shader>> ShadersManager::get(
+std::optional<std::shared_ptr<Shader>> ShadersManager::get(
     const std::string& shaderName) {
   auto it = loadedShaders.find(shaderName);
   if (it != loadedShaders.end()) {
-    return it->second;
+    return std::optional{it->second};
   }
 
   auto shaderPath = shaders.find(shaderName);
   if (shaderPath == shaders.end())
     return std::nullopt;
 
-  auto [insertIt, inserted] = loadedShaders.emplace(
-      std::piecewise_construct, std::forward_as_tuple(shaderName),
-      std::forward_as_tuple(assetsManager, shaderPath->second + "/main.vert",
-                            shaderPath->second + "/main.frag"));
+  auto shader =
+      std::make_shared<Shader>(assetsManager, shaderPath->second + "/main.vert",
+                               shaderPath->second + "/main.frag");
 
-  return insertIt->second;
+  loadedShaders[shaderName] = shader;
+  return shader;
 }
 
 }  // namespace Brut

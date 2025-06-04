@@ -6,8 +6,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Graphics/Shader/BrutShader.hpp"
-#include "Objects/Primitives/BrutCube.hpp"
+#include "Objects/Primitives/BrutCubeCollection.hpp"
 
 namespace Brut {
 
@@ -16,17 +15,15 @@ class Terrain {
   Terrain(int width, int depth, float cubeSize = 1.0f);
   ~Terrain();
 
-  void draw(Shader& shader, const glm::mat4& view);
+  void draw();
   void generate(float frequency = 0.1f, int seed = 0);
-
-  const std::vector<std::unique_ptr<Cube>>& getCubes() const;
 
   float getCubeSize() const;
 
  private:
   int width, depth;
   float cubeSize;
-  std::vector<std::unique_ptr<Cube>> cubes;
+  std::unique_ptr<CubeCollection> cubeCollection;
 };
 
 }  // namespace Brut

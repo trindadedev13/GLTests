@@ -16,6 +16,8 @@ class AssetsManager : public IAssetsManager {
 
   std::string readTextFile(const std::string& path) override;
 
+  std::vector<int8_t> readBinaryFile(const std::string& path) override;
+
   bool fileExists(const std::string& path) override;
 
   std::vector<std::string> listFiles(const std::string& path) override;

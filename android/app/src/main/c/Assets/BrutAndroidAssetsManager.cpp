@@ -28,6 +28,16 @@ std::string AssetsManager::readTextFile(const std::string& path) {
   return content;
 }
 
+std::vector<int8_t> AssetsManager::readBinaryFile(const std::string& path) {
+  Int8Array* bytes = BrutAssetsManagerJNI_ReadBinaryFile(path.c_str());
+  if (bytes == nullptr || bytes->data == nullptr || bytes->size == 0) {
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "Failed to read binary file %s\n", path.c_str());
+    return {};
+  }
+  return std::vector<int8_t>(bytes->data, bytes->data + bytes->size);
+}
+
 bool AssetsManager::fileExists(const std::string& path) {
   return BrutAssetsManagerJNI_FileExists(path.c_str());
 }

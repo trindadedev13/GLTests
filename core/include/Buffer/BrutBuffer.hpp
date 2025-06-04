@@ -23,6 +23,7 @@ class Buffer {
   void bind();
   void unbind();
   void putData(const void* data, size_t size, GLenum usage = GL_STATIC_DRAW);
+  void subData(const void* data, size_t size, GLintptr offset = 0);
   GLuint getID() const;
 
  private:

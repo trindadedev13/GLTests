@@ -37,6 +37,8 @@ add_library(main
     ${SOURCES}
     ${HEADERS})
 
+find_library(log-lib log)
+
 target_include_directories(main
     PRIVATE
     ${SDL3_SOURCE_DIR}/include)
@@ -44,5 +46,6 @@ target_include_directories(main
 target_link_libraries(main
     PRIVATE
     android
+    log
     brut_core
     SDL3::SDL3)

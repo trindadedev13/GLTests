@@ -15,12 +15,18 @@ set(DESKTOP_SOURCES
 set(DESKTOP_HEADERS
     include/Assets/BrutDesktopAssetsManager.hpp)
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CheckPackages.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CoreDeps.cmake)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../core
+    ${CMAKE_BINARY_DIR}/core_build)
+
 add_executable(${PROJECT_NAME}
     ${DESKTOP_SOURCES}
     ${DESKTOP_HEADERS})
 
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
+    ${CORE_DEPS}
     brut_core)
 
 target_include_directories(${PROJECT_NAME}

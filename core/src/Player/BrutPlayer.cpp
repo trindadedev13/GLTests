@@ -7,7 +7,6 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 
-#include "Objects/Primitives/BrutCube.hpp"
 #include "Player/BrutInventory.hpp"
 
 namespace Brut {
