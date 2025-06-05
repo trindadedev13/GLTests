@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,19 +37,20 @@ public class BrutAssetsManager {
   }
 
   public byte[] readBinaryFile(String path) {
-    try {
-      InputStream inputStream = assetManager.open(assetsRoot + path);
-      int size = inputStream.available();
-      byte[] buffer = new byte[size];
-      int readBytes = inputStream.read(buffer);
-      if (readBytes != size) {
-        throw new IOException("Incomplete read");
+    try (InputStream inputStream = assetManager.open(assetsRoot + path);
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+      byte[] tmp = new byte[4096];
+      int bytesRead;
+      while ((bytesRead = inputStream.read(tmp)) != -1) {
+        buffer.write(tmp, 0, bytesRead);
       }
-      return buffer;
+
+      return buffer.toByteArray();
+
     } catch (IOException e) {
       e.printStackTrace();
+      return new byte[0];
     }
-    return new byte[0];
   }
 
   public boolean fileExists(String path) {

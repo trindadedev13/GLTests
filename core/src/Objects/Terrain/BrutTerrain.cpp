@@ -6,9 +6,10 @@
 #include <memory>
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-#include "Graphics/Shader/BrutShader.hpp"
-#include "Objects/Primitives/BrutCube.hpp"
+#include "Graphics/BrutColor.hpp"
+#include "Objects/Primitives/BrutCubeCollection.hpp"
 #include "Perlin/BrutPerlinNoise.hpp"
 
 namespace Brut {
@@ -19,10 +20,15 @@ Terrain::Terrain(int width, int depth, float cubeSize)
 Terrain::~Terrain() {}
 
 void Terrain::generate(float frequency, int seed) {
-  cubes.clear();
-
   PerlinNoise noise(seed);
 
+  unsigned int totalCubes = width * depth * 2;
+
+  cubeCollection = std::make_unique<CubeCollection>(totalCubes);
+  std::vector<glm::mat4> models{};
+  std::vector<Color> colors{};
+
+  unsigned int i = 0;
   for (int x = 0; x < width; ++x) {
     for (int z = 0; z < depth; ++z) {
       float heightNoise = noise.noise(x * frequency, z * frequency, 0.0);
@@ -30,37 +36,22 @@ void Terrain::generate(float frequency, int seed) {
           static_cast<int>((heightNoise + 1.0) * 0.5 * 5);  // Altura máxima = 5
 
       for (int y = 0; y <= height; ++y) {
-        auto cube = std::make_unique<Cube>();
-        cube->setPosition(glm::vec3(x * cubeSize, y * cubeSize, z * cubeSize));
-
-        // Cor diferente no topo
-        if (y == height) {
-          cube->setColors({Color::Green, Color::Green, Color::Green,
-                           Color::Green, Color::Green, Color::Green});
+        glm::vec3 pos = glm::vec3(x, y, z);
+        models[i] = glm::translate(glm::mat4(1.0f), pos * cubeSize) *
+                    glm::scale(glm::mat4(1.0f), glm::vec3(cubeSize));
+        if (y >= height) {
+          colors[i] = Color::Brown;
         } else {
-          cube->setColors({Color::Brown, Color::Brown, Color::Brown,
-                           Color::Brown, Color::Brown, Color::Brown});
+          colors[i] = Color::Green;
         }
-
-        cubes.push_back(std::move(cube));
+        ++i;
       }
     }
   }
 }
 
-void Terrain::draw(Shader& shader, const glm::mat4& view) {
-  for (auto& cube : cubes) {
-    glm::mat4 model = cube->getPosition();
-    shader.bind();
-    shader.sendUniformData("model", model);
-    shader.sendUniformData("view", view);
-    cube->draw();
-    shader.unbind();
-  }
-}
-
-const std::vector<std::unique_ptr<Cube>>& Terrain::getCubes() const {
-  return cubes;
+void Terrain::draw() {
+  cubeCollection->draw();
 }
 
 float Terrain::getCubeSize() const {

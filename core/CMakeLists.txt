@@ -14,10 +14,11 @@ set(SOURCES
     src/Buffer/BrutVertexArrayBuffer.cpp
     src/Camera/BrutCamera.cpp
     src/Error/BrutError.cpp
+    src/FreeTypeGL/BrutFreeTypeGL.cpp
     src/Graphics/BrutColor.cpp
     src/Graphics/Shader/BrutShader.cpp
     src/Graphics/Shader/BrutShadersManager.cpp
-    src/Objects/Primitives/BrutCube.cpp
+    src/Objects/Primitives/BrutCubeCollection.cpp
     src/Objects/Primitives/BrutObject.cpp
     src/Objects/Primitives/BrutPyramid.cpp
     src/Objects/Primitives/2D/BrutSquare.cpp
@@ -40,10 +41,11 @@ set(HEADERS
     include/Buffer/BrutVertexArrayBuffer.hpp
     include/Camera/BrutCamera.hpp
     include/Error/BrutError.hpp
+    include/FreeTypeGL/BrutFreeTypeGL.hpp
     include/Graphics/BrutColor.hpp
     include/Graphics/Shader/BrutShader.hpp
     include/Graphics/Shader/BrutShadersManager.hpp
-    include/Objects/Primitives/BrutCube.hpp
+    include/Objects/Primitives/BrutCubeCollection.hpp
     include/Objects/Primitives/BrutObject.hpp
     include/Objects/Primitives/BrutPyramid.hpp
     include/Objects/Primitives/2D/BrutSquare.hpp
@@ -58,7 +60,8 @@ set(HEADERS
     include/Window/BrutSDLWindow.hpp
     include/Window/BrutWindowConfig.h)
 
-add_subdirectory("../extern" "${CMAKE_BINARY_DIR}/extern_build")
+include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CheckPackages.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CoreDeps.cmake)
 
 add_library(
     ${PROJECT_NAME}
@@ -66,22 +69,23 @@ add_library(
     ${SOURCES}
     ${HEADERS})
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CheckPackages.cmake)
-
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-    glad
-    glm::glm
-    SDL3::SDL3)
+    ${CORE_DEPS})
 
-target_compile_definitions(${PROJECT_NAME}
-    PUBLIC
-    RUNNING_PATH=$ENV{RUNNING_PATH})
-
-if(DEFINED ENV{BRUT_WINDOW_USE_DISPLAY_SIZE})
+if (DEFINED RUNNING_PATH)
   target_compile_definitions(${PROJECT_NAME}
-      PUBLIC
-      BRUT_WINDOW_USE_DISPLAY_SIZE)
+      PUBLIC RUNNING_PATH=\"${RUNNING_PATH}\")
+endif()
+
+if (DEFINED BRUT_WINDOW_USE_DISPLAY_SIZE)
+  target_compile_definitions(${PROJECT_NAME}
+      PUBLIC BRUT_WINDOW_USE_DISPLAY_SIZE)
+endif()
+
+if (DEFINED BRUT_ANDROID)
+  target_compile_definitions(${PROJECT_NAME}
+      PUBLIC BRUT_ANDROID)
 endif()
 
 target_include_directories(${PROJECT_NAME}

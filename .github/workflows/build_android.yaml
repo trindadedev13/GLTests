@@ -27,12 +27,11 @@ jobs:
           distribution: 'oracle'
           java-version: '21'
 
-      - name: Make Gradle executable
-        run: chmod +x android/gradlew
+      - name: Give Make permission
+        run: chmod +x Make.sh
 
       - name: Build APK
-        working-directory: android
-        run: ./gradlew assembleRelease
+        run: ./Make.sh -a
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

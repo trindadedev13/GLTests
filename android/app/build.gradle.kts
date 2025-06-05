@@ -18,6 +18,23 @@ android {
     ndk {
       abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
     }
+    
+    externalNativeBuild {
+      cmake {
+        val runningPath = System.getenv("RUNNING_PATH") ?: ""
+        val useDisplaySize = System.getenv("BRUT_WINDOW_USE_DISPLAY_SIZE") != null
+        val isAndroid = true
+
+        arguments += listOf(
+            "-DRUNNING_PATH=$runningPath",
+            "-DBRUT_ANDROID=$isAndroid"
+        )
+
+        if (useDisplaySize) {
+          arguments += "-DBRUT_WINDOW_USE_DISPLAY_SIZE=1"
+        }
+      }
+    }
   }
 
   externalNativeBuild {

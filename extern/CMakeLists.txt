@@ -1,7 +1,13 @@
+include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CheckPackages.cmake)
+
 add_subdirectory(KHR)
 add_subdirectory(glad)
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/CheckPackages.cmake)
+add_subdirectory(bzip2)
+add_subdirectory(libpng)
+add_subdirectory(brotli)
+add_subdirectory(harfbuzz)
+add_subdirectory(FreeType2)
+add_subdirectory(FreeTypeGL)
 
 if(NOT SDL_FOUND)
   set(SDL_VIDEO ON CACHE BOOL "" FORCE)

@@ -61,6 +61,9 @@ class Shader {
   void bind() const;
   void unbind() const;
 
+  void sendUniformData(const std::string& varName, const float data);
+  void sendUniformData(const std::string& varName, const int data);
+  void sendUniformData(const std::string& varName, const float data[]);
   void sendUniformData(const std::string& varName, const glm::mat4& data);
 
  private:

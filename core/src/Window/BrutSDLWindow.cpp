@@ -30,15 +30,17 @@ void SDLWindow::initWindow() {
 
 // configures gl
 #ifdef BRUT_ANDROID
-  // OpenGL ES 3.2
+  // OpenGL ES 3.0
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+  SDL_Log("OpenGL ES 3.0 Setup Complete!\n");
 #else
   // OpenGL 4.5
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+  SDL_Log("OpenGL Core 4.5 Setup Complete!\n");
 #endif
 
 #ifdef BRUT_WINDOW_USE_DISPLAY_SIZE
@@ -47,6 +49,7 @@ void SDLWindow::initWindow() {
   const SDL_DisplayMode* mode = SDL_GetCurrentDisplayMode(displayId);
   width = mode->w;
   height = mode->h;
+  SDL_Log("Window Display full Size Setup Complete!\n");
 #endif
 
   // create window

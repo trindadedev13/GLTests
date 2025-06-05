@@ -1,6 +1,6 @@
-#include "Objects/Primitives/BrutCube.hpp"
+#include "Objects/Primitives/BrutCubeCollection.hpp"
 
-#include <array>
+#include <vector>
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -11,18 +11,19 @@
 
 namespace Brut {
 
-Cube::Cube() {
-  initCube();
+CubeCollection::CubeCollection(unsigned int _cubeCount)
+    : cubeCount(_cubeCount) {
+  initCubeCollection();
 }
 
-Cube::~Cube() {}
+CubeCollection::~CubeCollection() {}
 
-void Cube::initCube() {
+void CubeCollection::initCubeCollection() {
   fillBuffers();
   linkBuffers();
 }
 
-void Cube::fillBuffers() {
+void CubeCollection::fillBuffers() {
   glm::vec3 points[] = {
       // Front
       glm::vec3(-0.5f, +0.5f, +0.5f),  // 0
@@ -90,11 +91,14 @@ void Cube::fillBuffers() {
   verticesVBO.bind();
   verticesVBO.putData(vertices, sizeof(vertices));
 
-  // Fill cube with color
-  setColors(faceColors);
+  modelVBO.bind();
+  modelVBO.putData(0, cubeCount * sizeof(glm::mat4), GL_DYNAMIC_DRAW);
+
+  colorVBO.bind();
+  colorVBO.putData(0, cubeCount * sizeof(Color), GL_DYNAMIC_DRAW);
 }
 
-void Cube::linkBuffers() {
+void CubeCollection::linkBuffers() {
   VAO.bind();
   {
     EBO.bind();
@@ -105,28 +109,47 @@ void Cube::linkBuffers() {
     colorVBO.bind();
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribDivisor(1, 1);
+
+    modelVBO.bind();
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4),
+                          (void*)(sizeof(glm::vec4) * 0));
+
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4),
+                          (void*)(sizeof(glm::vec4) * 1));
+
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4),
+                          (void*)(sizeof(glm::vec4) * 2));
+
+    glEnableVertexAttribArray(5);
+    glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4),
+                          (void*)(sizeof(glm::vec4) * 3));
+
+    glVertexAttribDivisor(2, 1);
+    glVertexAttribDivisor(3, 1);
+    glVertexAttribDivisor(4, 1);
+    glVertexAttribDivisor(5, 1);
   }
   VAO.unbind();
 }
 
-void Cube::draw() {
-  VAO.bind();
-  { glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0); }
-  VAO.unbind();
+void CubeCollection::setModels(const std::vector<glm::mat4>& models) {
+  modelVBO.bind();
+  modelVBO.subData(models.data(), models.size() * sizeof(glm::mat4));
 }
 
-void Cube::setColors(const std::array<Color, 6>& newFaceColors) {
-  Color vertexColors[24] = {};
-
-  for (int face = 0; face < 6; ++face) {
-    faceColors[face] = newFaceColors[face];
-    for (int i = 0; i < 4; ++i) {
-      vertexColors[face * 4 + i] = faceColors[face];
-    }
-  }
-
+void CubeCollection::setColors(const std::vector<Color>& colors) {
   colorVBO.bind();
-  colorVBO.putData(vertexColors, sizeof(vertexColors));
+  colorVBO.subData(colors.data(), colors.size() * sizeof(Color));
+}
+
+void CubeCollection::draw() {
+  VAO.bind();
+  { glDrawElementsInstanced(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0, cubeCount); }
+  VAO.unbind();
 }
 
 }  // namespace Brut

@@ -15,7 +15,8 @@ Camera::Camera(float _windowWidth, float _windowHeight)
       renderDistance{100.0f},
       windowWidth{_windowWidth},
       windowHeight{_windowHeight} {
-  float aspectRatio = windowWidth / windowHeight;
+  float aspectRatio =
+      static_cast<float>(windowWidth) / static_cast<float>(windowHeight);
   perspectiveProjection =
       glm::perspective(glm::radians(fov), aspectRatio, 0.1f, renderDistance);
 }

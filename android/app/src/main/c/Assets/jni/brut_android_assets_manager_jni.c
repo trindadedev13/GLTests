@@ -98,8 +98,64 @@ char* BrutAssetsManagerJNI_ReadTextFile(const char* filepath) {
   char* result_copy = strdup(result_cstr);
 
   (*env)->ReleaseStringUTFChars(env, jresult, result_cstr);
+  (*env)->DeleteLocalRef(env, jresult);
 
   return result_copy;
+}
+
+Int8Array* BrutAssetsManagerJNI_ReadBinaryFile(const char* filepath) {
+  JNIEnv* env = BrutAssetsManagerJNI_GetEnv();
+  if (env == NULL) {
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to get JNIEnv*");
+    return NULL;
+  }
+
+  jmethodID jmethod_id =
+      (*env)->GetMethodID(env, asmgr->c_brut_assets_manager, "readBinaryFile",
+                          "(Ljava/lang/String;)[B");
+
+  if (jmethod_id == NULL) {
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "JNI readTextFile method id not found");
+    return NULL;
+  }
+
+  jstring jfilepath = (*env)->NewStringUTF(env, filepath);
+  if (jfilepath == NULL) {
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "Failed to create jstring for jfilepath");
+    return NULL;
+  }
+
+  jbyteArray jresult = (jbyteArray)(*env)->CallObjectMethod(
+      env, asmgr->o_brut_assets_manager, jmethod_id, jfilepath);
+
+  (*env)->DeleteLocalRef(env, jfilepath);
+
+  if (jresult == NULL) {
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to read file");
+    return NULL;
+  }
+
+  jsize len = (*env)->GetArrayLength(env, jresult);
+  jbyte* bytes = (*env)->GetByteArrayElements(env, jresult, NULL);
+
+  int8_t* cBytes = malloc(len * sizeof(int8_t));
+  if (!cBytes) {
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                 "Failed to allocate bytes for binaru file read");
+    return NULL;
+  }
+  memcpy(cBytes, bytes, len * sizeof(int8_t));
+
+  (*env)->ReleaseByteArrayElements(env, jresult, bytes, JNI_ABORT);
+  (*env)->DeleteLocalRef(env, jresult);
+
+  Int8Array* a = malloc(sizeof(Int8Array));
+  a->data = cBytes;
+  a->size = len;
+
+  return a;
 }
 
 // Checks if an file exists

@@ -4,3 +4,18 @@
 [submodule "extern/glm"]
 	path = extern/glm
 	url = https://github.com/g-truc/glm
+[submodule "extern/FreeType2"]
+	path = extern/FreeType2
+	url = https://github.com/inviwo/freetype2
+[submodule "extern/libpng"]
+	path = extern/libpng
+	url = https://github.com/pnggroup/libpng.git
+[submodule "extern/bzip2"]
+	path = extern/bzip2
+	url = https://github.com/libarchive/bzip2
+[submodule "extern/brotli"]
+	path = extern/brotli
+	url = https://github.com/google/brotli
+[submodule "extern/harfbuzz"]
+	path = extern/harfbuzz
+	url = https://github.com/harfbuzz/harfbuzz.git

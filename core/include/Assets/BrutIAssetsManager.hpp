@@ -13,6 +13,8 @@ class IAssetsManager {
 
   virtual std::string readTextFile(const std::string& path) = 0;
 
+  virtual std::vector<int8_t> readBinaryFile(const std::string& path) = 0;
+
   virtual bool fileExists(const std::string& path) = 0;
 
   virtual std::vector<std::string> listFiles(const std::string& path) = 0;
