@@ -3,6 +3,11 @@
 - A Voxel game
 ---
 
+## Clone
+```bash
+git clone --recursive https://github.com/trindadedev13/Brut
+```
+
 ## How to Run
 
 ### Desktop (Linux)
